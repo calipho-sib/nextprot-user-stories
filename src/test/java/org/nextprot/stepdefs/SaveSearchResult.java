@@ -1,4 +1,4 @@
-package org.nextprot.stepdef;
+package org.nextprot.stepdefs;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
