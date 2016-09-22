@@ -1,4 +1,3 @@
-@active
 Feature: Registration to neXtProt
 
   As a end user of neXtProt
