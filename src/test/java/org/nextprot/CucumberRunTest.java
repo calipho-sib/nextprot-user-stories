@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = ".", tags = "@active", dryRun = true)
+@CucumberOptions(features = ".", tags = "@active", dryRun = true, plugin = {"pretty", "html:target/cucumber"})
 public class CucumberRunTest {
 
     @Test

@@ -12,19 +12,24 @@ import java.util.concurrent.TimeUnit;
 public class DriverManager {
 
     public static WebDriver driver;
+    private Properties props;
 
     public void openBrowser() {
 
-        Properties props = readPropertiesFromFile("config.properties");
+        props = readPropertiesFromFile("config.properties");
 
         driver = new FirefoxDriver();
-        driver.get(props.getProperty("api_page"));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     public void closeBrowser() {
 
         driver.quit();
+    }
+
+    protected String getProperty(String name) {
+
+        return props.getProperty(name);
     }
 
     private static Properties readPropertiesFromFile(String filename) {
