@@ -6,7 +6,7 @@ Feature: Search neXtProt
 
   Scenario: Make a simple search
 
-    Given I am on page "search"
-    When I submit a search for a protein
-    Then I see results
-
+    Given I am on nextprot page "search"
+    When I make a simple search with query "kinase"
+    Then I see results "Insulin decreases blood glucose concentration"
+    And I close the browser

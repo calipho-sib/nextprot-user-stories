@@ -1,4 +1,3 @@
-@active
 Feature: neXtProt web application is accessible
 
   As a user I should be able to access neXtProt web site
@@ -10,6 +9,6 @@ Feature: neXtProt web application is accessible
 
   Scenario: Check release data version from nextprot search
     Given I am on nextprot page "search"
-    When I navigate to "Release contents"
+    When I click on link "Release contents"
     Then I should find in the page "Application release"
     And I close the browser

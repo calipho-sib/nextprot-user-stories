@@ -4,7 +4,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-public class SaveSearchResult {
+public class SaveSearchResultSteps {
 
     @And("^I click on 'Save as list'$")
     public void iClickOnSaveAsList() {

@@ -1,3 +1,4 @@
+@active
 Feature: Save search result
 
   As a end user of www.nextprot.org

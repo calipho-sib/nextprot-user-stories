@@ -7,14 +7,17 @@ Feature: Registration to neXtProt
 
   Scenario: Register with my google account
 
-    Given I am on page "any"
-    And I am connected with my google account
-    When I click on 'Login' button
-    Then I am logged "false"
+    Given I am on nextprot page "any"
+    And I am logged "false"
+    When I click on link "Login"
+    And I click on link "Login with Google"
+    Then I am logged "true"
+    And I close the browser
 
   Scenario: Logout from nextprot
 
-    Given I am on page "any"
+    Given I am on nextprot page "any"
     And I am logged "true"
-    When I click on 'Logout' button
-    Then I am logged "true"
+    When I click on link "Logout"
+    Then I am logged "false"
+    And I close the browser
