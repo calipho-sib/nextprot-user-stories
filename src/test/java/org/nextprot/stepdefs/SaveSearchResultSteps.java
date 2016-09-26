@@ -1,18 +1,25 @@
 package org.nextprot.stepdefs;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.nextprot.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class SaveSearchResultSteps {
 
-    @And("^I click on 'Save as list'$")
-    public void iClickOnSaveAsList() {
+
+    @Then("^The list is saved in user space \"([^\"]*)\"$")
+    public void theListIsSavedInUserSpace(String shouldBeSaved) throws Throwable {
+
+
     }
 
-    @Then("^The list is saved in my private space$")
-    public void theListIsSavedInMyPrivateSpace() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("^I select first search result$")
+    public void iSelectFirstSearchResult() throws Throwable {
+
+        WebElement ul = WebDriverManager.getDriver().findElement(By.id("search-results"));
+        WebElement checkbox = ul.findElement(By.xpath("//input[@value=\"NX_O95819\"]"));
+        checkbox.click();
     }
 }

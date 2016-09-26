@@ -1,7 +1,6 @@
 package org.nextprot.stepdefs;
 
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.nextprot.WebDriverManager;
@@ -13,10 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SimpleSearchSteps {
 
-    @Given("^I already submit a search \"([^\"]*)\"$")
-    public void iAlreadyMadeASearch(String searchMade) {
-    }
-
     @And("^I have some result selected$")
     public void iHaveSomeResultSelected() {
     }
@@ -25,7 +20,7 @@ public class SimpleSearchSteps {
     public void iMakeASimpleSearchWithQuery(String query) throws Throwable {
 
         WebElement searchField = WebDriverManager.getDriver().findElement(By.id("search-query"));
-        searchField.sendKeys("insulin");
+        searchField.sendKeys(query);
         searchField.submit();
     }
 

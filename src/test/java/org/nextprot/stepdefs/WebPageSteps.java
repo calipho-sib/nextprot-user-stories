@@ -68,6 +68,12 @@ public class WebPageSteps {
         WebDriverManager.closeDriver();
     }
 
+    @And("^I click on button \"([^\"]*)\"$")
+    public void iClickOnButton(String name) throws Throwable {
+
+        WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
+    }
+
     /*
     @Then("^I should see the Application release version$")
     public void i_check_that_Application_release_is_defined() {
