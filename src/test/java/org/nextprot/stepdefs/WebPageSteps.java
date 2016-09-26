@@ -1,11 +1,15 @@
 package org.nextprot.stepdefs;
 
+import com.google.common.base.Predicate;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebPageSteps {
 
@@ -59,8 +63,25 @@ public class WebPageSteps {
 
         boolean shouldBeLogged = Boolean.parseBoolean(expectedLogStatus);
 
-        System.out.println("should be logger: "+shouldBeLogged);
-        // angular.element($0).scope().user.profile.username != "Guest"
+        new WebDriverWait(WebDriverManager.getDriver(), 20).until(new Predicate<WebDriver>() {
+
+            @Override
+            public boolean apply(WebDriver driver) {
+
+                String script = "angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
+
+                if (driver instanceof JavascriptExecutor) {
+
+                    Object res = ((JavascriptExecutor) driver).executeScript(script);
+
+                    boolean isLogged = res instanceof String && !"Guest".equals(res);
+
+                    return shouldBeLogged == isLogged;
+                }
+
+                return false;
+            }
+        });
     }
 
     @And("^I close the browser$")
