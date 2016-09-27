@@ -13,7 +13,6 @@ Feature: Registration to neXtProt
     When I click on link "Login"
     And I click on div Google
     Then I am logged "true"
-    And I close the browser
 
   Scenario: Logout from nextprot
 
@@ -21,4 +20,3 @@ Feature: Registration to neXtProt
     And I am logged "true"
     When I click on link "Logout"
     Then I am logged "false"
-    And I close the browser

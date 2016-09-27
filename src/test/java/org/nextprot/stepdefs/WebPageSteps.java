@@ -36,7 +36,6 @@ public class WebPageSteps {
     @When("^I am on nextprot page \"([^\"]*)\"$")
     public void shouldNavigateToNextprotPage(String pageName) throws Throwable {
 
-        WebDriverManager.newDriver();
         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
     }
 
@@ -63,43 +62,20 @@ public class WebPageSteps {
 
         boolean shouldBeLogged = Boolean.parseBoolean(expectedLogStatus);
 
-        String script = "angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
+        String script = "return angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
 
         WebDriver driver = WebDriverManager.getDriver();
 
         if (driver instanceof JavascriptExecutor) {
 
-            Object res = ((JavascriptExecutor) driver).executeScript(script);
+            JavascriptExecutor js = (JavascriptExecutor) driver;
 
-            boolean isLogged = res instanceof String && !"Guest".equals(res);
+            String res = (String)js.executeScript(script);
+
+            boolean isLogged = res != null && !"Guest".equals(res);
 
             Assert.assertTrue(shouldBeLogged == isLogged);
         }
-
-       /* new WebDriverWait(WebDriverManager.getDriver(), 1).until(new Predicate<WebDriver>() {
-
-            @Override
-            public boolean apply(WebDriver driver) {
-
-                String script = "angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
-
-                if (driver instanceof JavascriptExecutor) {
-
-                    Object res = ((JavascriptExecutor) driver).executeScript(script);
-
-                    boolean isLogged = res instanceof String && !"Guest".equals(res);
-
-                    return shouldBeLogged == isLogged;
-                }
-
-                return false;
-            }
-        });*/
-    }
-
-    @And("^I close the browser$")
-    public void iCloseTheBrowser() throws Throwable {
-        WebDriverManager.closeDriver();
     }
 
     @And("^I click on button \"([^\"]*)\"$")

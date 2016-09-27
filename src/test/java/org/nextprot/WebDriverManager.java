@@ -15,7 +15,6 @@ public class WebDriverManager {
     public static void closeDriver() {
 
         driver.quit();
-        //driver.close();
     }
 
     public static WebDriver getDriver() {
