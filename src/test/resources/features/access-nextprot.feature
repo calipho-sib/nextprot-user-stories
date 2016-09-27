@@ -2,11 +2,14 @@ Feature: neXtProt web application is accessible
 
   As a user I should be able to access neXtProt web site
 
-  Scenario: Check nextprot search title
-    When I am on nextprot page "search"
-    Then I check page title is "neXtProt platform"
+  @active
+  Scenario Outline: Check nextprot page title
+    When I am on nextprot page "<page>"
+    Then I check page title is "<title>"
 
-  Scenario: Check release data version from nextprot search
-    Given I am on nextprot page "search"
-    When I click on link "Release contents"
-    Then I should find in the page "Application release"
+    Examples: Expected page titles
+    |page  |title            |
+    |search|neXtProt platform|
+    |api   |neXtProt REST API|
+    |snorql|neXtProt SnorQL  |
+

@@ -5,7 +5,6 @@ Feature: Registration to neXtProt
   so that I can access my user space
   and access more services
 
-  @active
   Scenario: Register with my google account
 
     Given I am on nextprot page "any"
