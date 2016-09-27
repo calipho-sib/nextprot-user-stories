@@ -24,8 +24,8 @@ public class SimpleSearchSteps {
         searchField.submit();
     }
 
-    @Then("^I see results \"([^\"]*)\"$")
-    public void iSeeResults(String result) throws Throwable {
+    @Then("^Page source contains \"([^\"]*)\"$")
+    public void pageSourceShouldContain(String result) throws Throwable {
 
         new WebDriverWait(WebDriverManager.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
