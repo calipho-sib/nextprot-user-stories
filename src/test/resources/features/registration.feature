@@ -5,12 +5,13 @@ Feature: Registration to neXtProt
   so that I can access my user space
   and access more services
 
+  @active
   Scenario: Register with my google account
 
     Given I am on nextprot page "any"
     And I am logged "false"
     When I click on link "Login"
-    And I click on link "Login with Google"
+    And I click on div Google
     Then I am logged "true"
     And I close the browser
 

@@ -1,15 +1,15 @@
 package org.nextprot.stepdefs;
 
-import com.google.common.base.Predicate;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.nextprot.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+import java.util.concurrent.TimeUnit;
 
 public class WebPageSteps {
 
@@ -63,7 +63,20 @@ public class WebPageSteps {
 
         boolean shouldBeLogged = Boolean.parseBoolean(expectedLogStatus);
 
-        new WebDriverWait(WebDriverManager.getDriver(), 20).until(new Predicate<WebDriver>() {
+        String script = "angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
+
+        WebDriver driver = WebDriverManager.getDriver();
+
+        if (driver instanceof JavascriptExecutor) {
+
+            Object res = ((JavascriptExecutor) driver).executeScript(script);
+
+            boolean isLogged = res instanceof String && !"Guest".equals(res);
+
+            Assert.assertTrue(shouldBeLogged == isLogged);
+        }
+
+       /* new WebDriverWait(WebDriverManager.getDriver(), 1).until(new Predicate<WebDriver>() {
 
             @Override
             public boolean apply(WebDriver driver) {
@@ -81,7 +94,7 @@ public class WebPageSteps {
 
                 return false;
             }
-        });
+        });*/
     }
 
     @And("^I close the browser$")
@@ -95,6 +108,12 @@ public class WebPageSteps {
         WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
+    @And("^I click on div Google$")
+    public void iLogWithGoogle() throws Throwable {
+
+        WebDriverManager.getDriver().findElement(By.className("a0-googleplus")).click();
+    }
+
     /*
     @Then("^I should see the Application release version$")
     public void i_check_that_Application_release_is_defined() {
@@ -102,4 +121,16 @@ public class WebPageSteps {
         Assert.assertEquals("Data release: 2016-08-25", text);
         driver.quit();
     } */
+
+    public WebElement fluentWait(WebDriver driver, final By locator) {
+
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(30, TimeUnit.SECONDS)
+                .pollingEvery(5, TimeUnit.SECONDS)
+                .ignoring(NoSuchElementException.class);
+
+        WebElement foo = wait.until(driver1 -> driver1.findElement(locator));
+
+        return foo;
+    };
 }
