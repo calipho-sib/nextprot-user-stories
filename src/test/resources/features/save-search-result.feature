@@ -12,7 +12,6 @@ Feature: Save search result as list
     And I am logged "false"
     And I click on button "Save as list"
     Then The list is saved in user space "false"
-    And I close the browser
 
   Scenario: Logged user can save selected results
 
@@ -22,4 +21,3 @@ Feature: Save search result as list
     And I am logged "true"
     And I click on button "Save as list"
     Then The list is saved in user space "true"
-    And I close the browser

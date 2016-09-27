@@ -9,4 +9,3 @@ Feature: Search neXtProt
     Given I am on nextprot page "search"
     When I make a simple search with query "kinase"
     Then Page source contains "Insulin decreases blood glucose concentration"
-    And I close the browser
