@@ -5,7 +5,7 @@ Feature: neXtProt web application is accessible
   @active
   Scenario Outline: Check nextprot page title
     When I am on nextprot page "<page>"
-    Then I check page title is "<title>"
+    Then the page title should be "<title>"
 
     Examples: Expected page titles
     |page  |title            |

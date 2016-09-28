@@ -39,7 +39,7 @@ public class WebPageSteps {
         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
     }
 
-    @Then("^I check page title is \"([^\"]*)\"$")
+    @Then("^the page title should be \"([^\"]*)\"$")
     public void pageTitleShouldBe(String expectedTitle) throws Throwable {
         Assert.assertTrue(WebDriverManager.getDriver().getTitle().contains(expectedTitle));
     }
