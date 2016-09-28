@@ -13,7 +13,6 @@ Feature: Search neXtProt
       | Mitogen-activated protein kinase kinase kinase kinase 4 |
       | Aurora kinase B                                         |
 
-  @active
   Scenario Outline: Make a simple search with a specified entity
     Given I click on "search-entity" dropdown
     And I click on link "<link>"
@@ -24,3 +23,8 @@ Feature: Search neXtProt
       | link         | result                                                                                                     |
       | Proteins     | Aurora kinase B                                                                                            |
       | Publications | Conformation-Selective Analogues of Dasatinib Reveal Insight into Kinase Inhibitor Binding and Selectivity |
+
+  Scenario: Select a result after a protein search should add it to clipboard
+    Given I make a simple search with query "kinase"
+    When I select one search result with accession "NX_O95819"
+    Then the badge should be equal to "1"

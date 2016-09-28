@@ -10,7 +10,7 @@ Feature: Save search result as list
     And I make a simple search with query "kinase"
 
   Scenario: Guest cannot save selected results
-    When I select first search result
+    When I select one search result with accession "NX_O95819"
     And I click on button "Save as list"
     Then the list "should not" be saved
 
@@ -18,6 +18,6 @@ Feature: Save search result as list
     Given I click on link "Login"
     And I click on googleplus button
     And I "should" be logged
-    When I select first search result
+    When I select one search result with accession "NX_O95819"
     And I click on button "Save as list"
     Then the list "should" be saved
