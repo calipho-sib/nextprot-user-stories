@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class SimpleSearchSteps {
 
     @And("^I have some result selected$")
@@ -24,13 +26,17 @@ public class SimpleSearchSteps {
         searchField.submit();
     }
 
-    @Then("^Page source contains \"([^\"]*)\"$")
-    public void pageSourceShouldContain(String result) throws Throwable {
+    @Then("^the page source should contain texts$")
+    public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
+
+        //textList.stream().filter(text -> !WebDriverManager.getDriver().getPageSource().contains(text)).forEach(text -> Assert.fail("could not find test '" + text + "' in page source"));
 
         new WebDriverWait(WebDriverManager.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
+
             public Boolean apply(WebDriver d) {
-                return d.getPageSource().contains(result);
+                return textList.stream().allMatch(text -> d.getPageSource().contains(text));
             }
         });
+
     }
 }

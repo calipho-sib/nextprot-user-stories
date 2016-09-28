@@ -33,7 +33,7 @@ public class WebPageSteps {
         }
     }
 
-    @When("^I am on nextprot page \"([^\"]*)\"$")
+    @When("^I am on \"([^\"]*)\" nextprot page$")
     public void shouldNavigateToNextprotPage(String pageName) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
@@ -57,10 +57,20 @@ public class WebPageSteps {
 
     }
 
-    @And("^I am logged \"([^\"]*)\"$")
-    public void iAmLoggedTo(String expectedLogStatus) {
+    @And("^I \"([^\"]*)\" be logged$")
+    public void iAmLogged(String shouldStatus) throws Throwable {
 
-        boolean shouldBeLogged = Boolean.parseBoolean(expectedLogStatus);
+        boolean shouldBeLogged;
+
+        if ("should".equalsIgnoreCase(shouldStatus)) {
+            shouldBeLogged = true;
+        }
+        else if ("should not".equalsIgnoreCase(shouldStatus)) {
+            shouldBeLogged = false;
+        }
+        else {
+            throw new IllegalArgumentException(shouldStatus+": bad argument format (take only values 'should' or 'should not')");
+        }
 
         String script = "return angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
 
@@ -68,9 +78,7 @@ public class WebPageSteps {
 
         if (driver instanceof JavascriptExecutor) {
 
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-
-            String res = (String)js.executeScript(script);
+            String res = (String)((JavascriptExecutor) driver).executeScript(script);
 
             boolean isLogged = res != null && !"Guest".equals(res);
 
@@ -84,7 +92,7 @@ public class WebPageSteps {
         WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    @And("^I click on div Google$")
+    @And("^I click on googleplus button$")
     public void iLogWithGoogle() throws Throwable {
 
         WebDriverManager.getDriver().findElement(By.className("a0-googleplus")).click();

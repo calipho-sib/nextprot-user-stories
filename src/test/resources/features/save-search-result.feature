@@ -6,18 +6,18 @@ Feature: Save search result as list
 
   Scenario: Guest cannot save selected results
 
-    Given I am on nextprot page "search"
+    Given I am on "search" nextprot page
     And I make a simple search with query "kinase"
     When I select first search result
-    And I am logged "false"
+    And I "should not" be logged
     And I click on button "Save as list"
     Then The list is saved in user space "false"
 
   Scenario: Logged user can save selected results
 
-    Given I am on nextprot page "search"
+    Given I am on "search" nextprot page
     And I make a simple search with query "kinase"
     When I select first search result
-    And I am logged "true"
+    And I "should" be logged
     And I click on button "Save as list"
     Then The list is saved in user space "true"

@@ -2,9 +2,8 @@ Feature: neXtProt web application is accessible
 
   As a user I should be able to access neXtProt web site
 
-  @active
   Scenario Outline: Check nextprot page title
-    When I am on nextprot page "<page>"
+    When I am on "<page>" nextprot page
     Then the page title should be "<title>"
 
     Examples: Expected page titles

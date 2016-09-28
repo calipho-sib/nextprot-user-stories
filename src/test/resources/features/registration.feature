@@ -7,15 +7,15 @@ Feature: Registration to neXtProt
 
   Scenario: Register with my google account
 
-    Given I am on nextprot page "any"
-    And I am logged "false"
+    Given I am on "any" nextprot page
+    And I "should not" be logged
     When I click on link "Login"
-    And I click on div Google
-    Then I am logged "true"
+    And I click on googleplus button
+    Then I "should" be logged
 
   Scenario: Logout from nextprot
 
-    Given I am on nextprot page "any"
-    And I am logged "true"
+    Given I am on "any" nextprot page
+    And I "should" be logged
     When I click on link "Logout"
-    Then I am logged "false"
+    Then I "should not" be logged
