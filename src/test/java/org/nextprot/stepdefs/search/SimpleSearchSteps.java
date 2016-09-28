@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SimpleSearchSteps {
@@ -42,6 +43,11 @@ public class SimpleSearchSteps {
                 return true;
             }
         });
+    }
 
+    @Then("^the page source should contain text \"([^\"]*)\"$")
+    public void thePageSourceShouldContainText(String text) throws Throwable {
+
+        thePageSourceShouldContainTexts(Collections.singletonList(text));
     }
 }

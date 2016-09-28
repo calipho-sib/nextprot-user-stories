@@ -1,6 +1,7 @@
 package org.nextprot.stepdefs;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
@@ -90,5 +91,13 @@ public class WebPageSteps {
     public void iClickOnDropdown() throws Throwable {
 
         WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
+    }
+
+    @Given("^I click on \"([^\"]*)\" dropdown$")
+    public void iClickOnDropdown(String elementId) throws Throwable {
+
+        System.out.println("clicking of dropdown "+elementId);
+
+        WebDriverManager.getDriver().findElement(By.id(elementId)).click();
     }
 }
