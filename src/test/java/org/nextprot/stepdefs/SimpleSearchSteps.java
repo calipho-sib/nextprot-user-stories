@@ -29,12 +29,17 @@ public class SimpleSearchSteps {
     @Then("^the page source should contain texts$")
     public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
 
-        //textList.stream().filter(text -> !WebDriverManager.getDriver().getPageSource().contains(text)).forEach(text -> Assert.fail("could not find test '" + text + "' in page source"));
-
         new WebDriverWait(WebDriverManager.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
 
             public Boolean apply(WebDriver d) {
-                return textList.stream().allMatch(text -> d.getPageSource().contains(text));
+
+                for (String text : textList) {
+
+                    if (!d.getPageSource().contains(text)) {
+                        return false;
+                    }
+                }
+                return true;
             }
         });
 

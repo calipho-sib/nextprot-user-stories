@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class WebPageSteps {
 
-    private static String API    = "http://dev-api.nextprot.org/";
-    private static String SEARCH = "http://dev-search.nextprot.org/";
-    private static String SNORQL = "http://dev-snorql.nextprot.org/";
+    private static String API    = "http://alpha-api.nextprot.org/";
+    private static String SEARCH = "http://alpha-search.nextprot.org/";
+    private static String SNORQL = "http://alpha-snorql.nextprot.org/";
 
     private static String getNextprotPageUrl(String page) {
 

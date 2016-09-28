@@ -10,5 +10,5 @@ Feature: Search neXtProt
     Given I am on "search" nextprot page
     When I make a simple search with query "kinase"
     Then the page source should contain texts
-      | Insulin decreases blood glucose concentration                        |
-      | Basement membrane-specific heparan sulfate proteoglycan core protein |
+      | Mitogen-activated protein kinase kinase kinase kinase 4 |
+      | Aurora kinase B                                         |
