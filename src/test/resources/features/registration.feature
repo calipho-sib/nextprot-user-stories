@@ -5,7 +5,7 @@ Feature: Registration to neXtProt
   so that I can access my user space
   and access more services
 
-  Scenario: Register with my google account
+  Scenario: Login with my google account
 
     Given I am on "any" nextprot page
     And I "should not" be logged

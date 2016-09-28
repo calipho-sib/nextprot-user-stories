@@ -4,7 +4,6 @@ Feature: Search neXtProt
   I want to make a search
   so that I can access to results
 
-  @active
   Scenario: Make a simple search
 
     Given I am on "search" nextprot page

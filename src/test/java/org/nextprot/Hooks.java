@@ -10,7 +10,6 @@ public class Hooks {
     // run before any scenario
     @Before
     public void setupWebDriver() {
-        System.out.println("create new web driver");
         WebDriverManager.newDriver();
         WebDriverManager.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
@@ -18,7 +17,6 @@ public class Hooks {
     // run after any scenario
     @After
     public void closeWebDriver() {
-        System.out.println("close web driver");
         WebDriverManager.closeDriver();
     }
 }

@@ -57,45 +57,10 @@ public class WebPageSteps {
 
     }
 
-    @And("^I \"([^\"]*)\" be logged$")
-    public void iAmLogged(String shouldStatus) throws Throwable {
-
-        boolean shouldBeLogged;
-
-        if ("should".equalsIgnoreCase(shouldStatus)) {
-            shouldBeLogged = true;
-        }
-        else if ("should not".equalsIgnoreCase(shouldStatus)) {
-            shouldBeLogged = false;
-        }
-        else {
-            throw new IllegalArgumentException(shouldStatus+": bad argument format (take only values 'should' or 'should not')");
-        }
-
-        String script = "return angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
-
-        WebDriver driver = WebDriverManager.getDriver();
-
-        if (driver instanceof JavascriptExecutor) {
-
-            String res = (String)((JavascriptExecutor) driver).executeScript(script);
-
-            boolean isLogged = res != null && !"Guest".equals(res);
-
-            Assert.assertTrue(shouldBeLogged == isLogged);
-        }
-    }
-
     @And("^I click on button \"([^\"]*)\"$")
     public void iClickOnButton(String name) throws Throwable {
 
         WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
-    }
-
-    @And("^I click on googleplus button$")
-    public void iLogWithGoogle() throws Throwable {
-
-        WebDriverManager.getDriver().findElement(By.className("a0-googleplus")).click();
     }
 
     /*
