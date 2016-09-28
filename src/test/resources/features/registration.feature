@@ -16,6 +16,10 @@ Feature: Registration to neXtProt
   Scenario: Logout from nextprot
 
     Given I am on "any" nextprot page
+    And I "should not" be logged
+    And I click on link "Login"
+    And I click on googleplus button
     And I "should" be logged
-    When I click on link "Logout"
+    When I click on dropdown
+    And I click on link "Logout"
     Then I "should not" be logged
