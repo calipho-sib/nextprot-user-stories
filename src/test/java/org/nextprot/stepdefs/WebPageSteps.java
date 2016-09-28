@@ -7,13 +7,8 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 
-import java.util.concurrent.TimeUnit;
+import static org.nextprot.StepUtils.fluentWait;
 
 public class WebPageSteps {
 
@@ -67,26 +62,6 @@ public class WebPageSteps {
         WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    /*
-    @Then("^I should see the Application release version$")
-    public void i_check_that_Application_release_is_defined() {
-        String text = driver.findElement(By.xpath("//p[@class=\"ng-binding\"]")).getText();
-        Assert.assertEquals("Data release: 2016-08-25", text);
-        driver.quit();
-    } */
-
-    public WebElement fluentWait(WebDriver driver, final By locator) {
-
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(5, TimeUnit.SECONDS)
-                .ignoring(NoSuchElementException.class);
-
-        WebElement foo = wait.until(driver1 -> driver1.findElement(locator));
-
-        return foo;
-    };
-
     @When("^I click on dropdown$")
     public void iClickOnDropdown() throws Throwable {
 
@@ -96,8 +71,12 @@ public class WebPageSteps {
     @Given("^I click on \"([^\"]*)\" dropdown$")
     public void iClickOnDropdown(String elementId) throws Throwable {
 
-        System.out.println("clicking of dropdown "+elementId);
-
         WebDriverManager.getDriver().findElement(By.id(elementId)).click();
+    }
+
+    @When("^I select all search results$")
+    public void iSelectAllSearchResultWithAccession() throws Throwable {
+
+        fluentWait(WebDriverManager.getDriver(), 20, By.id("main-clipboard-button")).click();
     }
 }

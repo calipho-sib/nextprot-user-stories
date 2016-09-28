@@ -11,15 +11,10 @@ import static org.nextprot.StepUtils.valueOfShouldBeStatus;
 
 public class SaveSearchResultSteps {
 
-
     @Then("^the list \"([^\"]*)\" be saved$")
     public void theListBeSaved(String shouldStatus) throws Throwable {
 
         boolean shouldBeSaved = valueOfShouldBeStatus(shouldStatus);
-
-        String value = WebDriverManager.getDriver().findElement(By.xpath("//span[contains(@class, 'badge ng-binding')]")).getText();
-
-        System.err.println(value);
     }
 
     @When("^I select one search result with accession \"([^\"]*)\"$")
@@ -30,11 +25,13 @@ public class SaveSearchResultSteps {
         checkbox.click();
     }
 
-    @Then("^the badge should be equal to \"([^\"]*)\"$")
+    @Then("^the clipboard count should be equal to \"([^\"]*)\"$")
     public void theBadgeShouldBeEqualTo(String expectedCountString) throws Throwable {
 
-        String observedCountString = WebDriverManager.getDriver().findElement(By.xpath("//span[contains(@class, 'badge ng-binding')]")).getText();
+        WebElement elt = WebDriverManager.getDriver().findElement(By.xpath("//span[contains(@class, 'badge ng-binding')]"));
 
-        Assert.assertTrue(observedCountString.equals(expectedCountString));
+        String observedCountString = elt.getText();
+
+        Assert.assertTrue("observed count: "+observedCountString, observedCountString.equals(expectedCountString));
     }
 }
