@@ -4,20 +4,20 @@ Feature: Save search result as list
   I want to save the result of my previous search
   so that I can access to results in my private space
 
-  Scenario: Guest cannot save selected results
-
+  Background:
     Given I am on "search" nextprot page
-    And I make a simple search with query "kinase"
-    When I select first search result
     And I "should not" be logged
+    And I make a simple search with query "kinase"
+
+  Scenario: Guest cannot save selected results
+    When I select first search result
     And I click on button "Save as list"
-    Then The list is saved in user space "false"
+    Then the list "should not" be saved
 
   Scenario: Logged user can save selected results
-
-    Given I am on "search" nextprot page
-    And I make a simple search with query "kinase"
-    When I select first search result
+    Given I click on link "Login"
+    And I click on googleplus button
     And I "should" be logged
+    When I select first search result
     And I click on button "Save as list"
-    Then The list is saved in user space "true"
+    Then the list "should" be saved

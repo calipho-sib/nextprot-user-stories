@@ -5,19 +5,17 @@ Feature: Registration to neXtProt
   so that I can access my user space
   and access more services
 
-  Scenario: Login with my google account
-
+  Background:
     Given I am on "any" nextprot page
     And I "should not" be logged
+
+  Scenario: Login with my google account
     When I click on link "Login"
     And I click on googleplus button
     Then I "should" be logged
 
   Scenario: Logout from nextprot
-
-    Given I am on "any" nextprot page
-    And I "should not" be logged
-    And I click on link "Login"
+    Given I click on link "Login"
     And I click on googleplus button
     And I "should" be logged
     When I click on dropdown

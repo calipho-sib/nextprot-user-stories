@@ -8,20 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.nextprot.StepUtils.valueOfShouldBeStatus;
+
 public class NextprotLoginSteps {
 
     @And("^I \"([^\"]*)\" be logged$")
     public void iAmLogged(String shouldStatus) throws Throwable {
 
-        boolean shouldBeLogged;
-
-        if ("should".equalsIgnoreCase(shouldStatus)) {
-            shouldBeLogged = true;
-        } else if ("should not".equalsIgnoreCase(shouldStatus)) {
-            shouldBeLogged = false;
-        } else {
-            throw new IllegalArgumentException(shouldStatus + ": bad argument format (take only values 'should' or 'should not')");
-        }
+        boolean shouldBeLogged = valueOfShouldBeStatus(shouldStatus);
 
         String script = "return angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
 
