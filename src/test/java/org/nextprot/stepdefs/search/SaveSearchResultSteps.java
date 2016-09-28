@@ -1,4 +1,4 @@
-package org.nextprot.stepdefs;
+package org.nextprot.stepdefs.search;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

@@ -1,4 +1,4 @@
-package org.nextprot.stepdefsnonactive;
+package org.nextprot.stepdefs.api;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
