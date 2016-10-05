@@ -17,13 +17,20 @@ import java.util.concurrent.TimeUnit;
 
 public class StepUtils {
 
-    private static Properties properties;
+    private static final Properties properties;
+
+    private StepUtils() {
+        throw new IllegalAccessError("not instanciable");
+    }
 
     static {
         try {
-            properties = loadProperties(StepUtils.class.getClassLoader().getResource("settings.properties").getFile());
+            properties = loadProperties(
+                    StepUtils.class.getClassLoader().getResource("settings.properties").getFile(),
+                    StepUtils.class.getClassLoader().getResource("hidden.properties").getFile()
+            );
         } catch (IOException e) {
-            throw new IllegalStateException("cannot load file 'settings.properties'", e);
+            throw new IllegalStateException("cannot load properties", e);
         }
     }
 
@@ -59,17 +66,16 @@ public class StepUtils {
         return properties.getProperty(name);
     }
 
-    private static Properties loadProperties(String fileName) throws IOException {
+    private static Properties loadProperties(String... fileNames) throws IOException {
 
-        Objects.requireNonNull(fileName);
+        Properties props = new Properties();
 
-        Properties prop = new Properties();
-
-        try (InputStream input = new FileInputStream(fileName)) {
-
-            prop.load(input);
+        for (String fileName : fileNames) {
+            try (InputStream input = new FileInputStream(fileName)) {
+                props.load(input);
+            }
         }
 
-        return prop;
+        return props;
     }
 }

@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
+import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,9 +19,9 @@ import static org.nextprot.StepUtils.fluentWaitUntilFindElement;
 
 public class WebPageSteps {
 
-    public static final String API_URL = "http://alpha-api.nextprot.org/";
-    public static final String SEARCH_URL = "http://alpha-search.nextprot.org/";
-    public static final String SNORQL_URL = "http://alpha-snorql.nextprot.org/";
+    public static final String API_URL = StepUtils.getProperty("api.url");
+    public static final String SEARCH_URL = StepUtils.getProperty("search.url");
+    public static final String SNORQL_URL = StepUtils.getProperty("snorql.url");
 
     public static String getNextprotPageUrl(String page) {
 
@@ -88,7 +89,7 @@ public class WebPageSteps {
     @Then("^the page source should contain texts$")
     public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
 
-        new WebDriverWait(WebDriverManager.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
+        new WebDriverWait(WebDriverManager.getDriver(), 30).until(new ExpectedCondition<Boolean>() {
 
             public Boolean apply(WebDriver d) {
 
