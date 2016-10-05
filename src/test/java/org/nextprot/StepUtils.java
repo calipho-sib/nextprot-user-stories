@@ -8,10 +8,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class StepUtils {
+
+    private static Properties properties;
+
+    static {
+        try {
+            properties = loadProperties(StepUtils.class.getClassLoader().getResource("settings.properties").getFile());
+        } catch (IOException e) {
+            throw new IllegalStateException("cannot load file 'settings.properties'", e);
+        }
+    }
 
     public static boolean valueOfShouldBeStatus(String shouldStatus) {
 
@@ -38,5 +52,24 @@ public class StepUtils {
                 .ignoring(NoSuchElementException.class);
 
         return wait.until(d -> d.findElement(locator));
+    }
+
+    public static String getProperty(String name) {
+
+        return properties.getProperty(name);
+    }
+
+    private static Properties loadProperties(String fileName) throws IOException {
+
+        Objects.requireNonNull(fileName);
+
+        Properties prop = new Properties();
+
+        try (InputStream input = new FileInputStream(fileName)) {
+
+            prop.load(input);
+        }
+
+        return prop;
     }
 }
