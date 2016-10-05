@@ -9,9 +9,13 @@ Feature: Registration to neXtProt with auth0
     Given I am on "any" nextprot page
     And I "should not" be logged
 
-  Scenario: Login with an google account
+  Scenario: Login with a google+ account
     When I click on link "Login"
-    And I click on googleplus button
+    And I click on google+ button
+    And I fill google+ email as "ndu.google.email"
+    And I click on google+ next
+    And I fill google+ password as "ndu.google.email"
+    And I click on google+ connexion
     Then I "should" be logged
 
   Scenario: Login with email account
@@ -22,7 +26,7 @@ Feature: Registration to neXtProt with auth0
 
   Scenario: Logout from nextprot
     Given I click on link "Login"
-    And I click on googleplus button
+    And I click on google+ button
     And I "should" be logged
     When I click on dropdown
     And I click on link "Logout"

@@ -57,7 +57,7 @@ public class Auth0Steps {
     }
 
     @And("^I \"([^\"]*)\" be logged$")
-    public void iAmLogged(String shouldStatus) throws Throwable {
+    public void iAmLoggedIn(String shouldStatus) throws Throwable {
 
         boolean shouldBeLogged = valueOfShouldBeStatus(shouldStatus);
 
@@ -79,11 +79,5 @@ public class Auth0Steps {
                 return false;
             }
         });
-    }
-
-    @And("^I click on googleplus button$")
-    public void iLogWithGoogle() throws Throwable {
-
-        WebDriverManager.getDriver().findElement(By.className("a0-googleplus")).click();
     }
 }
