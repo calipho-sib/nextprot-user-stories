@@ -7,8 +7,12 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.nextprot.StepUtils.fluentWait;
+import static org.nextprot.StepUtils.fluentWaitUntilFindElement;
 
 public class WebPageSteps {
 
@@ -53,7 +57,6 @@ public class WebPageSteps {
     public void iShouldFindInThePage(String expectedName) throws Throwable {
 
         Assert.assertTrue(WebDriverManager.getDriver().getPageSource().contains(expectedName));
-
     }
 
     @And("^I click on button \"([^\"]*)\"$")
@@ -68,6 +71,12 @@ public class WebPageSteps {
         WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
     }
 
+    @When("^I click on sign up$")
+    public void iClickOnSignUp() throws Throwable {
+
+        WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'a0-sign-up a0-btn-small')]")).click();
+    }
+
     @Given("^I click on \"([^\"]*)\" dropdown$")
     public void iClickOnDropdown(String elementId) throws Throwable {
 
@@ -77,6 +86,33 @@ public class WebPageSteps {
     @When("^I select all search results$")
     public void iSelectAllSearchResultWithAccession() throws Throwable {
 
-        fluentWait(WebDriverManager.getDriver(), 20, By.id("main-clipboard-button")).click();
+        fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20, By.id("main-clipboard-button")).click();
+    }
+
+    @Then("^I sign \"([^\"]*)\" the form with email \"([^\"]*)\" and password \"([^\"]*)\"$")
+    public void iFillTheFormWithEmailAndPassword(String sign, String email, String password) throws Throwable {
+
+        WebDriverManager.getDriver().findElement(By.id("a0-sign"+sign+"_easy_email")).sendKeys(email);
+        WebDriverManager.getDriver().findElement(By.id("a0-sign"+sign+"_easy_password")).sendKeys(password);
+    }
+
+    @And("^I submit to auth0$")
+    public void iSubmitToAut0() throws Throwable {
+
+        fluentWaitUntilFindElement(WebDriverManager.getDriver(), 5, By.xpath("//button[contains(@class, 'a0-primary a0-next')]")).click();
+    }
+
+    @Then("^a signup error appears with message \"([^\"]*)\"$")
+    public void aSignupErrorAppearsWithMessage(String expectedErrorMessage) throws Throwable {
+
+        WebElement h2Element = fluentWaitUntilFindElement(WebDriverManager.getDriver(), 10, By.xpath("//h2[contains(@class, 'a0-error')]"));
+
+        new WebDriverWait(WebDriverManager.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
+
+            public Boolean apply(WebDriver d) {
+
+                return h2Element.getText().startsWith(expectedErrorMessage);
+            }
+        });
     }
 }

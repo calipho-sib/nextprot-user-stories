@@ -28,7 +28,7 @@ public class StepUtils {
         return shouldBe;
     }
 
-    public static WebElement fluentWait(WebDriver driver, int seconds, final By locator) {
+    public static WebElement fluentWaitUntilFindElement(WebDriver driver, int seconds, final By locator) {
 
         Objects.requireNonNull(driver);
 
