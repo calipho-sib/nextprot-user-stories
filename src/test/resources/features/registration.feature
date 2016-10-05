@@ -9,14 +9,14 @@ Feature: Registration to neXtProt with auth0
     Given I am on "any" nextprot page
     And I "should not" be logged
 
-  Scenario: Login with my google account
+  Scenario: Login with an google account
     When I click on link "Login"
     And I click on googleplus button
     Then I "should" be logged
 
   Scenario: Login with email account
     When I click on link "Login"
-    And I sign "in" the form with email "ndu@isb-sib.ch" and password "Npteam.1"
+    And I sign "in" with email as "ndu.email"
     And I submit to auth0
     Then I "should" be logged
 
@@ -31,6 +31,6 @@ Feature: Registration to neXtProt with auth0
   Scenario: Error occurs when sign up with existing email account
     Given I click on link "Login"
     When I click on sign up
-    And I sign "up" the form with email "ndu@isb-sib.ch" and password "Npteam.1"
+    And I sign "up" with email as "ndu.email"
     And I submit to auth0
     Then a signup error appears with message "The user already exists"

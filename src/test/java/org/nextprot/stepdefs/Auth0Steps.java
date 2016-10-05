@@ -3,6 +3,8 @@ package org.nextprot.stepdefs;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
+import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,8 +24,13 @@ public class Auth0Steps {
         WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'a0-sign-up a0-btn-small')]")).click();
     }
 
-    @Then("^I sign \"([^\"]*)\" the form with email \"([^\"]*)\" and password \"([^\"]*)\"$")
-    public void iFillTheFormWithEmailAndPassword(String sign, String email, String password) throws Throwable {
+    @And("^I sign \"([^\"]*)\" with email as \"([^\"]*)\"$")
+    public void iSignTheFormWithEmail(String sign, String emailPropName) throws Throwable {
+
+        String email = StepUtils.getProperty(emailPropName);
+        String password = StepUtils.getProperty(emailPropName+".password");
+
+        Assert.assertTrue("missing password for "+emailPropName+ "", !password.isEmpty());
 
         WebDriverManager.getDriver().findElement(By.id("a0-sign"+sign+"_easy_email")).sendKeys(email);
         WebDriverManager.getDriver().findElement(By.id("a0-sign"+sign+"_easy_password")).sendKeys(password);
