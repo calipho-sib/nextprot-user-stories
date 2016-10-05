@@ -12,21 +12,21 @@ import static org.nextprot.StepUtils.fluentWait;
 
 public class WebPageSteps {
 
-    private static String API    = "http://alpha-api.nextprot.org/";
-    private static String SEARCH = "http://alpha-search.nextprot.org/";
-    private static String SNORQL = "http://alpha-snorql.nextprot.org/";
+    public static final String API_URL = "http://alpha-api.nextprot.org/";
+    public static final String SEARCH_URL = "http://alpha-search.nextprot.org/";
+    public static final String SNORQL_URL = "http://alpha-snorql.nextprot.org/";
 
-    private static String getNextprotPageUrl(String page) {
+    public static String getNextprotPageUrl(String page) {
 
         switch (page) {
             case "api":
-                return API;
+                return API_URL;
             case "search":
-                return SEARCH;
+                return SEARCH_URL;
             case "snorql":
-                return SNORQL;
+                return SNORQL_URL;
             case "any":
-                return SEARCH;
+                return SEARCH_URL;
             default:
                 throw new IllegalArgumentException("cannot find url for page "+page);
         }
