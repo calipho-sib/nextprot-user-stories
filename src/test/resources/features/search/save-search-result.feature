@@ -5,8 +5,8 @@ Feature: Save search result as list
   so that I can access to results in my private space
 
   Background:
-    Given I am on "search" nextprot page
-    And I "should not" be logged
+    Given I navigate to "search" nextprot page
+    And I "should not" be logged to nextprot
     And I make a simple search with query "kinase"
 
   Scenario: Guest cannot save selected results
@@ -16,8 +16,8 @@ Feature: Save search result as list
 
   Scenario: Logged user can save selected results
     Given I click on link "Login"
-    And I click on googleplus button
-    And I "should" be logged
+    And I sign "in" with email as "ndu.email"
+    And I submit to auth0
     When I select one search result with accession "NX_O95819"
     And I click on button "Save as list"
     Then the list "should" be saved

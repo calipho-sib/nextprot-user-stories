@@ -56,7 +56,7 @@ public class Auth0Steps {
         });
     }
 
-    @And("^I \"([^\"]*)\" be logged$")
+    @And("^I \"([^\"]*)\" be logged to nextprot$")
     public void iAmLoggedIn(String shouldStatus) throws Throwable {
 
         boolean shouldBeLogged = valueOfShouldBeStatus(shouldStatus);

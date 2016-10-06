@@ -39,14 +39,21 @@ public class WebPageSteps {
         }
     }
 
-    @When("^I am on \"([^\"]*)\" nextprot page$")
+    @When("^I navigate to \"([^\"]*)\" nextprot page$")
     public void shouldNavigateToNextprotPage(String pageName) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
     }
 
+    @When("^I navigate to \"([^\"]*)\"$")
+    public void shouldNavigateToUrl(String url) throws Throwable {
+
+        WebDriverManager.getDriver().navigate().to(url);
+    }
+
     @Then("^the page title should be \"([^\"]*)\"$")
     public void pageTitleShouldBe(String expectedTitle) throws Throwable {
+
         Assert.assertTrue(WebDriverManager.getDriver().getTitle().contains(expectedTitle));
     }
 
@@ -68,7 +75,7 @@ public class WebPageSteps {
         WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    @When("^I click on dropdown$")
+    @When("^I click on nextprot log dropdown$")
     public void iClickOnDropdown() throws Throwable {
 
         WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();

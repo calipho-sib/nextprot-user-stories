@@ -5,7 +5,7 @@ Feature: Retrieve entry accession numbers from neXtProt REST API
   so that I can get accession numbers
 
   Background:
-    Given I am on "api" nextprot page
+    Given I navigate to "api" nextprot page
 
   Scenario: Retrieve all accession numbers
     When I do a REST request with query "/entry-accessions"

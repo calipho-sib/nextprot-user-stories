@@ -5,7 +5,7 @@ Feature: Search neXtProt
   so that I can access to results
 
   Background:
-    Given I am on "search" nextprot page
+    Given I navigate to "search" nextprot page
 
   Scenario: Make a simple search (protein by default)
     When I make a simple search with query "kinase"

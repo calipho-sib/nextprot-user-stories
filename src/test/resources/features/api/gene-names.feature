@@ -5,7 +5,7 @@ Feature: Retrieve gene names from neXtProt REST API
   so that I can get gene names
 
   Background:
-    Given I am on "api" nextprot page
+    Given I navigate to "api" nextprot page
 
   Scenario: Retrieve gene name of a given entry accession
     When I do a REST request with query "/gene-names/entry/NX_P01308.json"

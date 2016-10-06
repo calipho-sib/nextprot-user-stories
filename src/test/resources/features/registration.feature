@@ -7,7 +7,7 @@ Feature: Registration to neXtProt with auth0
 
   Background:
     Given I navigate to "any" nextprot page
-    And I "should not" be logged
+    And I "should not" be logged to nextprot
 
   Scenario: Login with a gmail account
     Given I navigate to "http://www.gmail.com"
@@ -15,22 +15,22 @@ Feature: Registration to neXtProt with auth0
     And I navigate to "any" nextprot page
     When I click on link "Login"
     And I click on google+ button
-    Then I "should" be logged
+    Then I "should" be logged to nextprot
 
   Scenario: Login with email account
     When I click on link "Login"
     And I sign "in" with email as "ndu.email"
     And I submit to auth0
-    Then I "should" be logged
+    Then I "should" be logged to nextprot
 
   Scenario: Logout from nextprot
     Given I click on link "Login"
     And I sign "in" with email as "ndu.email"
     And I submit to auth0
-    And I "should" be logged
+    And I "should" be logged to nextprot
     When I click on dropdown
     And I click on link "Logout"
-    Then I "should not" be logged
+    Then I "should not" be logged to nextprot
 
   Scenario: Error occurs when sign up with existing email account
     Given I click on link "Login"

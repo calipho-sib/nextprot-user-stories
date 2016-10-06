@@ -5,7 +5,7 @@ Feature: Retrieve entry information from neXtProt REST API
   so that I can read entry data
 
   Background:
-    Given I am on "api" nextprot page
+    Given I navigate to "api" nextprot page
 
   Scenario: Retrieve entry accession in json format
     When I do a REST request with query "/entry/NX_P01308/accession.json"
