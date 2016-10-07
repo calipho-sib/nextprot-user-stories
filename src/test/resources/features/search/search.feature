@@ -20,9 +20,10 @@ Feature: Search neXtProt
     Then the page source should contain text "<result>"
 
     Examples:
-      | link         | result                                                                                                     |
-      | Proteins     | Aurora kinase B                                                                                            |
-      | Publications | Conformation-Selective Analogues of Dasatinib Reveal Insight into Kinase Inhibitor Binding and Selectivity |
+      | link         | result                                                 |
+      | Proteins     | Aurora kinase B                                        |
+      | Publications | Targeting human central nervous system protein kinases |
+      | Terms        | kinase binding [GO:0019900]                            |
 
   Scenario: Select a result after a protein search should add it to clipboard
     Given I make a simple search with query "kinase"
