@@ -3,6 +3,7 @@ package org.nextprot.stepdefs.search;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
+import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,10 +12,23 @@ import static org.nextprot.StepUtils.valueOfShouldBeStatus;
 
 public class SaveSearchResultSteps {
 
-    @Then("^the list \"([^\"]*)\" be saved$")
+    @Then("^the list \"([^\"]*)\" be savable")
     public void theListBeSaved(String shouldStatus) throws Throwable {
 
         boolean shouldBeSaved = valueOfShouldBeStatus(shouldStatus);
+
+        if (shouldBeSaved) {
+
+            WebElement modal = StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
+                    By.xpath("//h4[contains(@class, 'text-center ng-binding')]"));
+
+            Assert.assertEquals("Create List", modal.getText());
+        } else {
+            WebElement alertDiv = StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
+                    By.xpath("//div[contains(@class, 'flashmsg alert alert-warning alert-dismissible')]"));
+
+            Assert.assertTrue(alertDiv.getText().endsWith("Please login to save a list"));
+        }
     }
 
     @When("^I select one search result with accession \"([^\"]*)\"$")
