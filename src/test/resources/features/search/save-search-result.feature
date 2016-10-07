@@ -12,7 +12,7 @@ Feature: Save search result as list
   Scenario: Guest cannot save selected results
     When I select one search result with accession "NX_O95819"
     And I click on button "Save as list"
-    Then the list "should not" be saved
+    Then the list "should not" be savable
 
   Scenario: Logged user can save selected results
     Given I click on link "Login"
@@ -20,4 +20,4 @@ Feature: Save search result as list
     And I submit to auth0
     When I select one search result with accession "NX_O95819"
     And I click on button "Save as list"
-    Then the list "should" be saved
+    Then the list "should" be savable
