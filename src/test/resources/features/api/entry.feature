@@ -26,6 +26,10 @@ Feature: Retrieve entry information from neXtProt REST API
       | <begin position="1"/>                                                                                |
       | <end position="24"/>                                                                                 |
 
+    # TODO: behave differently given the browser:
+    # - in firefox a dialog for saving fasta file pops-up
+    # - in chrome it is content is rendered in the page
+    # We have to find a way of control this behavior (MIME)
   Scenario: Retrieve entry in fasta format
     When I do a REST request with query "/entry/NX_P01308.fasta"
     #Then the page source should contain texts
