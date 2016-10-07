@@ -33,4 +33,4 @@ Feature: Search neXtProt
   Scenario: Select all results after a protein search should add them to clipboard
     Given I make a simple search with query "krypton"
     When I select all search results
-    Then the clipboard count should be equal to "7"
+    Then the clipboard count should be equal to "12"
