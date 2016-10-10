@@ -19,10 +19,7 @@ public class SaveSearchResultSteps {
 
         if (shouldBeSaved) {
 
-            WebElement modal = StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
-                    By.xpath("//h4[contains(@class, 'text-center ng-binding')]"));
-
-            Assert.assertEquals("Create List", modal.getText());
+            Assert.assertTrue(WebDriverManager.getDriver().getPageSource().contains("Create List"));
         } else {
             WebElement alertDiv = StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
                     By.xpath("//div[contains(@class, 'flashmsg alert alert-warning alert-dismissible')]"));
@@ -42,7 +39,8 @@ public class SaveSearchResultSteps {
     @Then("^the clipboard count should be equal to \"([^\"]*)\"$")
     public void theBadgeShouldBeEqualTo(String expectedCountString) throws Throwable {
 
-        WebElement elt = WebDriverManager.getDriver().findElement(By.xpath("//span[contains(@class, 'badge ng-binding')]"));
+        WebElement elt = StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
+                By.xpath("//span[contains(@class, 'badge ng-binding')]"));
 
         String observedCountString = elt.getText();
 
