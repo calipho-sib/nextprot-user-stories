@@ -31,7 +31,7 @@ public class SaveSearchResultSteps {
     @When("^I select one search result with accession \"([^\"]*)\"$")
     public void iSelectOneSearchResultWithAccession(String accession) throws Throwable {
 
-        WebElement ul = WebDriverManager.getDriver().findElement(By.id("search-results"));
+        WebElement ul = StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20, By.id("search-results"));
         WebElement checkbox = ul.findElement(By.xpath("//input[@value=\""+accession+"\"]"));
         checkbox.click();
     }

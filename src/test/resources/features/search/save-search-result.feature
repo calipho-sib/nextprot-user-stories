@@ -9,11 +9,13 @@ Feature: Save search result as list
     And I "should not" be logged to nextprot
     And I make a simple search with query "kinase"
 
+  # FIXME: All feats executed => 'And I Click on button...' -> Element is not clickable
   Scenario: Guest cannot save selected results
     When I select one search result with accession "NX_O95819"
     And I click on button "Save as list"
     Then the list "should not" be savable
 
+  # FIXME: All feats executed => 'And I Click on button...' -> Element is not clickable
   Scenario: Logged user can save selected results
     Given I click on link "Login"
     And I sign "in" with email as "ndu.email"

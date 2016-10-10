@@ -60,7 +60,7 @@ public class WebPageSteps {
     @When("^I click on link \"([^\"]*)\"$")
     public void clickOnLink(String link) throws Throwable {
 
-        WebDriverManager.getDriver().findElement(By.linkText(link)).click();
+        StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20, By.linkText(link)).click();
     }
 
     @Then("^I should find in the page \"([^\"]*)\"$")
@@ -72,13 +72,15 @@ public class WebPageSteps {
     @And("^I click on button \"([^\"]*)\"$")
     public void iClickOnButton(String name) throws Throwable {
 
-        WebDriverManager.getDriver().findElement(By.xpath("//button[contains(text(),'"+name+"')]")).click();
+        StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
+                By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
     @When("^I click on nextprot log dropdown$")
     public void iClickOnDropdown() throws Throwable {
 
-        WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
+        StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
+                By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
     }
 
     @Given("^I click on \"([^\"]*)\" dropdown$")
