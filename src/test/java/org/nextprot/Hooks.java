@@ -10,7 +10,8 @@ public class Hooks {
     // run before any scenario
     @Before
     public void setupWebDriver() {
-        WebDriverManager.initFirefoxDriver();
+        //WebDriverManager.initFirefoxDriver();
+        WebDriverManager.initChromeDriver();
         //WebDriverManager.getDriver().manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         WebDriverManager.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
