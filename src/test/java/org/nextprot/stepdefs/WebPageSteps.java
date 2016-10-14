@@ -15,8 +15,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Collections;
 import java.util.List;
 
-import static org.nextprot.StepUtils.fluentWaitUntilFindElement;
-
 public class WebPageSteps {
 
     public static final String API_URL = StepUtils.getProperty("api.url");
@@ -87,12 +85,6 @@ public class WebPageSteps {
     public void iClickOnDropdown(String elementId) throws Throwable {
 
         WebDriverManager.getDriver().findElement(By.id(elementId)).click();
-    }
-
-    @When("^I select all search results$")
-    public void iSelectAllSearchResultWithAccession() throws Throwable {
-
-        fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20, By.id("main-clipboard-button")).click();
     }
 
     @Then("^the page source should contain texts$")

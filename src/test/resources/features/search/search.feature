@@ -27,10 +27,10 @@ Feature: Search neXtProt
 
   Scenario: Select a result after a protein search should add it to clipboard
     Given I make a simple search with query "kinase"
-    When I select one search result with accession "NX_O95819"
-    Then the clipboard count should be equal to "1"
+    When I select search result with accession "NX_O95819"
+    Then the clipboard should contain "1" elements
 
   Scenario: Select all results after a protein search should add them to clipboard
     Given I make a simple search with query "krypton"
     When I select all search results
-    Then the clipboard count should be equal to "12"
+    Then the clipboard should contain "12" elements
