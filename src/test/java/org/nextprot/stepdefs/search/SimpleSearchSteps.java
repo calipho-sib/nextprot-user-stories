@@ -6,6 +6,8 @@ import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static org.nextprot.WebDriverManager.waitUntilFindElement;
+
 public class SimpleSearchSteps {
 
     @And("^I have some result selected$")
@@ -15,7 +17,8 @@ public class SimpleSearchSteps {
     @When("^I make a simple search with query \"([^\"]*)\"$")
     public void iMakeASimpleSearchWithQuery(String query) throws Throwable {
 
-        WebElement searchField = WebDriverManager.getDriver().findElement(By.id("search-query"));
+        WebElement searchField = WebDriverManager.waitUntilFindElement(20, By.id("search-query"));
+
         searchField.sendKeys(query);
         searchField.submit();
     }

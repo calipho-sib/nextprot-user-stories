@@ -8,20 +8,17 @@ import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.nextprot.StepUtils.fluentWaitUntilFindElement;
 import static org.nextprot.StepUtils.valueOfShouldBeStatus;
+import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 
 public class Auth0Steps {
 
     @When("^I click on sign up$")
     public void iClickOnSignUp() throws Throwable {
 
-        WebDriverManager.getDriver().findElement(By.xpath("//a[contains(@class, 'a0-sign-up a0-btn-small')]")).click();
+        WebDriverManager.waitUntilFindElement(20, By.xpath("//a[contains(@class, 'a0-sign-up a0-btn-small')]")).click();
     }
 
     @And("^I sign \"([^\"]*)\" with email as \"([^\"]*)\"$")
@@ -32,52 +29,41 @@ public class Auth0Steps {
 
         Assert.assertTrue("missing password for "+emailPropName+ "", !password.isEmpty());
 
-        WebDriverManager.getDriver().findElement(By.id("a0-sign"+sign+"_easy_email")).sendKeys(email);
-        WebDriverManager.getDriver().findElement(By.id("a0-sign"+sign+"_easy_password")).sendKeys(password);
+        WebDriverManager.waitUntilFindElement(20, By.id("a0-sign"+sign+"_easy_email")).sendKeys(email);
+        WebDriverManager.waitUntilFindElement(20, By.id("a0-sign"+sign+"_easy_password")).sendKeys(password);
     }
 
     @And("^I submit to auth0$")
     public void iSubmitToAut0() throws Throwable {
 
-        fluentWaitUntilFindElement(WebDriverManager.getDriver(), 5, By.xpath("//button[contains(@class, 'a0-primary a0-next')]")).click();
+        WebDriverManager.waitUntilFindElement(5, By.xpath("//button[contains(@class, 'a0-primary a0-next')]")).click();
     }
 
     @Then("^a signup error appears with message \"([^\"]*)\"$")
     public void aSignupErrorAppearsWithMessage(String expectedErrorMessage) throws Throwable {
 
-        WebElement h2Element = fluentWaitUntilFindElement(WebDriverManager.getDriver(), 10, By.xpath("//h2[contains(@class, 'a0-error')]"));
+        WebElement h2Element = WebDriverManager.waitUntilFindElement(10, By.xpath("//h2[contains(@class, 'a0-error')]"));
 
-        new WebDriverWait(WebDriverManager.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
-
-            public Boolean apply(WebDriver d) {
-
-                return h2Element.getText().startsWith(expectedErrorMessage);
-            }
-        });
+        fluentWaitUntilExpectedCondition(20, d -> h2Element.getText().startsWith(expectedErrorMessage));
     }
 
     @And("^I \"([^\"]*)\" be logged to nextprot$")
     public void iAmLoggedIn(String shouldStatus) throws Throwable {
 
-        boolean shouldBeLogged = valueOfShouldBeStatus(shouldStatus);
+        fluentWaitUntilExpectedCondition(30, d -> {
 
-        String script = "return angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
+            if (d instanceof JavascriptExecutor) {
 
-        new WebDriverWait(WebDriverManager.getDriver(), 30).until(new ExpectedCondition<Boolean>() {
+                String script = "return angular.element('[ng-controller=SearchCtrl]').scope().user.profile.username";
 
-            public Boolean apply(WebDriver d) {
+                String res = (String) ((JavascriptExecutor) d).executeScript(script);
 
-                if (d instanceof JavascriptExecutor) {
+                boolean isLogged = res != null && !"Guest".equals(res);
 
-                    String res = (String) ((JavascriptExecutor) d).executeScript(script);
-
-                    boolean isLogged = res != null && !"Guest".equals(res);
-
-                    return shouldBeLogged == isLogged;
-                }
-
-                return false;
+                return valueOfShouldBeStatus(shouldStatus) == isLogged;
             }
+
+            return false;
         });
     }
 }

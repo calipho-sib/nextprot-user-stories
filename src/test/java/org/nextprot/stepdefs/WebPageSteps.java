@@ -4,16 +4,15 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
 import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Collections;
 import java.util.List;
+
+import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
+import static org.nextprot.WebDriverManager.waitUntilFindElement;
 
 public class WebPageSteps {
 
@@ -52,56 +51,50 @@ public class WebPageSteps {
     @Then("^the page title should be \"([^\"]*)\"$")
     public void pageTitleShouldBe(String expectedTitle) throws Throwable {
 
-        Assert.assertTrue(WebDriverManager.getDriver().getTitle().contains(expectedTitle));
+        fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedTitle));
     }
 
     @When("^I click on link \"([^\"]*)\"$")
     public void clickOnLink(String link) throws Throwable {
 
-        StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20, By.linkText(link)).click();
+        WebDriverManager.waitUntilFindElement(20, By.linkText(link)).click();
     }
 
     @Then("^I should find in the page \"([^\"]*)\"$")
     public void iShouldFindInThePage(String expectedName) throws Throwable {
 
-        Assert.assertTrue(WebDriverManager.getDriver().getPageSource().contains(expectedName));
+        fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedName));
     }
 
     @And("^I click on button \"([^\"]*)\"$")
     public void iClickOnButton(String name) throws Throwable {
 
-        StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
-                By.xpath("//button[contains(text(),'"+name+"')]")).click();
+        WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
     @When("^I click on nextprot log dropdown$")
     public void iClickOnDropdown() throws Throwable {
 
-        StepUtils.fluentWaitUntilFindElement(WebDriverManager.getDriver(), 20,
-                By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
+        WebDriverManager.waitUntilFindElement(20, By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
     }
 
     @Given("^I click on \"([^\"]*)\" dropdown$")
     public void iClickOnDropdown(String elementId) throws Throwable {
 
-        WebDriverManager.getDriver().findElement(By.id(elementId)).click();
+        WebDriverManager.waitUntilFindElement(20, By.id(elementId)).click();
     }
 
     @Then("^the page source should contain texts$")
     public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
 
-        new WebDriverWait(WebDriverManager.getDriver(), 30).until(new ExpectedCondition<Boolean>() {
+        fluentWaitUntilExpectedCondition(30, d -> {
 
-            public Boolean apply(WebDriver d) {
-
-                for (String text : textList) {
-
-                    if (!d.getPageSource().contains(text)) {
-                        return false;
-                    }
+            for (String text : textList) {
+                if (!d.getPageSource().contains(text)) {
+                    return false;
                 }
-                return true;
             }
+            return true;
         });
     }
 

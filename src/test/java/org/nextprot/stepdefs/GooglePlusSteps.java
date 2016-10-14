@@ -4,14 +4,13 @@ import cucumber.api.java.en.And;
 import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class GooglePlusSteps {
 
     @And("^I click on google\\+ button$")
     public void iClickOnGooglePlusButton() throws Throwable {
 
-        WebDriverManager.getDriver().findElement(By.className("a0-googleplus")).click();
+        WebDriverManager.waitUntilFindElement(30, By.className("a0-googleplus")).click();
     }
 
     @And("^I sign in with gmail as \"([^\"]*)\"$")
@@ -20,10 +19,10 @@ public class GooglePlusSteps {
         String email = StepUtils.getProperty(account);
         String password = StepUtils.getProperty(account+".password");
 
-        WebElement element = WebDriverManager.getDriver().findElement(By.id("Email"));
-        element.sendKeys(email);
-        WebDriverManager.getDriver().findElement(By.id("next")).click();
-        WebDriverManager.getDriver().findElement(By.id("Passwd")).sendKeys(password);
-        WebDriverManager.getDriver().findElement(By.id("signIn")).click();
+        WebDriverManager.waitUntilFindElement(30, By.id("Email")).sendKeys(email);
+
+        WebDriverManager.waitUntilFindElement(30, By.id("next")).click();
+        WebDriverManager.waitUntilFindElement(30, By.id("Passwd")).sendKeys(password);
+        WebDriverManager.waitUntilFindElement(30, By.id("signIn")).click();
     }
 }
