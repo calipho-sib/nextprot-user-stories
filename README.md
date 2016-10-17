@@ -1,13 +1,10 @@
-# neXtProt - The knowledge resource on human proteins
+# neXtProt User Stories
 
-This is a code repository for the SIB - Swiss Institute of Bioinformatics CALIPHO group neXtProt project
+Defines and tests user stories, features or specifications for [neXtProt](https://www.nextprot.org/).
 
-See: http://www.nextprot.org/
-
-# nextprot-user-stories
-
-Defines and tests neXtProt user stories, features or specifications based on:
+All our test acceptance are based on the following technologies:
 
 - [selenium](http://docs.seleniumhq.org/)
 - [cucumber](https://cucumber.io/)
 
+See [documentation](doc/user-stories.md)
