@@ -28,17 +28,64 @@ actually supports syntax highlighting but unfortunately not auto-completion :(
 Open a terminal and execute the following commands:
 
 ```
+$ cd somewhere-in-your-disk-where-you-want-to-save-repository
 $ git clone https://github.com/calipho-sib/nextprot-user-stories.git
-$ cd ~/nextprot-user-stories/
+$ cd nextprot-user-stories/
 $ bash script/update.sh
 ```
 
-Come back to your Atom editor and open your directory `~/nextprot-user-stories/src/test/resources/features`
+Come back to your Atom editor and open your directory `somewhere-in-your-disk-where-you-want-to-save-repository/nextprot-user-stories/src/test/resources/features`
 
-Note: Each time you want to edit, you need to execute:
+# Creating use stories
+
+## Each time you want to edit, you need to execute:
 
 ```
-$ cd ~/nextprot-user-stories/
+$ cd somewhere-in-your-disk-where-you-want-to-save-repository/nextprot-user-stories/
 $ bash script/update.sh
 ```
 
+## Editing features
+
+Here you just edit .features files in ```Atom```
+
+## Validation and staging modifications
+
+Any new or modified files have to be added before being pushed.
+
+### Adding each files separately
+
+You first have to select files you want to prepare to push:
+
+```
+$ git status
+On branch develop
+Your branch is up-to-date with 'origin/develop'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   src/test/resources/features/registration.feature
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+$ git add src/test/resources/features/registration.feature
+```
+
+I you want to add all modified files automatically, it can be done in the next push step 
+
+## Pushing your modifications to github
+
+```
+$ cd somewhere-in-your-disk-where-you-want-to-save-repository/nextprot-user-stories/
+$ bash script/push.sh "new user story blablabla..."
+
+# or alternatively add all
+$ bash script/push.sh -a "new user story blablabla..."
+```
+
+
+# Annexe
+
+If you are interested: [git cheat sheet](http://ndpsoftware.com/git-cheatsheet.html)
