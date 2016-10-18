@@ -72,7 +72,7 @@ Here are the most popular modern editors tested for our needs:
 
 # Github repository ```nextprot-user-stories```
 
-All our `feature`s are actually located in our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources)
+All our `feature`s are actually located in our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features)
 
 ```
 There is a file "resources/features.properties" that contains all variables that can be referenced in step definitions.
