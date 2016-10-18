@@ -1,91 +1,127 @@
-# For developers
+Cucumber is an awesome tool that can help us create living documentation. It is a great way to gain a better understanding of how it should function.
 
-Developers uses an IDE to code such as Eclipse or Intellij. Both provides plugins for cucumber/gherkin.
+It utilizes Gherkin – a language that is at the core of Cucumber’s ability to both document and automate tests. It allows for writing tests around how a feature should behave – a process known as Behaviour Driven Development.
+We will gain a better understanding of what is being tested and how a feature should function – something that is along the same lines as writing user stories.
 
-# For features writers (Monique, Amos...)
+# Gherkin, the `user story` language
 
-We need a simpler, generic editor with support for cucumber. This editor should have:
+Gherkin is a declarative language - you write your code in such a way that it describes what you want to do (like SQL).
+
+Each `feature` is defined by a bunch of `scenarii` or `user-stories`.
+
+A scenario focuses on 3 step definitions:
+
+1. an established condition
+2. an action
+3. an expected result
+
+Each step is a declaration of what the user is doing in the scenario.
+
+Example:
+```
+Scenario: User navigates to profile page
+Given I am on the home page
+When I log in
+Then I should be directed to my profile page
+```
+
+To be automatically tested by cucumber, each step definition is mapped to java code that handle execution of the step.
+
+Thanks to its declarative language, it's not so hard for non-developers to write them.
+Thus we can decouple the definition of a scenario (done by both collaborators) from the attached function (done by developers).
+
+# Features editors
+
+We need the help of a text editor to formalize those user-stories. Depending on the profile of the writer, there are some alternative solutions.
+
+## for developers
+
+Developers already uses IDE to write code (Eclipse, Intellij, ...). Most of them provides plugins for cucumber/gherkin.
+
+## for non developers
+
+They need a simpler, more generic editor that supports cucumber and gherkin.
+
+This editor should provide:
 
 1. syntax highlighting for gherkin
-2. auto-completion on feature steps
+2. auto-completion on existed feature steps
 
-[Brackets.io](http://brackets.io/) and [Visual-studio-code](https://code.visualstudio.com/?utm_expid=101350005-28.R1T8FshdTBWEfZjY0s7XKQ.0&utm_referrer=https%3A%2F%2Fwww.google.ch%2F)
-actually supports syntax highlighting but unfortunately not auto-completion :(
+Here are the most popular modern editors tested for our needs:
 
-# Installation of ```Atom```
+- [Brackets.io](http://brackets.io/), an open source code editor for web designers and front-end developers initiated by adobe
+- [Visual-studio-code](https://code.visualstudio.com/?utm_expid=101350005-28.R1T8FshdTBWEfZjY0s7XKQ.0&utm_referrer=https%3A%2F%2Fwww.google.ch%2F) is a code editor by microsoft
+- [Atom](https://atom.io/) is a text editor developed by github
 
-[Atom](https://atom.io/) is a text editor developed by github comes with both needed capabilities :)
+`Brackets` and `Visual-studio` actually supports syntax highlighting for gherkin but unfortunately not yet auto-completion :(
 
-1. First go to web site https://atom.io/ and download the last release.
+`Atom` comes with both needed requirements :)
+
+## Installation of ```Atom```
+
+1. First go to web site https://atom.io/ and download the latest release.
 2. Launch Atom
-3. Click on 'Atom/Preferences'
-4. Select tab 'Install' and search ```cucumber``` packages
-5. Install packages ```cucumber``` and ```cucumber-autocomplete```
-6. Select tab 'Package' and click on ```cucumber-autocomplete``` settings, fill ```Path``` to '/..'
+3. Click on `Atom/Preferences`
+4. Select tab `Install` and search `cucumber` packages
+5. Install packages `cucumber` and `cucumber-autocomplete`
+6. Select tab `Package` and click on `cucumber-autocomplete` settings, fill `Path` to `/.`
 
-# Fetch git repository ```nextprot-user-stories``` 
+## An example of feature in `Atom`:
 
-Open a terminal and execute the following commands:
+![feature](img/example-feature-in-atom.png)
 
-```
-$ cd somewhere-in-your-disk-where-you-want-to-save-repository
-$ git clone https://github.com/calipho-sib/nextprot-user-stories.git
-$ cd nextprot-user-stories/
-$ bash script/update.sh
-```
+# Github repository ```nextprot-user-stories```
 
-Come back to your Atom editor and open your directory `somewhere-in-your-disk-where-you-want-to-save-repository/nextprot-user-stories/src/test/resources/features`
-
-# Creating use stories
-
-## Each time you want to edit, you need to execute:
+All our `feature`s are actually located in our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources)
 
 ```
-$ cd somewhere-in-your-disk-where-you-want-to-save-repository/nextprot-user-stories/
-$ bash script/update.sh
+There is a file "resources/features.properties" that contains all variables that can be referenced in step definitions.
+```
+For example the variable `search` is referenced in the following step:
+```
+I navigate to url of nextprot "search"
 ```
 
-## Editing features
+Here variable "search" is like an alias for url "http://dev-search.nextprot.org/".
 
-Here you just edit .features files in ```Atom```
+# Development cycle and coordination between feature writers and java coders
 
-## Validation and staging modifications
+There are a list of steps that are already mapped to java code in this repository.
+They are accessible through auto-completion when writing `scenario`
 
-Any new or modified files have to be added before being pushed.
+When new steps are created, this will have to be handle by a developer.
 
-### Adding each files separately
+Could we copy directory features/ in Dropbox and synchronize with all collaborator.
+Could we synchronize with git ?
 
-You first have to select files you want to prepare to push:
+# Tutorial: create a first scenario
 
+There is a new service `https://dev-api.nextprot.org/entry-gene-names.json` that returns the map of all neXtProt entry accessions and their associated gene names.
+
+Create a new file "/api/playground-api.feature" and write one scenario that tests that the service returns the following entries:
 ```
-$ git status
-On branch develop
-Your branch is up-to-date with 'origin/develop'.
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   src/test/resources/features/registration.feature
-
-no changes added to commit (use "git add" and/or "git commit -a")
-
-$ git add src/test/resources/features/registration.feature
+"NX_P04156" : [ "PRNP" ]
+"NX_F7VJQ1" : [ "PRNP" ]
 ```
 
-I you want to add all modified files automatically, it can be done in the next push step 
-
-## Pushing your modifications to github
+Here is a template for the scenario:
 
 ```
-$ cd somewhere-in-your-disk-where-you-want-to-save-repository/nextprot-user-stories/
-$ bash script/push.sh "new user story blablabla..."
+Feature: Test API to learn cucumber
 
-# or alternatively add all
-$ bash script/push.sh -a "new user story blablabla..."
+  As a end user of api.nextprot.org
+  I want to make API requests
+  so that I can get some data
+
+  Scenario: Retrieve all accession numbers mapped with their gene names
+    Given ...
+    When ...
+    Then ...
 ```
 
+You should not need to declare new step in this scenario.
 
-# Annexe
+# Useful links
 
-If you are interested: [git cheat sheet](http://ndpsoftware.com/git-cheatsheet.html)
+- [gherkin](https://cucumber.io/docs/reference)
+- [atom](https://atom.io)
