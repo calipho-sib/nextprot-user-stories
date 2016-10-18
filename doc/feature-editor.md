@@ -70,13 +70,21 @@ Here are the most popular modern editors tested for our needs:
 
 ![feature](img/example-feature-in-atom.png)
 
-# Github repository ```nextprot-user-stories```
+# neXtProt user-stories
 
 All our `feature`s are actually located in our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features)
 
-```
-There is a file "resources/features.properties" that contains all variables that can be referenced in step definitions.
-```
+## Download folder /features 
+
+> I Highly recommend to get all directory features/ to profit from complete auto-completion
+
+Open your browser to [DownGit](https://minhaskamal.github.io/DownGit/#/home) then paste the link `https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features`
+and click on `Download`
+
+## File `features.properties`
+
+This file contains variables that can be referenced in step definitions.
+
 For example the variable `search` is referenced in the following step:
 ```
 I navigate to url of nextprot "search"
@@ -84,15 +92,12 @@ I navigate to url of nextprot "search"
 
 Here variable "search" is like an alias for url "http://dev-search.nextprot.org/".
 
-# Development cycle and coordination between feature writers and java coders
+## Development cycle and coordination between feature writers and java coders (TODO, TOTHINK)
 
 There are a list of steps that are already mapped to java code in this repository.
 They are accessible through auto-completion when writing `scenario`
 
-When new steps are created, this will have to be handle by a developer.
-
-Could we copy directory features/ in Dropbox and synchronize with all collaborator.
-Could we synchronize with git ?
+When new steps are created, new handlers must be provided by a developer to execute the step with `cucumber`.
 
 # Tutorial: create a first scenario
 
