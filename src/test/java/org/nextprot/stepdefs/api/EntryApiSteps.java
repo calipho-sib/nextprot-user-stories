@@ -6,7 +6,7 @@ import org.nextprot.stepdefs.WebPageSteps;
 
 public class EntryApiSteps {
 
-    @When("^I do a REST request with query \"([^\"]*)\"$")
+    @When("^I do an API request with query \"([^\"]*)\"$")
     public void iDoQuery(String query) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(getRESTfulURL(query));

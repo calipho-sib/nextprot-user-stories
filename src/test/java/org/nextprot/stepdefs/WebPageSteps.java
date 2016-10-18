@@ -12,13 +12,13 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
-import static org.nextprot.WebDriverManager.waitUntilFindElement;
 
 public class WebPageSteps {
 
-    public static final String API_URL = StepUtils.getProperty("api.url");
-    public static final String SEARCH_URL = StepUtils.getProperty("search.url");
-    public static final String SNORQL_URL = StepUtils.getProperty("snorql.url");
+    public static final String API_URL = StepUtils.getProperty("api");
+    public static final String SEARCH_URL = StepUtils.getProperty("search");
+    public static final String SNORQL_URL = StepUtils.getProperty("snorql");
+    public static final String ANY_URL = StepUtils.getProperty("any");
 
     public static String getNextprotPageUrl(String page) {
 
@@ -30,19 +30,19 @@ public class WebPageSteps {
             case "snorql":
                 return SNORQL_URL;
             case "any":
-                return SEARCH_URL;
+                return ANY_URL;
             default:
                 throw new IllegalArgumentException("cannot find url for page "+page);
         }
     }
 
-    @When("^I navigate to \"([^\"]*)\" nextprot page$")
+    @When("^I navigate to url of nextprot \"(api|search|snorql|any)\"$")
     public void shouldNavigateToNextprotPage(String pageName) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
     }
 
-    @When("^I navigate to \"([^\"]*)\"$")
+    @When("^I navigate to url \"([^\"]+)\"$")
     public void shouldNavigateToUrl(String url) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(url);

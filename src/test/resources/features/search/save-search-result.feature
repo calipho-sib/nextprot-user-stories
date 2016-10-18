@@ -5,7 +5,7 @@ Feature: Save search result as list
   so that I can access to results in my private space
 
   Background:
-    Given I navigate to "search" nextprot page
+    Given I navigate to url of nextprot "search"
     And I "should not" be logged to nextprot
     And I make a simple search with query "kinase"
 

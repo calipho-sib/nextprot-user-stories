@@ -18,7 +18,8 @@ public class StepUtils {
         try {
             properties = loadProperties(
                     StepUtils.class.getClassLoader().getResource("settings.properties").getFile(),
-                    StepUtils.class.getClassLoader().getResource("hidden.properties").getFile()
+                    StepUtils.class.getClassLoader().getResource("hidden.properties").getFile(),
+                    StepUtils.class.getClassLoader().getResource("features/features.properties").getFile()
             );
         } catch (IOException e) {
             throw new IllegalStateException("cannot load properties", e);

@@ -5,10 +5,10 @@ Feature: Retrieve entry page displayability from neXtProt REST API
   so that I can know which entry pages are displayable
 
   Background:
-    Given I navigate to "api" nextprot page
+    Given I navigate to url of nextprot "api"
 
   Scenario: Retrieve page display info for an entry
-    When I do a REST request with query "/entry/NX_P01308/page-display.json"
+    When I do an API request with query "/entry/NX_P01308/page-display.json"
     Then the page source should contain texts
     | "Function" : true      |
     | "Phenotypes" : false   |

@@ -5,22 +5,22 @@ Feature: Retrieve entry information from neXtProt REST API
   so that I can read entry data
 
   Background:
-    Given I navigate to "api" nextprot page
+    Given I navigate to url of nextprot "api"
 
   Scenario: Retrieve entry accession in json format
-    When I do a REST request with query "/entry/NX_P01308/accession.json"
+    When I do an API request with query "/entry/NX_P01308/accession.json"
     Then the page source should contain texts
       | "uniqueName" : "NX_P01308" |
       | "uniprotName" : "P01308"   |
 
   Scenario: Retrieve entry isoforms in xml format
-    When I do a REST request with query "/entry/NX_P01308/isoform.xml"
+    When I do an API request with query "/entry/NX_P01308/isoform.xml"
     Then the page source should contain texts
       | <isoform-sequence name="Iso 1" accession="NX_P01308-1" database="neXtProt"                                     |
       | MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN |
 
   Scenario: Retrieve entry signal peptide in xml format
-    When I do a REST request with query "/entry/NX_P01308/signal-peptide.xml"
+    When I do an API request with query "/entry/NX_P01308/signal-peptide.xml"
     Then the page source should contain texts
       | <annotation-category category="signal-peptide" hierarchy="positional-annotation;processing-product"> |
       | <begin position="1"/>                                                                                |
@@ -31,7 +31,7 @@ Feature: Retrieve entry information from neXtProt REST API
     # - in chrome it is content is rendered in the page
     # We have to find a way of control this behavior (MIME)
   Scenario: Retrieve entry in fasta format
-    When I do a REST request with query "/entry/NX_P01308.fasta"
+    When I do an API request with query "/entry/NX_P01308.fasta"
     Then the page source should contain texts
       | &gt;nxp\|NX_P01308-1\|INS\|Insulin\|Iso 1                    |
       | MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAED |
