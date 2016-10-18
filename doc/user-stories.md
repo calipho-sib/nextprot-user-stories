@@ -7,7 +7,7 @@ We will gain a better understanding of what is being tested and how a feature sh
 
 Gherkin is a declarative language - you write your code in such a way that it describes what you want to do (like SQL).
 
-Each `feature` is defined by a bunch of `scenarii` or `user-stories`.
+Each `feature` is defined by a bunch of `scenarios` or `user-stories`.
 
 A scenario focuses on 3 step definitions:
 
