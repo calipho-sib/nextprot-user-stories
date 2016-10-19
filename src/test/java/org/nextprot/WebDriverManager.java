@@ -26,7 +26,7 @@ public class WebDriverManager {
 
         switch (driverName) {
             case FIREFOX:
-                driver = new FirefoxDriver();
+                driver = newFirefoxDriver();
                 break;
             case CHROME:
                 driver = newChromeDriver();
@@ -34,6 +34,13 @@ public class WebDriverManager {
             default:
                 throw new IllegalStateException("cannot instanciate web driver "+driverName);
         }
+    }
+
+    private static WebDriver newFirefoxDriver() {
+
+        System.setProperty("webdriver.firefox.bin", StepUtils.getProperty("webdriver.firefox.bin"));
+
+        return new FirefoxDriver();
     }
 
     private static WebDriver newChromeDriver() {
