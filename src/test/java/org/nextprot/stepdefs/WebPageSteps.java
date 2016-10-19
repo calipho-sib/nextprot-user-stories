@@ -54,7 +54,7 @@ public class WebPageSteps {
         fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedTitle));
     }
 
-    @When("^I click on link \"([^\"]*)\"$")
+    @When("^I select option \"([^\"]*)\"$")
     public void clickOnLink(String link) throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.linkText(link)).click();
@@ -72,13 +72,13 @@ public class WebPageSteps {
         WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    @When("^I click on nextprot log dropdown$")
+    @When("^I click on nextprot log drop-down$")
     public void iClickOnDropdown() throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
     }
 
-    @Given("^I click on \"([^\"]*)\" dropdown$")
+    @Given("^I click on drop-down \"([^\"]*)\"$")
     public void iClickOnDropdown(String elementId) throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.id(elementId)).click();

@@ -1,8 +1,8 @@
 Feature: Search neXtProt
 
   As a end user of search.nextprot.org
-  I want to make a simple search
-  so that I can access to results
+  I want to make a simple search to nextprot
+  so that I can access the results
 
   Background:
     Given I navigate to url of nextprot "search"
@@ -14,13 +14,13 @@ Feature: Search neXtProt
       | Aurora kinase B                                         |
 
   Scenario Outline: Make a simple search with a specified entity
-    Given I click on "search-entity" dropdown
-    And I click on link "<link>"
+    Given I click on drop-down "search-entity"
+    And I select option "<option>"
     When I make a simple search with query "kinase"
     Then the page source should contain text "<result>"
 
     Examples:
-      | link         | result                                                 |
+      | option       | result                                                 |
       | Proteins     | Aurora kinase B                                        |
       | Publications | Targeting human central nervous system protein kinases |
       | Terms        | kinase binding [GO:0019900]                            |
