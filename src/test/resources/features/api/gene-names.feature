@@ -11,9 +11,8 @@ Feature: Retrieve gene names from neXtProt REST API
     When I do an API request with query "/gene-names/entry/NX_P01308.json"
     Then the page source should contain text "INS"
 
-  ## WARNING: The following scenario should not run in absence of cache !
   Scenario: Retrieve all neXtProt gene names
-    When I do an API request with query "/gene-names"
+    When I do an API request with query "/gene-names.json"
     Then the page source should contain texts
     | INS |
     | SCN9A |
