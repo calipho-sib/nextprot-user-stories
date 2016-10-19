@@ -9,7 +9,7 @@ public class Hooks {
     // run before any scenario
     @Before
     public void setupWebDriver() {
-        WebDriverManager.initDriver(WebDriverManager.DriverName.CHROME);
+        WebDriverManager.initDriver(WebDriverManager.DriverName.FIREFOX);
     }
 
     // run after any scenario
