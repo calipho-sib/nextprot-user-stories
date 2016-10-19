@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -75,6 +76,11 @@ public class WebDriverManager {
     public static WebElement waitUntilFindElement(int seconds, final By locator) {
 
         return fluentWait(seconds).until(d -> d.findElement(locator));
+    }
+
+    public static List<WebElement> waitUntilFindElements(int seconds, final By locator) {
+
+        return fluentWait(seconds).until(d -> d.findElements(locator));
     }
 
     public static WebElement waitUntilFindElement(int seconds, final WebElement fromElement, final By locator) {
