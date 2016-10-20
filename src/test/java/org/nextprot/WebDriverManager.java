@@ -19,6 +19,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.remote.DesiredCapabilities.chrome;
+import static org.openqa.selenium.remote.DesiredCapabilities.firefox;
 
 public class WebDriverManager {
 
@@ -66,28 +67,34 @@ public class WebDriverManager {
 
     private static WebDriver newChromeDriver() {
 
-        System.setProperty("webdriver.chrome.driver", StepUtils.getProperty("webdriver.chrome.driver"));
-        DesiredCapabilities desiredCapabilities = chrome();
-        desiredCapabilities.setCapability("webdriver.chrome.args", StepUtils.getProperty("webdriver.chrome.args"));
+        return new ChromeDriver(newDesiredCapabilities(DriverName.CHROME));
+    }
 
-        return new ChromeDriver(desiredCapabilities);
+    private static DesiredCapabilities newDesiredCapabilities(DriverName driverName) {
+
+        DesiredCapabilities desiredCapabilities = null;
+
+        if (driverName == DriverName.CHROME) {
+            desiredCapabilities = chrome();
+
+            desiredCapabilities.setCapability("platform", "Linux");
+            desiredCapabilities.setCapability("driver.version", "2.24");
+            //System.setProperty("webdriver.chrome.driver", StepUtils.getProperty("webdriver.chrome.driver"));
+        }
+        else if (driverName == DriverName.FIREFOX) {
+            desiredCapabilities = firefox();
+        }
+
+        return desiredCapabilities;
     }
 
     private static WebDriver newRemoteWebDriver(DriverName driverName) {
 
-        if (driverName == DriverName.CHROME || driverName == DriverName.FIREFOX) {
-
-            DesiredCapabilities desiredCapabilities = (driverName == DriverName.FIREFOX) ?
-                    DesiredCapabilities.firefox() : DesiredCapabilities.chrome();
-
-            desiredCapabilities.setCapability("platform", "Linux");
-
-            try {
-                //return new RemoteWebDriver(new URL("http://miniwatt:4444/wd/hub"), desiredCapabilities);
-                return new RemoteWebDriver(new URL("http://jenkins.vital-it.ch:4444/wd/hub"), desiredCapabilities);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+        try {
+            //return new RemoteWebDriver(new URL("http://miniwatt:4444/wd/hub"), newChromeDesiredCapabilities());
+            return new RemoteWebDriver(new URL("http://jenkins.vital-it.ch:4444/wd/hub"), newDesiredCapabilities(driverName));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
         throw new IllegalStateException("cannot create new remote web driver for driver "+driverName);
