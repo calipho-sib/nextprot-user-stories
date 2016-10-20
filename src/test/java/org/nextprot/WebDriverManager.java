@@ -41,33 +41,24 @@ public class WebDriverManager {
 
     static void initDriver(DriverName driverName, boolean remote) {
 
+        DesiredCapabilities desiredCapabilities = newDesiredCapabilities(driverName);
+
         if (remote) {
-            driver = newRemoteWebDriver(driverName);
+            driver = newRemoteWebDriver(desiredCapabilities);
         }
         else {
             switch (driverName) {
                 case FIREFOX:
-                    driver = newFirefoxDriver();
+                    System.setProperty("webdriver.firefox.bin", StepUtils.getProperty("webdriver.firefox.bin"));
+                    driver = new FirefoxDriver(desiredCapabilities);
                     break;
                 case CHROME:
-                    driver = newChromeDriver();
+                    driver = new ChromeDriver(desiredCapabilities);
                     break;
                 default:
                     throw new IllegalStateException("cannot instanciate web driver "+driverName);
             }
         }
-    }
-
-    private static WebDriver newFirefoxDriver() {
-
-        System.setProperty("webdriver.firefox.bin", StepUtils.getProperty("webdriver.firefox.bin"));
-
-        return new FirefoxDriver();
-    }
-
-    private static WebDriver newChromeDriver() {
-
-        return new ChromeDriver(newDesiredCapabilities(DriverName.CHROME));
     }
 
     private static DesiredCapabilities newDesiredCapabilities(DriverName driverName) {
@@ -88,16 +79,16 @@ public class WebDriverManager {
         return desiredCapabilities;
     }
 
-    private static WebDriver newRemoteWebDriver(DriverName driverName) {
+    private static WebDriver newRemoteWebDriver(DesiredCapabilities desiredCapabilities) {
 
         try {
-            //return new RemoteWebDriver(new URL("http://miniwatt:4444/wd/hub"), newChromeDesiredCapabilities());
-            return new RemoteWebDriver(new URL("http://jenkins.vital-it.ch:4444/wd/hub"), newDesiredCapabilities(driverName));
+            //return new RemoteWebDriver(new URL("http://miniwatt:4444/wd/hub"), desiredCapabilities);
+            return new RemoteWebDriver(new URL("http://jenkins.vital-it.ch:4444/wd/hub"), desiredCapabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        throw new IllegalStateException("cannot create new remote web driver for driver "+driverName);
+        throw new IllegalStateException("cannot create new remote web driver for driver "+desiredCapabilities.getBrowserName());
     }
 
     public static void saveScreenshot(String screenshotFileName) throws IOException {
@@ -117,7 +108,7 @@ public class WebDriverManager {
         return driver;
     }
 
-    public static Wait<WebDriver> fluentWait(int seconds) {
+    static Wait<WebDriver> fluentWait(int seconds) {
 
         Objects.requireNonNull(driver);
 

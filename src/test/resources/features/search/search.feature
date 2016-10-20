@@ -16,14 +16,14 @@ Feature: Search neXtProt
   Scenario Outline: Make a simple search with a specified entity
     Given I click on drop-down "search-entity"
     And I select option "<option>"
-    When I make a simple search with query "kinase"
+    When I make a simple search with query "krypton"
     Then the page source should contain text "<result>"
 
     Examples:
-      | option       | result                                                 |
-      | Proteins     | Aurora kinase B                                        |
-      | Publications | Targeting human central nervous system protein kinases |
-      | Terms        | kinase binding [GO:0019900]                            |
+      | option       | result                                                            |
+      | Proteins     | Transmembrane protease serine 11B                                 |
+      | Publications | Exploring hydrophobic sites in proteins with xenon or krypton     |
+      | Terms        | Inert Gas Narcosis [D007222]                                      |
 
   Scenario: Select a result after a protein search should add it to clipboard
     Given I make a simple search with query "kinase"
