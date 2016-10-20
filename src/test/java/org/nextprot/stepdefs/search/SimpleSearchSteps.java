@@ -6,7 +6,6 @@ import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.WebDriverManager.waitUntilFindElement;
 
 public class SimpleSearchSteps {
 

@@ -40,6 +40,7 @@ public class WebPageSteps {
     public void shouldNavigateToNextprotPage(String pageName) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
+        //WebDriverManager.saveScreenshot("/tmp/screenshot_navigateTo"+pageName+".png");
     }
 
     @When("^I navigate to url \"([^\"]+)\"$")
