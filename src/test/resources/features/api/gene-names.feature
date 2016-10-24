@@ -14,5 +14,5 @@ Feature: Retrieve gene names from neXtProt REST API
   Scenario: Retrieve all neXtProt gene names
     When I do an API request with query "/gene-names.json"
     Then the page source should contain texts
-    | INS |
+    | INS   |
     | SCN9A |

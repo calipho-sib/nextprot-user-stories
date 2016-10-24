@@ -29,7 +29,7 @@ Feature: Registration to neXtProt with auth0
     And I submit to auth0
     And I "should" be logged to nextprot
     When I click on logged user drop-down
-    And I click on link "Logout"
+    And I select option "Logout"
     Then I "should not" be logged to nextprot
 
   Scenario: Error occurs when sign up with existing email account

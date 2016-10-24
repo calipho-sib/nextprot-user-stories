@@ -88,6 +88,10 @@ Here is a snapshot of auto-complete in action with `Atom`:
 
 ![feature](img/auto-complete-in-atom.png)
 
+>! Note that right after typing `gherkin` keywords (`Given`, `And`, `When`, ...), the auto-completion directly proposes existing steps.
+It is also possible to type `ctrl-space` to ask for auto-completion.
+Finally auto-completion in `Atom` actually only works without internal spaces.
+
 ## File `features.properties`
 
 This file contains variables that can be referenced in step definitions.
@@ -97,18 +101,38 @@ For example the variable `search` is referenced in the following step:
 I navigate to url of nextprot "search"
 ```
 
-Here variable "search" is like an alias for url "http://dev-search.nextprot.org/".
+Here variable "search" is an alias for url "http://dev-search.nextprot.org/".
 
 ## Development cycle and coordination between feature writers and java coders (TODO, TOTHINK)
 
-There are a list of steps that are already mapped to java code in this repository.
+There are a list of step definition that are already mapped to java code in this repository.
 They are accessible through auto-completion when writing `scenario`
 
 When new steps are created, new handlers must be provided by a developer to execute the step with `cucumber`.
 
+# General step definitions
+
+Here are a list of defined step definition that should be reuse anywhere it is indicated
+
+## Navigation
+
+- I navigate to url "<url>": goto url defined in quoted value 
+- I navigate to url of nextprot "<alias to an url>" : goto url defined in quoted alias defined in `features.properties`
+
+## Interacting with page
+
+- I click on link "Login": clicking on login button from any nextprot page
+
+## Assertion
+
+- the page source should contain texts: the whole page source will be search against a given list of strings
+- the page source should contain text "<expected text>": the whole page source will be search against a given one single expected text
+- the page title should be "<expected title>": the page title have to match the expected title
+- I "<should or should not>" be logged to nextprot
+
 # Tutorial: create a first scenario
 
-There is a new hidden service `https://dev-api.nextprot.org/entry-gene-names.json` that returns the map of all neXtProt entry accessions and their associated gene names.
+There is a new hidden service `https://dev-api.nextprot.org/entry-gene-names.json` returning the map of all neXtProt entry accessions and their associated gene names.
 
 Create a new file "/api/playground-api.feature" and write one scenario that tests that the service returns the following entries:
 ```
