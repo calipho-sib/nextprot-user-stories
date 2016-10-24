@@ -28,7 +28,7 @@ Feature: Registration to neXtProt with auth0
     And I sign "in" with email as "ndu.email"
     And I submit to auth0
     And I "should" be logged to nextprot
-    When I click on nextprot log dropdown
+    When I click on logged user drop-down
     And I click on link "Logout"
     Then I "should not" be logged to nextprot
 

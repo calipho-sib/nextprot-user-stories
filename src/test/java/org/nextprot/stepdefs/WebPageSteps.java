@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,10 +56,16 @@ public class WebPageSteps {
         fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedTitle));
     }
 
-    @When("^I select option \"([^\"]*)\"$")
+    @When("^I click on link \"([^\"]*)\"$")
     public void clickOnLink(String link) throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.linkText(link)).click();
+    }
+
+    @When("^I select option \"([^\"]*)\"$")
+    public void selectOptionUrl(String optionLink) throws Throwable {
+
+        clickOnLink(optionLink);
     }
 
     @Then("^I should find in the page \"([^\"]*)\"$")
@@ -73,7 +80,7 @@ public class WebPageSteps {
         WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    @When("^I click on nextprot log drop-down$")
+    @When("^I click on logged user drop-down$")
     public void iClickOnDropdown() throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
@@ -82,7 +89,9 @@ public class WebPageSteps {
     @Given("^I click on drop-down \"([^\"]*)\"$")
     public void iClickOnDropdown(String elementId) throws Throwable {
 
-        WebDriverManager.waitUntilFindElement(20, By.id(elementId)).click();
+        WebElement dropDownElement = WebDriverManager.waitUntilFindElement(20, By.id(elementId));
+
+        dropDownElement.click();
     }
 
     @Then("^the page source should contain texts$")
