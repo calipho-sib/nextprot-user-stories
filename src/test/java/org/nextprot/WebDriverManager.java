@@ -123,14 +123,19 @@ public class WebDriverManager {
         return fluentWait(seconds).until(d -> d.findElement(locator));
     }
 
+    public static WebElement waitUntilFindElement(int seconds, final WebElement fromElement, final By locator) {
+
+        return fluentWait(seconds).until(d -> fromElement.findElement(locator));
+    }
+
     public static List<WebElement> waitUntilFindElements(int seconds, final By locator) {
 
         return fluentWait(seconds).until(d -> d.findElements(locator));
     }
 
-    public static WebElement waitUntilFindElement(int seconds, final WebElement fromElement, final By locator) {
+    public static List<WebElement> waitUntilFindElements(int seconds, final WebElement fromElement, final By locator) {
 
-        return fluentWait(seconds).until(d -> fromElement.findElement(locator));
+        return fluentWait(seconds).until(d -> fromElement.findElements(locator));
     }
 
     public static Boolean fluentWaitUntilExpectedCondition(int seconds, ExpectedCondition<Boolean> expectedCondition) {
