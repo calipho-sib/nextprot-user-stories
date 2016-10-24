@@ -74,12 +74,19 @@ Here are the most popular modern editors tested for our needs:
 
 All our `feature`s are actually located in our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features)
 
-## Download folder /features 
+## Download folder `features/` for full auto-completion
 
-> I Highly recommend to get all directory features/ to profit from complete auto-completion
+I Highly recommend to get all features from directory features/ to profit from complete auto-completion of `Atom`
 
-Open your browser to [DownGit](https://minhaskamal.github.io/DownGit/#/home) then paste the link `https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features`
-and click on `Download`
+1. Open your browser to [DownGit](https://minhaskamal.github.io/DownGit/#/home) 
+2. Paste the link `https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features`
+3. Click on `Download`. 
+4. Unzip `features.zip`
+5. Open directory `features/` with `Atom`
+
+Here is a snapshot of auto-complete in action with `Atom`:
+
+![feature](img/auto-complete-in-atom.png)
 
 ## File `features.properties`
 
@@ -101,7 +108,7 @@ When new steps are created, new handlers must be provided by a developer to exec
 
 # Tutorial: create a first scenario
 
-There is a new service `https://dev-api.nextprot.org/entry-gene-names.json` that returns the map of all neXtProt entry accessions and their associated gene names.
+There is a new hidden service `https://dev-api.nextprot.org/entry-gene-names.json` that returns the map of all neXtProt entry accessions and their associated gene names.
 
 Create a new file "/api/playground-api.feature" and write one scenario that tests that the service returns the following entries:
 ```
@@ -124,7 +131,7 @@ Feature: Test API to learn cucumber
     Then ...
 ```
 
-You should not need to declare new step in this scenario.
+You should not need to declare new steps in this scenario.
 
 # Useful links
 
