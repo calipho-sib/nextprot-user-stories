@@ -34,3 +34,31 @@ Feature: Search neXtProt
     Given I make a simple search with query "krypton"
     When I select all search results
     Then the clipboard should contain "12" elements
+
+  Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
+    Given I click on drop-down "search-entity"
+    And I click on link "<link>"
+    When I make a simple search with query "<query>"
+    Then the page source should contain text "<result>"
+
+    Examples:
+      | link         | query                         | result                                 |
+      | Proteins     | P01593                        | Ig kappa chain V-I region AG           |
+      | Proteins     | P04220                        | No search results were found.          |
+      | Proteins     | P04436                        | No search results were found.          |
+      | Proteins     | P04437                        | No search results were found.          |
+      | Proteins     | P01737                        | No search results were found.          |
+      | Proteins     | P01733                        | No search results were found.          |
+      | Proteins     | P04435                        | No search results were found.          |
+      | Publications | 21636302                      | severe neuromuscular phenotype         |
+      | Publications | 27663366                      | No search results were found.          |
+      | Terms        | You-Hoover-Fong syndrome      | You-Hoover-Fong syndrome               |
+      | Terms        | DI-01661                      | Gillespie syndrome                     |
+      | Terms        | DI-01848                      | No search results were found.          |
+      | Terms        | DO-00904                      | PP1-binding                            |
+      | Terms        | DO-00864                      | C2HC MYST-type                         |
+      | Terms        | DO-00106                      | No search results were found.          |
+      | Terms        | DO-00905                      | No search results were found.          |
+      | Terms        | FA-05386                      | Integrator subunit 8 family            |
+      | Terms        | FA-01918                      | IspD/TarI cytidylyltransferase family  |
+      | Terms        | FA-05376                      | No search results were found.          |
