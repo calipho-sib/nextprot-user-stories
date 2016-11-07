@@ -7,10 +7,16 @@ Feature: Display informations about neXtProt from nextProt API
     Given I navigate to url of nextprot "api"
 
   Scenario: Display "About" page informations
-    When I click on link "About"
+    When I click on link text "About"
     Then the page source should contain texts
       | Background                            |
       | Our vision                            |
       | Contact details                       |
       | SIB Swiss Institute of Bioinformatics |
 
+  Scenario: Display "Copyright" page informations
+    When I click on link id "copyright"
+    Then the page source should contain texts
+      | Copyright notice for neXtProt               |
+      | 2010-2016                                   |
+      | Javascript framework for website interface. |
