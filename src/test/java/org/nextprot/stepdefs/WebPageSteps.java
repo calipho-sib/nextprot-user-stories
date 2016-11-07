@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 
@@ -100,6 +102,12 @@ public class WebPageSteps {
         dropDownElement.click();
     }
 
+    @Then("^the page source should contain text \"([^\"]*)\"$")
+    public void thePageSourceShouldContainText(String text) throws Throwable {
+
+        thePageSourceShouldContainTexts(Collections.singletonList(text));
+    }
+
     @Then("^the page source should contain texts$")
     public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
 
@@ -114,9 +122,32 @@ public class WebPageSteps {
         });
     }
 
-    @Then("^the page source should contain text \"([^\"]*)\"$")
-    public void thePageSourceShouldContainText(String text) throws Throwable {
+    @Then("^the page source should match text \"([^\"]*)\"$")
+    public void thePageSourceShouldMatchText(String text) throws Throwable {
 
-        thePageSourceShouldContainTexts(Collections.singletonList(text));
+        thePageSourceShouldMatchTexts(Collections.singletonList(text));
     }
+
+    @Then("^the page source should match texts$")
+    public void thePageSourceShouldMatchTexts(List<String> regExpList) throws Throwable {
+
+        fluentWaitUntilExpectedCondition(30, d -> {
+
+            for (String regExp : regExpList) {
+
+                if (d != null && d.getPageSource() != null) {
+
+                    Pattern pattern = Pattern.compile(".+" + regExp + ".+", Pattern.DOTALL);
+                    Matcher regexMatcher = pattern.matcher(d.getPageSource());
+
+                    if (!regexMatcher.find()) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
+    }
+
+
 }
