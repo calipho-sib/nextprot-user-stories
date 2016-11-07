@@ -6,6 +6,11 @@ Feature: Display informations about neXtProt from nextProt API
   Background:
     Given I navigate to url of nextprot "api"
 
+  Scenario: Display well formatted release and application versions
+    Then the page source should match patterns
+      | Data release \d{4}-\d{2}-\d{2}  |
+      | Application release v\d\.\d\.\d |
+
   Scenario: Display "About" page informations
     When I click on link text "About"
     Then the page source should contain texts

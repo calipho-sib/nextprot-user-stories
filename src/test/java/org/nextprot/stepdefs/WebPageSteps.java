@@ -122,13 +122,13 @@ public class WebPageSteps {
         });
     }
 
-    @Then("^the page source should match text \"([^\"]*)\"$")
+    @Then("^the page source should match pattern \"([^\"]*)\"$")
     public void thePageSourceShouldMatchText(String text) throws Throwable {
 
         thePageSourceShouldMatchTexts(Collections.singletonList(text));
     }
 
-    @Then("^the page source should match texts$")
+    @Then("^the page source should match patterns$")
     public void thePageSourceShouldMatchTexts(List<String> regExpList) throws Throwable {
 
         fluentWaitUntilExpectedCondition(30, d -> {
