@@ -37,7 +37,7 @@ Feature: Search neXtProt
 
   Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
     Given I click on drop-down "search-entity"
-    And I click on link "<link>"
+    And I click on link text "<link>"
     When I make a simple search with query "<query>"
     Then the page source should contain text "<result>"
 

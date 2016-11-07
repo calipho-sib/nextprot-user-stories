@@ -15,7 +15,7 @@ Feature: Save search result as list
     Then the list "should not" be savable
 
   Scenario: Logged user can save selected results
-    Given I click on link "Login"
+    Given I click on link text "Login"
     And I sign "in" with email as "ndu.email"
     And I submit to auth0
     When I select search result with accession "NX_O95819"

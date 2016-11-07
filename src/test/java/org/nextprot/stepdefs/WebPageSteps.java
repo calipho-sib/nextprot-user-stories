@@ -56,16 +56,22 @@ public class WebPageSteps {
         fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedTitle));
     }
 
-    @When("^I click on link \"([^\"]*)\"$")
-    public void clickOnLink(String link) throws Throwable {
+    @When("^I click on link text \"([^\"]*)\"$")
+    public void clickOnLinkText(String link) throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.linkText(link)).click();
+    }
+
+    @When("^I click on link id \"([^\"]*)\"$")
+    public void clickOnLinkId(String linkId) throws Throwable {
+
+        WebDriverManager.waitUntilFindElement(20, By.id(linkId)).click();
     }
 
     @When("^I select option \"([^\"]*)\"$")
     public void selectOptionUrl(String optionLink) throws Throwable {
 
-        clickOnLink(optionLink);
+        clickOnLinkText(optionLink);
     }
 
     @Then("^I should find in the page \"([^\"]*)\"$")
@@ -97,10 +103,10 @@ public class WebPageSteps {
     @Then("^the page source should contain texts$")
     public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(30, d -> {
+        fluentWaitUntilExpectedCondition(45, d -> {
 
             for (String text : textList) {
-                if (!d.getPageSource().contains(text)) {
+                if (d != null && d.getPageSource() != null && !d.getPageSource().contains(text)) {
                     return false;
                 }
             }
