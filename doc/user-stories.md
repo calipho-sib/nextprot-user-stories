@@ -121,7 +121,8 @@ Here are a list of defined step definition that should be reuse anywhere it is i
 
 ## Interacting with page
 
-- I click on link "Login": clicking on login button from any nextprot page
+- I click on link text "link_name": clicking on a link by name (ex: `Login`)
+- I click on link id "link_id": clicking on a link by id (ex: `copyright` in nextprot-api page)
 
 ## Assertion
 
