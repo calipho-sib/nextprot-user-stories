@@ -37,12 +37,12 @@ Feature: Search neXtProt
 
   Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
     Given I click on drop-down "search-entity"
-    And I click on link text "<link>"
+    And I select option "<option>"
     When I make a simple search with query "<query>"
     Then the page source should contain text "<result>"
 
     Examples:
-      | link         | query                         | result                                 |
+      | option         | query                         | result                                 |
       | Proteins     | P01593                        | Ig kappa chain V-I region AG           |
       | Proteins     | P04220                        | No search results were found.          |
       | Proteins     | P04436                        | No search results were found.          |

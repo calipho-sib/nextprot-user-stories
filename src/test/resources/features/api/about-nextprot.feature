@@ -20,3 +20,11 @@ Feature: Display informations about neXtProt from nextProt API
       | Copyright notice for neXtProt               |
       | 2010-2016                                   |
       | Javascript framework for website interface. |
+
+  Scenario: Display "Legal disclaimer" page informations
+    When I click on link id "legal-disclaimer"
+    Then the page source should contain texts
+      | Legal Disclaimer        |
+      | Limitation of Liability |
+      | Personal Data           |
+      | Security of Access      |

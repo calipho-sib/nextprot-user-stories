@@ -103,7 +103,7 @@ public class WebPageSteps {
     @Then("^the page source should contain texts$")
     public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(45, d -> {
+        fluentWaitUntilExpectedCondition(30, d -> {
 
             for (String text : textList) {
                 if (d != null && d.getPageSource() != null && !d.getPageSource().contains(text)) {
