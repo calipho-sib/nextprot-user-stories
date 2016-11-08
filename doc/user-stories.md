@@ -126,9 +126,9 @@ Here are a list of defined step definition that should be reuse anywhere it is i
 
 ## Assertion
 
-- the page source should contain texts: the whole page source will be search against a given list of strings
-- the page source should contain text "<expected text>": the whole page source will be search against a given one single expected text
-- the page title should be "<expected title>": the page title have to match the expected title
+- the page source should contain text(s) "text or data table texts" : the page source will be searched against single (multiple) text(s)
+- the page source should match pattern(s) "pattern or data table patterns": the page source will be matched against single (multiple) pattern(s)
+- the page title should be "<expected title>": the page title have to be equalled to the expected title
 - I "<should or should not>" be logged to nextprot
 
 # Tutorial: create a first scenario
