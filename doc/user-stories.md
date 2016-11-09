@@ -1,36 +1,38 @@
 Cucumber is an awesome tool that can help us create living documentation. It is a great way to gain a better understanding of how it should function.
 
 It utilizes Gherkin – a language that is at the core of Cucumber’s ability to both document and automate tests. It allows for writing tests around how a feature should behave – a process known as Behaviour Driven Development.
+
 We will gain a better understanding of what is being tested and how a feature should function – something that is along the same lines as writing user stories.
 
 # Gherkin, the `user story` language
 
-Gherkin is a declarative language - you write your code in such a way that it describes what you want to do (like SQL).
+Gherkin is a declarative language - you write your code in such a way that it describes what you want to do.
 
-Each `feature` is defined by a bunch of `scenarios` or `user-stories`.
+Each `feature` is defined as a bunch of `scenarios` or `user-stories`.
 
-A scenario focuses on 3 step definitions:
+A scenario focuses on 3 kind of step definitions (+ gherkin keywords):
 
-1. an established condition
-2. an action
-3. an expected result
+1. an established condition (`Given`...)
+2. an action (`When`...)
+3. an expected result (`Then`...)
 
 Each step is a declaration of what the user is doing in the scenario.
 
 Example:
 ```
 Scenario: User navigates to profile page
-Given I am on the home page
-When I log in
-Then I should be directed to my profile page
+Given the user is in the home page
+When he logs in
+Then he should be directed to his profile page
 ```
 
-To be automatically tested by cucumber, each step definition is mapped to java code that handle execution of the step.
+To be automatically tested by cucumber, each step definition is mapped to java code that handles execution of the step.
 
 Thanks to its declarative language, it's not so hard for non-developers to write them.
+
 Thus we can decouple the definition of a scenario (done by both collaborators) from the attached function (done by developers).
 
-# Features editors
+# `user story` compliant editors
 
 We need the help of a text editor to formalize those user-stories. Depending on the profile of the writer, there are some alternative solutions.
 
@@ -40,11 +42,11 @@ Developers already uses IDE to write code (Eclipse, Intellij, ...). Most of them
 
 ## for non developers
 
-They need a simpler, more generic editor that supports cucumber and gherkin.
+They need a simpler editor that supports `gherkin` syntax only.
 
-This editor should provide:
+In my opinion, this editor should be able to provide:
 
-1. syntax highlighting for gherkin
+1. syntax highlighting for `gherkin`
 2. auto-completion on existed feature steps
 
 Here are the most popular modern editors tested for our needs:
@@ -72,11 +74,11 @@ Here are the most popular modern editors tested for our needs:
 
 # neXtProt user-stories
 
-All our `feature`s are actually located in our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features)
+Some `feature`s have already been written for neXtProt. They are available from our github repository named [```nextprot-user-stories```](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features).
+
+I Highly recommend to get those features (accessed in folder features/) to profit from complete auto-completion of `Atom`.
 
 ## Download folder `features/` for full auto-completion
-
-I Highly recommend to get all features from directory features/ to profit from complete auto-completion of `Atom`
 
 1. Open your browser to [DownGit](https://minhaskamal.github.io/DownGit/#/home) 
 2. Paste the link `https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features`
@@ -88,9 +90,10 @@ Here is a snapshot of auto-complete in action with `Atom`:
 
 ![feature](img/auto-complete-in-atom.png)
 
->! Note that right after typing `gherkin` keywords (`Given`, `And`, `When`, ...), the auto-completion directly proposes existing steps.
+> Note that right after typing `gherkin` keywords (`Given`, `And`, `When`, ...), the auto-completion directly proposes existing steps.
 It is also possible to type `ctrl-space` to ask for auto-completion.
-Finally auto-completion in `Atom` actually only works without internal spaces.
+
+> Also note that auto-completion in `Atom` actually ONLY WORKS WITHOUT INTERNAL SPACES.
 
 ## File `features.properties`
 
@@ -105,37 +108,39 @@ Here variable "search" is an alias for url "http://dev-search.nextprot.org/".
 
 ## Development cycle and coordination between feature writers and java coders (TODO, TOTHINK)
 
-There are a list of step definition that are already mapped to java code in this repository.
-They are accessible through auto-completion when writing `scenario`
+There is a list of step definitions already mapping java code in this repository.
+They are accessible through auto-completion when writing future `scenario`.
 
-When new steps are created, new handlers must be provided by a developer to execute the step with `cucumber`.
+When new steps are created, it is not executable by `cucumber` and the java logic will have to be written by a developer.
 
 # General step definitions
 
-Here are a list of defined step definition that should be reuse anywhere it is indicated
+Here are a few already defined step definitions that should be reuse anywhere it is indicated:
 
-## Navigation
+## Url navigation
 
 - I navigate to url "<url>": goto url defined in quoted value 
 - I navigate to url of nextprot "<alias to an url>" : goto url defined in quoted alias defined in `features.properties`
 
-## Interacting with page
+## Page interaction
 
 - I click on link text "link_name": clicking on a link by name (ex: `Login`)
 - I click on link id "link_id": clicking on a link by id (ex: `copyright` in nextprot-api page)
 
-## Assertion
+## Assertion testing
 
 - the page source should contain text(s) "text or data table texts" : the page source will be searched against single (multiple) text(s)
 - the page source should match pattern(s) "pattern or data table patterns": the page source will be matched against single (multiple) pattern(s)
 - the page title should be "<expected title>": the page title have to be equalled to the expected title
 - I "<should or should not>" be logged to nextprot
 
-# Tutorial: create a first scenario
+# Tutorial
+
+## Create a first scenario
 
 There is a new hidden service `https://dev-api.nextprot.org/entry-gene-names.json` returning the map of all neXtProt entry accessions and their associated gene names.
 
-Create a new file "/api/playground-api.feature" and write one scenario that tests that the service returns the following entries:
+Create a new file "tutorial.feature" and write one scenario that tests that the service returns the following entries:
 ```
 "NX_P04156" : [ "PRNP" ]
 "NX_F7VJQ1" : [ "PRNP" ]
@@ -144,19 +149,30 @@ Create a new file "/api/playground-api.feature" and write one scenario that test
 Here is a template for the scenario:
 
 ```
-Feature: Test API to learn cucumber
+Feature: Learn gherkin and cucumber
 
-  As a end user of api.nextprot.org
-  I want to make API requests
-  so that I can get some data
-
-  Scenario: Retrieve all accession numbers mapped with their gene names
+  Scenario: As a user of api.nextprot.org I want to retrieve all accession numbers mapped with their gene names
     Given ...
     When ...
     Then ...
 ```
 
-You should not need to declare new steps in this scenario.
+> You should reuse already defined steps in this scenario.
+
+## Create another scenario
+
+In the same a file "tutorial.feature", write a new scenario that search `nextprot` from google:
+
+Here is a template for the scenario:
+
+```
+  Scenario: Search nextprot over google
+    Given ...
+    When ...
+    Then ...
+```
+
+> Tip: You should just need to declare one new step in this scenario.
 
 # Useful links
 
