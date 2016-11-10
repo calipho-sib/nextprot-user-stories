@@ -1,7 +1,9 @@
 package org.nextprot.stepdefs.snorql;
 
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,23 +18,31 @@ import static org.nextprot.WebDriverManager.getJavascriptExecutor;
 
 public class SnorqlSteps {
 
-    @When("^I click on sparql query \"([^\"]*)\"$")
+    @When("^I select sparql query \"([^\"]*)\"$")
     public void iClickOnSparqlQueryExample(String queryName) throws Throwable {
-        List<WebElement> elements = getAllPublicQueryList();
-        for (WebElement we : elements) {
+        WebElement we = findQueryElementStartingWith(queryName);
 
-            if (we.getText().startsWith(queryName)) {
+        if (we != null)
+            we.click();
+    }
 
-                getJavascriptExecutor().executeScript("window.scrollBy(0,"+(we.getLocation().getY())+");");
-                we.click();
+    @Given("^I scroll to sparql query \"([^\"]*)\"$")
+    public void iScrollToSparqlQuery(String queryName) throws Throwable {
 
-                break;
-            }
+        WebElement we = findQueryElementStartingWith(queryName);
+
+        if (we != null) {
+
+            int scrollToY = we.getLocation().getY() - getFirstQueryElement().getLocation().getY();
+            getJavascriptExecutor().executeScript("window.scrollBy(0," + scrollToY + ");");
+        }
+        else {
+            Assert.fail("could not find element " + queryName);
         }
     }
 
-    @Then("^the results should contain text \"([^\"]*)\"$")
-    public void theSnorqlResultsShouldContainText(String expectedResult) throws Throwable {
+    @Then("^the sparql results should contain text \"([^\"]*)\"$")
+    public void theSparqlResultsShouldContainText(String expectedResult) throws Throwable {
 
         WebDriverManager.fluentWaitUntilExpectedCondition(45, driver -> {
 
@@ -49,6 +59,24 @@ public class SnorqlSteps {
 
         return WebDriverManager.waitUntilFindElements(30, By.xpath("//h5[contains(@class, 'list-group-item-heading ng-binding')]"))
                 .stream().filter(e -> e.getText().startsWith("NXQ_")).collect(Collectors.toList());
+    }
+
+    private static WebElement getFirstQueryElement() throws Throwable {
+
+        return getAllPublicQueryList().get(0);
+    }
+
+    private static WebElement findQueryElementStartingWith(String queryName) throws Throwable {
+
+        List<WebElement> elements = getAllPublicQueryList();
+        for (WebElement we : elements) {
+
+            if (we.getText().startsWith(queryName)) {
+
+                return we;
+            }
+        }
+        return null;
     }
 
     @Then("^an error \"does\\s([^\"]*)\" occur$")
