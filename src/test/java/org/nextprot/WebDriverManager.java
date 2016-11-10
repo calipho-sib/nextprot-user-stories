@@ -108,6 +108,11 @@ public class WebDriverManager {
         return driver;
     }
 
+    public static JavascriptExecutor getJavascriptExecutor() {
+
+        return (JavascriptExecutor) WebDriverManager.getDriver();
+    }
+
     static Wait<WebDriver> fluentWait(int seconds) {
 
         Objects.requireNonNull(driver);
