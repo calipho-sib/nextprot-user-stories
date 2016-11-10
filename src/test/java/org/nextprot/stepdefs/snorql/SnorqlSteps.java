@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static org.nextprot.WebDriverManager.getJavascriptExecutor;
+
 
 public class SnorqlSteps {
 
@@ -21,7 +23,9 @@ public class SnorqlSteps {
 
             if (we.getText().startsWith(queryName)) {
 
+                getJavascriptExecutor().executeScript("window.scrollBy(0,"+(we.getLocation().getY())+");");
                 we.click();
+
                 break;
             }
         }
