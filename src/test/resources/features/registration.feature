@@ -6,13 +6,13 @@ Feature: Registration to neXtProt with auth0
   and access more services
 
   Background:
-    Given I navigate to url of nextprot "any"
+    Given I navigate to nextprot url "{any}"
     And I should not be logged to nextprot
 
   Scenario: Login with a gmail account
     Given I navigate to url "http://www.gmail.com"
     And I sign in with gmail as "ndu.google.email"
-    And I navigate to url of nextprot "any"
+    And I navigate to nextprot url "{any}"
     When I click on link text "Login"
     And I click on google+ button
     Then I should be logged to nextprot

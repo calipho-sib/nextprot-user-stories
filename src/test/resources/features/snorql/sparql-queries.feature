@@ -5,7 +5,7 @@ Feature: Sparql search neXtProt
   so that I can access the results
 
   Background:
-    Given I navigate to url of nextprot "snorql"
+    Given I navigate to nextprot url "{snorql}"
 
   Scenario: Run sparql query NXQ_00001
     Given I select sparql query "NXQ_00001"
@@ -17,7 +17,7 @@ Feature: Sparql search neXtProt
   Scenario Outline: Select extreme sparql queries
     Given I scroll to sparql query "<query>"
     When I select sparql query "<query>"
-    Then an error "does not" occur
+    Then an error does not occur
 
     Examples: Expected query results
     | query     |
