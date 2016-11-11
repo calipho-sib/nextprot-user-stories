@@ -5,7 +5,7 @@ Feature: Search neXtProt
   so that I can access the results
 
   Background:
-    Given I navigate to url of nextprot "search"
+    Given I navigate to nextprot url "{search}"
 
   Scenario: Make a simple search (protein by default)
     When I make a simple search with query "kinase"
@@ -14,7 +14,7 @@ Feature: Search neXtProt
       | Aurora kinase B                                         |
 
   Scenario Outline: Make a simple search with a specified entity
-    Given I click on drop-down "search-entity"
+    Given I click on drop-down id "#search-entity"
     And I select option "<option>"
     When I make a simple search with query "krypton"
     Then the page source should contain text "<result>"
@@ -36,7 +36,7 @@ Feature: Search neXtProt
     Then the clipboard should contain "12" elements
 
   Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
-    Given I click on drop-down "search-entity"
+    Given I click on drop-down id "#search-entity"
     And I select option "<option>"
     When I make a simple search with query "<query>"
     Then the page source should contain text "<result>"
