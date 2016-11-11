@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.StepUtils.valueOfShouldBeStatus;
+import static org.nextprot.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 
 public class Auth0Steps {
@@ -21,7 +21,7 @@ public class Auth0Steps {
         WebDriverManager.waitUntilFindElement(20, By.xpath("//a[contains(@class, 'a0-sign-up a0-btn-small')]")).click();
     }
 
-    @And("^I sign \"([^\"]*)\" with email as \"([^\"]*)\"$")
+    @And("^I sign ([^\"]*) with email as \"([^\"]*)\"$")
     public void iSignTheFormWithEmail(String sign, String emailPropName) throws Throwable {
 
         String email = StepUtils.getProperty(emailPropName);
@@ -47,8 +47,8 @@ public class Auth0Steps {
         fluentWaitUntilExpectedCondition(20, d -> h2Element.getText().startsWith(expectedErrorMessage));
     }
 
-    @And("^I \"([^\"]*)\" be logged to nextprot$")
-    public void iAmLoggedIn(String shouldStatus) throws Throwable {
+    @And("^I should( not)? be logged to nextprot$")
+    public void iAmLoggedIn(String notStatus) throws Throwable {
 
         fluentWaitUntilExpectedCondition(30, d -> {
 
@@ -60,7 +60,7 @@ public class Auth0Steps {
 
                 boolean isLogged = res != null && !"Guest".equals(res);
 
-                return valueOfShouldBeStatus(shouldStatus) == isLogged;
+                return valueOfBooleanFromNotStatus(notStatus) == isLogged;
             }
 
             return false;

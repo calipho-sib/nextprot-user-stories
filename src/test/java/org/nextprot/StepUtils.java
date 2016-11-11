@@ -26,21 +26,16 @@ public class StepUtils {
         }
     }
 
-    public static boolean valueOfShouldBeStatus(String shouldStatus) {
+    public static boolean valueOfBooleanFromNotStatus(String notStatus) {
 
-        boolean shouldBe;
-
-        if ("should".equalsIgnoreCase(shouldStatus)) {
-            shouldBe = true;
-        } else if ("should not".equalsIgnoreCase(shouldStatus)) {
-            shouldBe = false;
-        } else {
-            throw new IllegalArgumentException(shouldStatus + ": bad argument format (take only values 'should' or 'should not')");
+        if (notStatus == null || notStatus.trim().isEmpty()) {
+            return true;
+        } else if ("not".equalsIgnoreCase(notStatus.trim())) {
+            return false;
         }
 
-        return shouldBe;
+        throw new IllegalArgumentException(notStatus + ": bad argument format (take only empty or 'not' strings)");
     }
-
     public static String getProperty(String name) {
 
         return properties.getProperty(name);

@@ -79,7 +79,7 @@ public class SnorqlSteps {
         return null;
     }
 
-    @Then("^an error \"does\\s([^\"]*)\" occur$")
+    @Then("^an error does\\s?([^\"]*) occur$")
     public void thereIsNoError(String errorStatus) throws Throwable {
 
         boolean hasError = errorStatus.isEmpty();

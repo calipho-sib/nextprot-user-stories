@@ -6,18 +6,18 @@ import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.StepUtils.valueOfShouldBeStatus;
+import static org.nextprot.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 import static org.nextprot.WebDriverManager.waitUntilFindElement;
 
 public class SaveSearchResultSteps {
 
-    @Then("^the list \"([^\"]*)\" be savable")
-    public void theListMayBeSavable(String shouldStatus) throws Throwable {
+    @Then("^the list should( not)? be savable")
+    public void theListMayBeSavable(String notStatus) throws Throwable {
 
         fluentWaitUntilExpectedCondition(30, d -> {
 
-            if (valueOfShouldBeStatus(shouldStatus)) {
+            if (valueOfBooleanFromNotStatus(notStatus)) {
 
                 return WebDriverManager.getDriver().getPageSource().contains("Create List");
             } else {
