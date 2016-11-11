@@ -66,7 +66,7 @@ public class WebPageSteps {
     @Then("^the page title should be \"([^\"]*)\"$")
     public void pageTitleShouldBe(String expectedTitle) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedTitle));
+        fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getTitle().equals(expectedTitle));
     }
 
     @When("^I click on link text \"([^\"]*)\"$")
