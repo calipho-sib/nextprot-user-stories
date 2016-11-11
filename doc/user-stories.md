@@ -119,8 +119,9 @@ Here are a few already defined step definitions that should be reuse anywhere it
 
 ## Url navigation
 
-- I navigate to url "url": goto url defined in quoted value 
-- I navigate to nextprot url "{np-page}/..." : goto nextprot url defined in alias (with curly brackets) defined in `features.properties`
+- I navigate to url "http://..": goto url defined in quoted value 
+- I navigate to nextprot url "{np-page}/path" : goto nextprot url defined in alias (with curly brackets) defined in `features.properties`
+- I navigate to relative url "/path": goto url from current url location to given path
 
 ## Page interaction
 

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.nextprot.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 
 public class WebPageSteps {
@@ -39,17 +40,27 @@ public class WebPageSteps {
         }
     }
 
-    @When("^I navigate to url of nextprot \"(api|search|snorql|any)\"$")
-    public void shouldNavigateToNextprotPage(String pageName) throws Throwable {
+    @When("^I navigate to nextprot url \"\\{(api|search|snorql|any)\\}(/.*)?\"$")
+    public void shouldNavigateToNextprotPage(String host, String path) throws Throwable {
 
-        WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(pageName));
-        //WebDriverManager.saveScreenshot("/tmp/screenshot_navigateTo"+pageName+".png");
+        if (path != null)
+            WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(host) + path);
+        else
+            WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(host));
     }
 
     @When("^I navigate to url \"([^\"]+)\"$")
     public void shouldNavigateToUrl(String url) throws Throwable {
 
         WebDriverManager.getDriver().navigate().to(url);
+    }
+
+    @When("^I navigate to relative url \"(/.+)\"$")
+    public void shouldNavigateToRelativeUrl(String path) throws Throwable {
+
+        String previousURL = WebDriverManager.getDriver().getCurrentUrl();
+
+        WebDriverManager.getDriver().navigate().to(previousURL+path);
     }
 
     @Then("^the page title should be \"([^\"]*)\"$")
@@ -64,7 +75,7 @@ public class WebPageSteps {
         WebDriverManager.waitUntilFindElement(20, By.linkText(link)).click();
     }
 
-    @When("^I click on link id \"([^\"]*)\"$")
+    @When("^I click on link id \"#([^\"]*)\"$")
     public void clickOnLinkId(String linkId) throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.id(linkId)).click();
@@ -89,33 +100,43 @@ public class WebPageSteps {
     }
 
     @When("^I click on logged user drop-down$")
-    public void iClickOnDropdown() throws Throwable {
+    public void iClickOnLogginDropdown() throws Throwable {
 
         WebDriverManager.waitUntilFindElement(20, By.xpath("//a[contains(@class, 'dropdown-toggle lgOnly ng-binding')]")).click();
     }
 
-    @Given("^I click on drop-down \"([^\"]*)\"$")
-    public void iClickOnDropdown(String elementId) throws Throwable {
+    @Given("^I click on drop-down id \"#([^\"]*)\"$")
+    public void iClickOnDropdownId(String elementId) throws Throwable {
 
         WebElement dropDownElement = WebDriverManager.waitUntilFindElement(20, By.id(elementId));
 
         dropDownElement.click();
     }
 
-    @Then("^the page source should contain text \"([^\"]*)\"$")
-    public void thePageSourceShouldContainText(String text) throws Throwable {
+    @Given("^I click on drop-down \"([^\"]*)\"$")
+    public void iClickOnDropdown(String name) throws Throwable {
 
-        thePageSourceShouldContainTexts(Collections.singletonList(text));
+        WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    @Then("^the page source should contain texts$")
-    public void thePageSourceShouldContainTexts(List<String> textList) throws Throwable {
+    @Then("^the page source should( not)? contain text \"([^\"]*)\"$")
+    public void thePageSourceShouldContainText(String shouldNotContainText, String text) throws Throwable {
+
+        thePageSourceShouldContainTexts(shouldNotContainText, Collections.singletonList(text));
+    }
+
+    @Then("^the page source should( not)? contain texts$")
+    public void thePageSourceShouldContainTexts(String notStatus, List<String> textList) throws Throwable {
 
         fluentWaitUntilExpectedCondition(30, d -> {
 
+            boolean doContain = valueOfBooleanFromNotStatus(notStatus);
+
             for (String text : textList) {
-                if (d != null && d.getPageSource() != null && !d.getPageSource().contains(text)) {
-                    return false;
+                if (d != null && d.getPageSource() != null) {
+                    if (d.getPageSource().contains(text) != doContain) {
+                        return false;
+                    }
                 }
             }
             return true;
