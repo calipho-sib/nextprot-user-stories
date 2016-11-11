@@ -164,3 +164,8 @@ Feature: Sparql search neXtProt
       | NXQ_00203 | entry:NX_Q14376     |
       | NXQ_00204 | entry:NX_Q15513     |
       | NXQ_00208 | entry:NX_Q99250     |
+
+  Scenario: Filter sparql query by tag
+    Given I click on drop-down "Tags"
+    When I select option "3D structure"
+    Then the page source should not contain text "NXQ_00001"
