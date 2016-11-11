@@ -119,20 +119,20 @@ Here are a few already defined step definitions that should be reuse anywhere it
 
 ## Url navigation
 
-- I navigate to url "<url>": goto url defined in quoted value 
-- I navigate to url of nextprot "<alias to an url>" : goto url defined in quoted alias defined in `features.properties`
+- I navigate to url "url": goto url defined in quoted value 
+- I navigate to nextprot url "{np-page}/..." : goto nextprot url defined in alias (with curly brackets) defined in `features.properties`
 
 ## Page interaction
 
 - I click on link text "link_name": clicking on a link by name (ex: `Login`)
-- I click on link id "link_id": clicking on a link by id (ex: `copyright` in nextprot-api page)
+- I click on link id "#link_id": clicking on a link by id (ex: `#copyright` in nextprot-api page)
 
 ## Assertion testing
 
-- the page source should contain text(s) "text or data table texts" : the page source will be searched against single (multiple) text(s)
-- the page source should match pattern(s) "pattern or data table patterns": the page source will be matched against single (multiple) pattern(s)
-- the page title should be "<expected title>": the page title have to be equalled to the expected title
-- I "<should or should not>" be logged to nextprot
+- the page source should (or not) contain text(s) "text or data table texts" : check that single (or multiple) text(s) found in page source (inverted if "should not")
+- the page source should match pattern(s) "pattern or data table patterns": check that one (or multiple) pattern(s) match the page source
+- the page title should be "<expected title>": the page title have to be equal to expected title
+- I should (or not) be logged to nextprot: check user is logged in nextprot (negative and positive assertion).
 
 # Tutorial
 
