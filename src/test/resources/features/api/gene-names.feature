@@ -26,6 +26,7 @@ Feature: Retrieve gene names from neXtProt REST API
   # NX_O15178 Shortest recommended gene name (1-letter)
   # NX_Q6UY13 ORF name (25-letter) with slash (longest?)
   # NX_P68431 Entry with the 10 recommended gene names (is this the most we have?)
+  # NX_P04156 NX_F7VJQ1 Both entries have the same gene name (PRNP)
   Scenario Outline: Check special cases of gene names in API
     When I navigate to relative url "<path>"
     Then the page source should contain text "<result>"
@@ -50,3 +51,5 @@ Feature: Retrieve gene names from neXtProt REST API
       | /gene-names/entry/NX_P68431.json | HIST1H3H                  |
       | /gene-names/entry/NX_P68431.json | HIST1H3I                  |
       | /gene-names/entry/NX_P68431.json | HIST1H3J                  |
+      | /gene-names/entry/NX_P04156.json | PRNP                      |
+      | /gene-names/entry/NX_F7VJQ1.json | PRNP                      |
