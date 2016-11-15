@@ -33,7 +33,7 @@ Feature: Sparql search neXtProt
       | entry:NX_P06493 |
       | entry:NX_Q9Y241 |
 
-  # Missing examples for:	NXQ_00089  NXQ_00094 NXQ_00141
+  # Missing examples for:	NXQ_00089
   Scenario Outline: Check saved queries run and return appropriate result
     Given I scroll to sparql query "<query>"
     And I select sparql query "<query>"
@@ -128,6 +128,7 @@ Feature: Sparql search neXtProt
       | NXQ_00090 | entry:NX_O75636     |
       | NXQ_00092 | entry:NX_Q8NF91     |
       | NXQ_00093 | entry:NX_P11171     |
+      | NXQ_00094 | entry:NX_P08183     |
       | NXQ_00096 | entry:NX_O00180     |
       | NXQ_00097 | entry:NX_P02461     |
       | NXQ_00099 | entry:NX_A0A087X1C5 |
@@ -155,6 +156,7 @@ Feature: Sparql search neXtProt
       | NXQ_00138 | entry:NX_P48023     |
       | NXQ_00139 | entry:NX_Q14164     |
       | NXQ_00140 | entry:NX_Q15392     |
+      | NXQ_00141 | entry:NX_O60684     |
       | NXQ_00143 | entry:NX_Q5TA89     |
       | NXQ_00144 | entry:NX_P20396     |
       | NXQ_00145 | entry:NX_P01189     |
