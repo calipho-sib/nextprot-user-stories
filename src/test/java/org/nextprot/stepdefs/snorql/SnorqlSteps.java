@@ -44,7 +44,7 @@ public class SnorqlSteps {
     @Then("^the sparql results should contain text \"([^\"]*)\"$")
     public void theSparqlResultsShouldContainText(String expectedResult) throws Throwable {
 
-        WebDriverManager.fluentWaitUntilExpectedCondition(45, driver -> {
+        WebDriverManager.fluentWaitUntilExpectedCondition(1800, driver -> {
 
             for (WebElement result : WebDriverManager.waitUntilFindElements(30, By.xpath("//a[contains(@class, 'graph-link')]"))) {
 
