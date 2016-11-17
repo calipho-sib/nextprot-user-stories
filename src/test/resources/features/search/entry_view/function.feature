@@ -13,23 +13,23 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                                         |
-      | {search}/entry/NX_O43290/function |	ALLERGEN                                       |
-	  | {search}/entry/NX_P10109/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
-	  | {search}/entry/NX_Q8WVF1/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
-	  | {search}/entry/NX_Q2M3T9/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
-	  | {search}/entry/NX_Q13268/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
-	  | {search}/entry/NX_Q5TA31/function | CAUTION                                        |
-	  | {search}/entry/NX_Q13547/function |	ENZYMATIC ACTIVITY                             |
-	  | {search}/entry/NX_P51800/function |	ENZYMATIC ACTIVITY                             | 
-	  | {search}/entry/NX_Q5T7P8/function |	ENZYMATIC ACTIVITY                             |
-	  | {search}/entry/NX_F8WCM5/function |	GO MOLECULAR FUNCTION                          |
-	  | {search}/entry/NX_Q15513/function |	GO BIOLOGICAL PROCESS                          |
-	  | {search}/entry/NX_Q13571/function | KEGG PATHWAYS                                  |
-	  | {search}/entry/NX_Q5TAG4/function | NOTE                                           |
-	  | {search}/entry/NX_P01308/function |	OVERVIEW                                       |	  
-	  | {search}/entry/NX_Q13625/function | REACTOME PATHWAYS                              |
-	  | {search}/entry/NX_Q5TAQ9/function | UNIPATHWAYS                                    |
-	  | {search}/entry/NX_Q14146/function | There is no Function data for this entry.      |
+      | {search}/entry/NX_O43290/function | ALLERGEN                                       |
+      | {search}/entry/NX_P10109/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
+      | {search}/entry/NX_Q8WVF1/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
+      | {search}/entry/NX_Q2M3T9/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
+      | {search}/entry/NX_Q13268/function | BIOPHYSICOCHEMICAL PROPERTIES                  |
+      | {search}/entry/NX_Q5TA31/function | CAUTION                                        |
+      | {search}/entry/NX_Q13547/function | ENZYMATIC ACTIVITY                             |
+      | {search}/entry/NX_P51800/function | ENZYMATIC ACTIVITY                             | 
+      | {search}/entry/NX_Q5T7P8/function | ENZYMATIC ACTIVITY                             |
+      | {search}/entry/NX_F8WCM5/function | GO MOLECULAR FUNCTION                          |
+      | {search}/entry/NX_Q15513/function | GO BIOLOGICAL PROCESS                          |
+      | {search}/entry/NX_Q13571/function | KEGG PATHWAYS                                  |
+      | {search}/entry/NX_Q5TAG4/function | NOTE                                           |
+      | {search}/entry/NX_P01308/function | OVERVIEW                                       |	  
+      | {search}/entry/NX_Q13625/function | REACTOME PATHWAYS                              |
+      | {search}/entry/NX_Q5TAQ9/function | UNIPATHWAYS                                    |
+      | {search}/entry/NX_Q14146/function | There is no Function data for this entry.      |
 
 # Carbonic anhydrase 2 [EC 4.2.1.1] (CA2) [NX_P00918]
 # Entry with many categories and sub-categories of annotations	  
@@ -39,7 +39,7 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | result                                                                             |
-	  | OVERVIEW                                                                           |
+      | OVERVIEW                                                                           |
       | GO MOLECULAR FUNCTION                                                              |
       | GO BIOLOGICAL PROCESS                                                              |
       | ENZYMATIC ACTIVITY                                                                 |
@@ -47,10 +47,10 @@ Feature: Function view for neXtProt entries
       | It requires the following cofactor                                                 |
       | It is regulated in the following manner                                            |	  
       | KEGG PATHWAYS                                                                      |
-	  | REACTOME PATHWAYS                                                                  |
-	  | NOTE                                                                               |
-	  | BIOPHYSICOCHEMICAL PROPERTIES                                                      |
-	  | Absorption                                                                         |
+      | REACTOME PATHWAYS                                                                  |
+      | NOTE                                                                               |
+      | BIOPHYSICOCHEMICAL PROPERTIES                                                      |
+      | Absorption                                                                         |
       | Kinetic parameters                                                                 |
       | Dependence                                                                         |	  
 
@@ -61,14 +61,14 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                                         |	  
-	  | {search}/entry/NX_P38398/function |	(PubMed:                                       |	  
-	  | {search}/entry/NX_Q8WVF1/function |	described in PubMed:                           |
-	  | {search}/entry/NX_P52701/function |	Contributes to                                 |	  
-	  | {search}/entry/NX_Q06187/function |	Not                                            |
-	  | {search}/entry/NX_Q969P6/function |	Not                                            |
-	  | {search}/entry/NX_P38398/function |	Gold                                           |                                           
-	  | {search}/entry/NX_F8WCM5/function |	Silver                                         |
-	  | {search}/entry/NX_P52701/function |	neXtProt                                       |	  
+      | {search}/entry/NX_P38398/function | (PubMed:                                       |	  
+      | {search}/entry/NX_Q8WVF1/function | described in PubMed:                           |
+      | {search}/entry/NX_P52701/function | Contributes to                                 |	  
+      | {search}/entry/NX_Q06187/function | Not                                            |
+      | {search}/entry/NX_Q969P6/function | Not                                            |
+      | {search}/entry/NX_P38398/function | Gold                                           |                                           
+      | {search}/entry/NX_F8WCM5/function | Silver                                         |
+      | {search}/entry/NX_P52701/function | neXtProt                                       |	  
 
 # Entries with no GO annotations and only one category of keywords selected for testing (SP_FV_75)  
   Scenario Outline: Check categories of keywords found in Function view
@@ -77,9 +77,9 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                     |
-	  | {search}/entry/NX_Q5SZI1/function |	MOLECULAR FUNCTION         |
-	  | {search}/entry/NX_Q8TF61/function |	BIOLOGICAL PROCESS	       |  
-	  | {search}/entry/NX_P61583/function |	TECHNICAL TERM             |	  
+      | {search}/entry/NX_Q5SZI1/function | MOLECULAR FUNCTION         |
+      | {search}/entry/NX_Q8TF61/function | BIOLOGICAL PROCESS	       |  
+      | {search}/entry/NX_P61583/function | TECHNICAL TERM             |	  
 
 # Cellular tumor antigen p53 (TP53) [NX_P04637]	  
 # Entry with 2 (of the 3) categories of keywords (use AC as this is stable)
@@ -105,10 +105,10 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                            |
-	  | {search}/entry/NX_Q8TDD5/function |	Chemistry                         |
-	  | {search}/entry/NX_P42574/function |	Enzyme and pathway databases      |
-	  | {search}/entry/NX_P42574/function |	Other                             |	  
-	  | {search}/entry/NX_P42658/function |	Protein family/group databases    |	  
+      | {search}/entry/NX_Q8TDD5/function | Chemistry                         |
+      | {search}/entry/NX_P42574/function | Enzyme and pathway databases      |
+      | {search}/entry/NX_P42574/function | Other                             |	  
+      | {search}/entry/NX_P42658/function | Protein family/group databases    |	  
 
 	  
 # TO DO: Add period after BRENDA CAZy MEROPS TCDB if going in Further external links in NP2 
@@ -118,18 +118,18 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                     |
-	  | {search}/entry/NX_Q06187/function |	BRENDA:                    |
-	  | {search}/entry/NX_Q96KX0/function |	CAZy                       |
-	  | {search}/entry/NX_P42658/function |	ESTHER:                    |
-	  | {search}/entry/NX_P01308/function |	GeneWiki:                  |
-	  | {search}/entry/NX_Q14146/function |	GenomeRNAi:                |
-	  | {search}/entry/NX_Q8TDD5/function |	GuidetoPHARMACOLOGY:       |	  
-	  | {search}/entry/NX_P47897/function |	MoonProt:                  |
-	  | {search}/entry/NX_Q58DX5/function |	MEROPS:                    |
-	  | {search}/entry/NX_Q13547/function |	PRO:                       |	  
-	  | {search}/entry/NX_P42574/function |	SABIO-RK:                  |
-	  | {search}/entry/NX_P39877/function |	SwissLipids:               |	  
-	  | {search}/entry/NX_Q8NCS7/function |	TCDB                       |
+      | {search}/entry/NX_Q06187/function | BRENDA:                    |
+      | {search}/entry/NX_Q96KX0/function | CAZy                       |
+      | {search}/entry/NX_P42658/function | ESTHER:                    |
+      | {search}/entry/NX_P01308/function | GeneWiki:                  |
+      | {search}/entry/NX_Q14146/function | GenomeRNAi:                |
+      | {search}/entry/NX_Q8TDD5/function | GuidetoPHARMACOLOGY:       |	  
+      | {search}/entry/NX_P47897/function | MoonProt:                  |
+      | {search}/entry/NX_Q58DX5/function | MEROPS:                    |
+      | {search}/entry/NX_Q13547/function | PRO:                       |	  
+      | {search}/entry/NX_P42574/function | SABIO-RK:                  |
+      | {search}/entry/NX_P39877/function | SwissLipids:               |	  
+      | {search}/entry/NX_Q8NCS7/function | TCDB                       |
 
 # Angiotensin-converting enzyme [EC 3.2.1.-, EC 3.4.15.1] (ACE) [NX_P12821]	  
 # Entry with 3 (of the the 4) categories of cross-references 
@@ -143,7 +143,7 @@ Feature: Function view for neXtProt entries
       | GeneWiki:             |
       | GenomeRNAi:           |
       | PRO:                  |
-	  | GuidetoPHARMACOLOGY:  |
+      | GuidetoPHARMACOLOGY:  |
 	  
   Scenario Outline: Check sections or keywords which should be absent from Function view
     Given I navigate to nextprot url "<query>"
@@ -151,9 +151,9 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                     |	  
-	  | {search}/entry/NX_Q14146/function |	Keywords                   |
-	  | {search}/entry/NX_Q7Z2R9/function |	Further external links     |
-	  | {search}/entry/NX_Q7Z2R9/function |	KW-1185                    |	  
+      | {search}/entry/NX_Q14146/function | Keywords                   |
+      | {search}/entry/NX_Q7Z2R9/function | Further external links     |
+      | {search}/entry/NX_Q7Z2R9/function | KW-1185                    |	  
 
   Scenario Outline: Check properties of cross-references in Function view
     Given I navigate to nextprot url "<query>"
@@ -161,4 +161,4 @@ Feature: Function view for neXtProt entries
 
  Examples: Expected query results
       | query                             | result                                |
-	  | {search}/entry/NX_P42658/function |	 [ Family name: DPP4N Peptidase S9 ]  |
+      | {search}/entry/NX_P42658/function | [ Family name: DPP4N Peptidase S9 ]   |
