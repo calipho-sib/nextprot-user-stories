@@ -83,7 +83,7 @@ public class WebDriverManager {
 
         try {
             //return new RemoteWebDriver(new URL("http://miniwatt:4444/wd/hub"), desiredCapabilities);
-            return new RemoteWebDriver(new URL("http://jenkins.vital-it.ch:4444/wd/hub"), desiredCapabilities);
+            return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), desiredCapabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
