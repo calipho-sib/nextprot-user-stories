@@ -1,6 +1,5 @@
 package org.nextprot;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,8 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -39,7 +36,7 @@ public class WebDriverManager {
         initDriver(driverName, true);
     }
 
-    static void initDriver(DriverName driverName, boolean remote) {
+    private static void initDriver(DriverName driverName, boolean remote) {
 
         DesiredCapabilities desiredCapabilities = newDesiredCapabilities(driverName);
 
@@ -89,13 +86,6 @@ public class WebDriverManager {
         }
 
         throw new IllegalStateException("cannot create new remote web driver for driver "+desiredCapabilities.getBrowserName());
-    }
-
-    public static void saveScreenshot(String screenshotFileName) throws IOException {
-
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File(screenshotFileName));
-        System.out.println("save screenshot "+screenshotFileName);
     }
 
     static void closeDriver() {
