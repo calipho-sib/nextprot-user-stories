@@ -155,11 +155,12 @@ public class WebPageSteps {
      */
     private boolean doTextsContainedInPageSource(List<String> textList, boolean doContain, boolean iframe, WebDriver webDriver) {
 
+        // http://www.assertselenium.com/webdriver/handling-iframes-using-webdriver/
         String pageSource = ((iframe) ? webDriver.switchTo().frame("iframeViewer") : webDriver).getPageSource();
 
         if (pageSource != null) {
             for (String text : textList) {
-                if (pageSource.contains(text) != doContain) {
+                if (Pattern.compile(Pattern.quote(text), Pattern.CASE_INSENSITIVE).matcher(pageSource).find() != doContain) {
                     return false;
                 }
             }
