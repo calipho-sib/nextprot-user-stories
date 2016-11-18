@@ -1,10 +1,10 @@
-package org.nextprot.stepdefs.snorql;
+package org.nextprot.scenario.step_definition.snorql;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.nextprot.WebDriverManager;
+import org.nextprot.scenario.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static org.nextprot.WebDriverManager.getJavascriptExecutor;
+import static org.nextprot.scenario.WebDriverManager.getJavascriptExecutor;
 
 
 public class SnorqlSteps {

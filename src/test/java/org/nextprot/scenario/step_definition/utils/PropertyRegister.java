@@ -1,4 +1,4 @@
-package org.nextprot.stepdefs.utils;
+package org.nextprot.scenario.step_definition.utils;
 
 
 import java.io.FileInputStream;
@@ -6,36 +6,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class StepUtils {
+public class PropertyRegister {
 
     private static final Properties properties;
 
-    private StepUtils() {
+    private PropertyRegister() {
         throw new IllegalAccessError("not instanciable");
     }
 
     static {
         try {
             properties = loadProperties(
-                    StepUtils.class.getClassLoader().getResource("settings.properties").getFile(),
-                    StepUtils.class.getClassLoader().getResource("hidden.properties").getFile(),
-                    StepUtils.class.getClassLoader().getResource("features/features.properties").getFile()
+                    PropertyRegister.class.getClassLoader().getResource("settings.properties").getFile(),
+                    PropertyRegister.class.getClassLoader().getResource("hidden.properties").getFile(),
+                    PropertyRegister.class.getClassLoader().getResource("features/features.properties").getFile()
             );
         } catch (IOException e) {
             throw new IllegalStateException("cannot load properties", e);
         }
     }
-
-    public static boolean valueOfBooleanFromNotStatus(String notStatus) {
-
-        if (notStatus == null || notStatus.trim().isEmpty()) {
-            return true;
-        } else if ("not".equalsIgnoreCase(notStatus.trim())) {
-            return false;
-        }
-
-        throw new IllegalArgumentException(notStatus + ": bad argument format (take only empty or 'not' strings)");
-    }
+    
     public static String getProperty(String name) {
 
         return properties.getProperty(name);

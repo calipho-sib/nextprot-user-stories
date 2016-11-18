@@ -1,8 +1,8 @@
-package org.nextprot.stepdefs;
+package org.nextprot.scenario.step_definition;
 
 import cucumber.api.java.en.And;
-import org.nextprot.WebDriverManager;
-import org.nextprot.stepdefs.utils.StepUtils;
+import org.nextprot.scenario.WebDriverManager;
+import org.nextprot.scenario.step_definition.utils.PropertyRegister;
 import org.openqa.selenium.By;
 
 public class GooglePlusSteps {
@@ -16,8 +16,8 @@ public class GooglePlusSteps {
     @And("^I sign in with gmail as \"([^\"]*)\"$")
     public void iSignInToGmailAs(String account) throws Throwable {
 
-        String email = StepUtils.getProperty(account);
-        String password = StepUtils.getProperty(account+".password");
+        String email = PropertyRegister.getProperty(account);
+        String password = PropertyRegister.getProperty(account+".password");
 
         WebDriverManager.waitUntilFindElement(30, By.id("Email")).sendKeys(email);
 

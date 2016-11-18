@@ -1,19 +1,20 @@
-package org.nextprot.stepdefs;
+package org.nextprot.scenario.step_definition;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.nextprot.WebDriverManager;
-import org.nextprot.stepdefs.utils.StepUtils;
+import org.nextprot.scenario.WebDriverManager;
+import org.nextprot.scenario.step_definition.utils.StepUtils;
+import org.nextprot.scenario.step_definition.utils.TextFinder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.nextprot.stepdefs.utils.StepUtils.valueOfBooleanFromNotStatus;
-import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
+import static org.nextprot.scenario.step_definition.utils.StepUtils.valueOfBooleanFromNotStatus;
+import static org.nextprot.scenario.WebDriverManager.fluentWaitUntilExpectedCondition;
 
 public class WebPageSteps {
 
@@ -130,8 +131,8 @@ public class WebPageSteps {
         boolean caseSensitive = !" ignore case".equalsIgnoreCase(ignoreCase);
 
         fluentWaitUntilExpectedCondition(30, d ->
-                new TextFinder(d.getPageSource(), caseSensitive, reverseSearch).findText(textList) ||
-                new TextFinder(d.switchTo().frame("iframeViewer").getPageSource(), caseSensitive, reverseSearch).findText(textList)
+                new TextFinder(d.getPageSource(), caseSensitive).findText(textList, reverseSearch) ||
+                new TextFinder(d.switchTo().frame("iframeViewer").getPageSource(), caseSensitive).findText(textList, reverseSearch)
         );
     }
 
@@ -146,9 +147,6 @@ public class WebPageSteps {
 
         boolean reverseSearch = valueOfBooleanFromNotStatus(notStatus);
 
-        fluentWaitUntilExpectedCondition(30, d ->
-                new TextFinder(d.getPageSource(), true, reverseSearch).matchPattern(patternList) ||
-                new TextFinder(d.switchTo().frame("iframeViewer").getPageSource(), true, reverseSearch).matchPattern(patternList)
-        );
+        fluentWaitUntilExpectedCondition(30, d -> TextFinder.CaseSensitive(d.getPageSource()).matchPattern(patternList, reverseSearch));
     }
 }

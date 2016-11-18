@@ -1,6 +1,6 @@
-package org.nextprot;
+package org.nextprot.scenario;
 
-import org.nextprot.stepdefs.utils.StepUtils;
+import org.nextprot.scenario.step_definition.utils.PropertyRegister;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -47,7 +47,7 @@ public class WebDriverManager {
         else {
             switch (driverName) {
                 case FIREFOX:
-                    System.setProperty("webdriver.firefox.bin", StepUtils.getProperty("webdriver.firefox.bin"));
+                    System.setProperty("webdriver.firefox.bin", PropertyRegister.getProperty("webdriver.firefox.bin"));
                     driver = new FirefoxDriver(desiredCapabilities);
                     break;
                 case CHROME:

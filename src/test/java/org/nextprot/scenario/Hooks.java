@@ -1,4 +1,4 @@
-package org.nextprot;
+package org.nextprot.scenario;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

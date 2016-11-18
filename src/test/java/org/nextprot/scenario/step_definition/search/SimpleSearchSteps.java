@@ -1,8 +1,8 @@
-package org.nextprot.stepdefs.search;
+package org.nextprot.scenario.step_definition.search;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import org.nextprot.WebDriverManager;
+import org.nextprot.scenario.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

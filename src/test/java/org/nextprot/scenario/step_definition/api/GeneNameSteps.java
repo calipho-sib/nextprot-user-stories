@@ -1,4 +1,4 @@
-package org.nextprot.stepdefs.api;
+package org.nextprot.scenario.step_definition.api;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

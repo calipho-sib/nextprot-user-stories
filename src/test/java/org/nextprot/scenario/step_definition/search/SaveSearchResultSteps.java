@@ -1,14 +1,14 @@
-package org.nextprot.stepdefs.search;
+package org.nextprot.scenario.step_definition.search;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.nextprot.WebDriverManager;
+import org.nextprot.scenario.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.stepdefs.utils.StepUtils.valueOfBooleanFromNotStatus;
-import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
-import static org.nextprot.WebDriverManager.waitUntilFindElement;
+import static org.nextprot.scenario.step_definition.utils.BooleanUtils.mapNotStringToBoolean;
+import static org.nextprot.scenario.WebDriverManager.fluentWaitUntilExpectedCondition;
+import static org.nextprot.scenario.WebDriverManager.waitUntilFindElement;
 
 public class SaveSearchResultSteps {
 
@@ -17,7 +17,7 @@ public class SaveSearchResultSteps {
 
         fluentWaitUntilExpectedCondition(30, d -> {
 
-            if (valueOfBooleanFromNotStatus(notStatus)) {
+            if (mapNotStringToBoolean(notStatus)) {
 
                 return WebDriverManager.getDriver().getPageSource().contains("Create List");
             } else {

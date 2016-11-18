@@ -1,17 +1,17 @@
-package org.nextprot.stepdefs;
+package org.nextprot.scenario.step_definition;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.nextprot.WebDriverManager;
-import org.nextprot.stepdefs.utils.StepUtils;
+import org.nextprot.scenario.WebDriverManager;
+import org.nextprot.scenario.step_definition.utils.PropertyRegister;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.stepdefs.utils.StepUtils.valueOfBooleanFromNotStatus;
-import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
+import static org.nextprot.scenario.WebDriverManager.fluentWaitUntilExpectedCondition;
+import static org.nextprot.scenario.step_definition.utils.BooleanUtils.mapNotStringToBoolean;
 
 public class Auth0Steps {
 
@@ -24,8 +24,8 @@ public class Auth0Steps {
     @And("^I sign ([^\"]*) with email as \"([^\"]*)\"$")
     public void iSignTheFormWithEmail(String sign, String emailPropName) throws Throwable {
 
-        String email = StepUtils.getProperty(emailPropName);
-        String password = StepUtils.getProperty(emailPropName+".password");
+        String email = PropertyRegister.getProperty(emailPropName);
+        String password = PropertyRegister.getProperty(emailPropName+".password");
 
         Assert.assertTrue("missing password for "+emailPropName+ "", !password.isEmpty());
 
@@ -60,7 +60,7 @@ public class Auth0Steps {
 
                 boolean isLogged = res != null && !"Guest".equals(res);
 
-                return valueOfBooleanFromNotStatus(notStatus) == isLogged;
+                return mapNotStringToBoolean(notStatus) == isLogged;
             }
 
             return false;
