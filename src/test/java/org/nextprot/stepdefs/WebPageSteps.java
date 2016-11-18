@@ -4,18 +4,15 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
+import org.nextprot.stepdefs.utils.StepUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static org.nextprot.StepUtils.valueOfBooleanFromNotStatus;
+import static org.nextprot.stepdefs.utils.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 
 public class WebPageSteps {
@@ -120,76 +117,38 @@ public class WebPageSteps {
         WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
     }
 
-    @Then("^the page source should( not)? contain text \"([^\"]*)\"$")
-    public void thePageSourceShouldContainText(String shouldNotContainText, String text) throws Throwable {
+    @Then("^the page source should( not)? contain( ignored case)? text \"([^\"]*)\"$")
+    public void thePageSourceShouldContainText(String shouldNotContainText, String ignoreCase, String text) throws Throwable {
 
-        thePageSourceShouldContainTexts(shouldNotContainText, Collections.singletonList(text));
+        thePageSourceShouldContainTexts(shouldNotContainText, ignoreCase, Collections.singletonList(text));
     }
 
-    @Then("^the page source should( not)? contain texts$")
-    public void thePageSourceShouldContainTexts(String notStatus, List<String> textList) throws Throwable {
+    @Then("^the page source should( not)? contain( ignored case)? texts$")
+    public void thePageSourceShouldContainTexts(String notStatus, String ignoreCase, List<String> textList) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(30, d -> doTextsContainedInPageSource(textList, valueOfBooleanFromNotStatus(notStatus), false, d) ||
-                doTextsContainedInPageSource(textList, valueOfBooleanFromNotStatus(notStatus), true, d));
+        boolean reverseSearch = valueOfBooleanFromNotStatus(notStatus);
+        boolean caseSensitive = !" ignore case".equalsIgnoreCase(ignoreCase);
+
+        fluentWaitUntilExpectedCondition(30, d ->
+                new TextFinder(d.getPageSource(), caseSensitive, reverseSearch).findText(textList) ||
+                new TextFinder(d.switchTo().frame("iframeViewer").getPageSource(), caseSensitive, reverseSearch).findText(textList)
+        );
     }
 
-    @Then("^the page source should match pattern \"([^\"]*)\"$")
-    public void thePageSourceShouldMatchPattern(String pattern) throws Throwable {
+    @Then("^the page source should( not)? match pattern \"([^\"]*)\"$")
+    public void thePageSourceShouldMatchPattern(String shouldNotContainText, String pattern) throws Throwable {
 
-        thePageSourceShouldMatchTexts(Collections.singletonList(pattern));
+        thePageSourceShouldMatchTexts(shouldNotContainText, Collections.singletonList(pattern));
     }
 
-    @Then("^the page source should match patterns$")
-    public void thePageSourceShouldMatchTexts(List<String> patternList) throws Throwable {
+    @Then("^the page source should( not)? match patterns$")
+    public void thePageSourceShouldMatchTexts(String notStatus, List<String> patternList) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(30, d -> doPatternsMatchPageSource(patternList, false, d) || doPatternsMatchPageSource(patternList, true, d));
-    }
+        boolean reverseSearch = valueOfBooleanFromNotStatus(notStatus);
 
-    /**
-     * Search texts in page source of the main or embedded html source page
-     * @param textList the list of string to search in the page
-     * @param doContain reverse the search if true
-     * @param iframe search in iframe if true
-     * @param webDriver the web driver
-     * @return true if all texts contained in the page
-     */
-    private boolean doTextsContainedInPageSource(List<String> textList, boolean doContain, boolean iframe, WebDriver webDriver) {
-
-        // http://www.assertselenium.com/webdriver/handling-iframes-using-webdriver/
-        String pageSource = ((iframe) ? webDriver.switchTo().frame("iframeViewer") : webDriver).getPageSource();
-
-        if (pageSource != null) {
-            for (String text : textList) {
-                if (Pattern.compile(Pattern.quote(text), Pattern.CASE_INSENSITIVE).matcher(pageSource).find() != doContain) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Match all patterns against the main or embedded html source page
-     * @param patternList the patterns to match page
-     * @param iframe search in iframe if true
-     * @param webDriver the web driver
-     * @return true if all patterns match the page
-     */
-    private boolean doPatternsMatchPageSource(List<String> patternList, boolean iframe, WebDriver webDriver) {
-
-        String pageSource = ((iframe) ? webDriver.switchTo().frame("iframeViewer") : webDriver).getPageSource();
-
-        if (pageSource != null) {
-            for (String pattern : patternList) {
-
-                Pattern p = Pattern.compile(".+" + pattern + ".+", Pattern.DOTALL);
-                Matcher regexMatcher = p.matcher(pageSource);
-
-                if (!regexMatcher.find()) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        fluentWaitUntilExpectedCondition(30, d ->
+                new TextFinder(d.getPageSource(), true, reverseSearch).matchPattern(patternList) ||
+                new TextFinder(d.switchTo().frame("iframeViewer").getPageSource(), true, reverseSearch).matchPattern(patternList)
+        );
     }
 }
