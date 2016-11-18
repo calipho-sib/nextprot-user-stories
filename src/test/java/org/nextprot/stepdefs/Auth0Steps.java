@@ -4,13 +4,13 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
+import org.nextprot.stepdefs.utils.StepUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.StepUtils.valueOfBooleanFromNotStatus;
+import static org.nextprot.stepdefs.utils.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 
 public class Auth0Steps {

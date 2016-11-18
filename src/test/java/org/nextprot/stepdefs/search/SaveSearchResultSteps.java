@@ -6,7 +6,7 @@ import org.nextprot.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.nextprot.StepUtils.valueOfBooleanFromNotStatus;
+import static org.nextprot.stepdefs.utils.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.WebDriverManager.fluentWaitUntilExpectedCondition;
 import static org.nextprot.WebDriverManager.waitUntilFindElement;
 

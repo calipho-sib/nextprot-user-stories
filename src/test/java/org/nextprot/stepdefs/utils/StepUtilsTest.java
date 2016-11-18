@@ -1,4 +1,4 @@
-package org.nextprot;
+package org.nextprot.stepdefs.utils;
 
 import org.junit.Assert;
 import org.junit.Test;

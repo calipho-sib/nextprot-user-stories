@@ -1,8 +1,8 @@
 package org.nextprot.stepdefs;
 
 import cucumber.api.java.en.And;
-import org.nextprot.StepUtils;
 import org.nextprot.WebDriverManager;
+import org.nextprot.stepdefs.utils.StepUtils;
 import org.openqa.selenium.By;
 
 public class GooglePlusSteps {
