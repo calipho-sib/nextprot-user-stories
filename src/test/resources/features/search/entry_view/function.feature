@@ -36,7 +36,7 @@ Feature: Function view for neXtProt entries
   # Entry with many categories and sub-categories of annotations
   Scenario Outline: Check all categories and sub-categories of annotations for NX_P00918 (SP_FV_33 and SP_FV_36)
     Given I navigate to nextprot url "{search}/entry/NX_P00918/function"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | result                                                                         |
@@ -58,7 +58,7 @@ Feature: Function view for neXtProt entries
 
   Scenario Outline: Check special cases in annotations found in Function view (SP_FV_36 and SP_FV_37)
     Given I navigate to nextprot url "<query>"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | query                             | result               |
@@ -74,7 +74,7 @@ Feature: Function view for neXtProt entries
   # Entries with no GO annotations and only one category of keywords selected for testing (SP_FV_75)
   Scenario Outline: Check categories of keywords found in Function view
     Given I navigate to nextprot url "<query>"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | query                             | result             |
@@ -86,7 +86,7 @@ Feature: Function view for neXtProt entries
   # Entry with 2 (of the 3) categories of keywords (use AC as this is stable)
   Scenario Outline: Check all 9 keywords for the well-known protein p53 (SP_FV_75)
     Given I navigate to nextprot url "{search}/entry/NX_P04637/function"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | result  |
@@ -102,7 +102,7 @@ Feature: Function view for neXtProt entries
 
   Scenario Outline: Check categories of cross-references found in Function view
     Given I navigate to nextprot url "<query>"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | query                             | result                         |
@@ -115,7 +115,7 @@ Feature: Function view for neXtProt entries
   # TO DO: Add period after BRENDA CAZy MEROPS TCDB if going in Further external links in NP2
   Scenario Outline: Check cross-references found in Function view
     Given I navigate to nextprot url "<query>"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | query                             | result               |
@@ -136,7 +136,7 @@ Feature: Function view for neXtProt entries
   # Entry with 3 (of the the 4) categories of cross-references
   Scenario Outline: Check all 5 cross-references for the well-characterized protein ACE
     Given I navigate to nextprot url "{search}/entry/NX_P12821/function"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | result               |
@@ -148,7 +148,7 @@ Feature: Function view for neXtProt entries
 
   Scenario Outline: Check sections or keywords which should be absent from Function view
     Given I navigate to nextprot url "<query>"
-    Then the page source should not contain text "<result>"
+    Then the page source should not contain ignored case text "<result>"
 
     Examples: Expected query results
       | query                             | result                 |
@@ -158,7 +158,7 @@ Feature: Function view for neXtProt entries
 
   Scenario Outline: Check properties of cross-references in Function view
     Given I navigate to nextprot url "<query>"
-    Then the page source should contain text "<result>"
+    Then the page source should contain ignored case text "<result>"
 
     Examples: Expected query results
       | query                             | result                              |
