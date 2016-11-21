@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -137,5 +138,28 @@ public class WebDriverManager {
     public static Boolean fluentWaitUntilExpectedCondition(int seconds, ExpectedCondition<Boolean> expectedCondition) {
 
         return fluentWait(seconds).until(expectedCondition);
+    }
+
+    /**
+     * @return a list of page sources (including iframe(s))
+     */
+    public static List<String> getPageSources() {
+
+        List<String> pageSources = new ArrayList<>(2);
+
+        pageSources.add(driver.getPageSource());
+
+        List<WebElement> iframes = WebDriverManager.waitUntilFindElements(30, By.tagName("iframe"));
+
+        for (WebElement iframe : iframes) {
+
+            WebDriver newDriver = driver.switchTo().frame(iframe);
+
+            pageSources.add(newDriver.getPageSource());
+
+            driver.switchTo().defaultContent();
+        }
+
+        return pageSources;
     }
 }
