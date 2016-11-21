@@ -1,59 +1,83 @@
 package org.nextprot.scenario.step_definition.utils;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class TextFinderTest {
 
-    private final String source = "Lorem ipsum dolor sit amet, consectetuer integer nulla aliquam, massa tempor taciti est, mattis " +
-            "bibendum, justo nostra. Molestie gravida tristique, ipsum fermentum lobortis mattis felis, et egestas " +
-            "ultricies ligula vel. Vivamus vestibulum ut orci pretium, nam mauris fringilla arcu. Tristique ac diam, " +
-            "orci ac duis non. Dignissim quis ante primis, in vestibulum molestie neque egestas, pede luctus cursus neque " +
-            "amet, maecenas dolor ultricies amet volutpat pulvinar at, dolor habitant adipiscing velit magnis amet non. " +
-            "Eget id ut aliquam sollicitudin sed eu, nonummy vitae. Leo luctus nec semper, pede at dui, turpis condimentum " +
-            "mauris eu. Nam tempus, quis inceptos vivamus, odio libero, id elit. Nec elementum. Consequat malesuada ac, " +
-            "pellentesque orci viverra. Duis mi at, elit amet lectus auctor fermentum torquent, ut vel.";
+    private List<String> sources;
 
-    @Test
-    public void shouldFindTextList() throws Exception {
+    @Before
+    public void setup() {
 
-        TextFinder finder = TextFinder.CaseSensitive(source);
-
-        Assert.assertTrue(finder.findText(Arrays.asList("quis", "amet")));
+        sources = Arrays.asList("hello world", "Lorem ipsum dolor sit amet, consectetuer integer nulla aliquam, massa tempor taciti est, mattis " +
+                "bibendum, justo nostra. Molestie gravida tristique, ipsum fermentum lobortis mattis felis, et egestas " +
+                "ultricies ligula vel. Vivamus vestibulum ut orci pretium, nam mauris fringilla arcu. Tristique ac diam, " +
+                "orci ac duis non. Dignissim quis ante primis, in vestibulum molestie neque egestas, pede luctus cursus neque " +
+                "amet, maecenas dolor ultricies amet volutpat pulvinar at, dolor habitant adipiscing velit magnis amet non. " +
+                "Eget id ut aliquam sollicitudin sed eu, nonummy vitae. Leo luctus nec semper, pede at dui, turpis condimentum " +
+                "mauris eu. Nam tempus, quis inceptos vivamus, odio libero, id elit. Nec elementum. Consequat malesuada ac, " +
+                "pellentesque orci viverra. Duis mi at, elit amet lectus auctor fermentum torquent, ut vel hello.");
     }
 
     @Test
-    public void shouldNotFindRoudoudouInTextList() throws Exception {
+    public void shouldFindTextsInAtLeastOneSource() throws Exception {
 
-        TextFinder finder = TextFinder.CaseSensitive(source);
+        TextFinder finder = TextFinder.CaseSensitive(sources);
 
-        Assert.assertTrue(!finder.findText(Arrays.asList("quis", "roudoudou")));
+        Assert.assertTrue(finder.search(Arrays.asList("quis", "amet"), false));
     }
 
     @Test
-    public void shouldFindInsensitiveCaseTextList() throws Exception {
+    public void shouldNotFindAllTextsInSources() throws Exception {
 
-        TextFinder finder = TextFinder.CaseInsensitive(source);
+        TextFinder finder = TextFinder.CaseSensitive(sources);
 
-        Assert.assertTrue(finder.findText(Arrays.asList("QUIS", "amet")));
+        Assert.assertTrue(!finder.search(Arrays.asList("quis", "roudoudou"), false));
     }
 
     @Test
-    public void shouldNotFindText() throws Exception {
+    public void shouldFindInsensitiveCaseTextsInAtLeastOneSource() throws Exception {
 
-        TextFinder finder = TextFinder.CaseSensitive(source);
+        TextFinder finder = TextFinder.CaseInsensitive(sources);
 
-        Assert.assertTrue(finder.findText(Collections.singletonList("roudoudou"), true));
+        Assert.assertTrue(finder.search(Arrays.asList("QUIS", "amet"), false));
+    }
+
+    @Test
+    public void shouldNotFindTextsInSources() throws Exception {
+
+        TextFinder finder = TextFinder.CaseInsensitive(sources);
+
+        Assert.assertTrue(finder.search(Arrays.asList("roudoudou", "rantanplan"), true));
+    }
+
+    @Test
+    public void shouldNotFindTextsInSources2() throws Exception {
+
+        TextFinder finder = TextFinder.CaseInsensitive(sources);
+
+        Assert.assertFalse(finder.search(Arrays.asList("hello", "rantanplan"), true));
     }
 
     @Test
     public void shouldMatchPattern() throws Exception {
 
-        TextFinder finder = TextFinder.CaseSensitive(source);
+        TextFinder finder = TextFinder.CaseSensitive(sources);
 
-        Assert.assertTrue(finder.matchPattern(Collections.singletonList("gravida\\s+tristique")));
+        Assert.assertTrue(finder.matchPattern(Collections.singletonList("gravida\\s+tristique"), false));
+    }
+
+    @Test
+    public void shouldMatchPatternMultiline() throws Exception {
+
+        TextFinder finder = TextFinder.CaseSensitive(sources);
+
+        Assert.assertTrue(finder.matchPattern(Collections.singletonList("gravida.+lectus"), false));
     }
 }
