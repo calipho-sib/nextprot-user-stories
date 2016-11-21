@@ -5,7 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.nextprot.scenario.WebDriverManager;
-import org.nextprot.scenario.step_definition.utils.StepUtils;
+import org.nextprot.scenario.step_definition.utils.PropertyRegister;
 import org.nextprot.scenario.step_definition.utils.TextFinder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,15 +13,17 @@ import org.openqa.selenium.WebElement;
 import java.util.Collections;
 import java.util.List;
 
-import static org.nextprot.scenario.step_definition.utils.StepUtils.valueOfBooleanFromNotStatus;
 import static org.nextprot.scenario.WebDriverManager.fluentWaitUntilExpectedCondition;
+import static org.nextprot.scenario.WebDriverManager.getPageSources;
+import static org.nextprot.scenario.step_definition.utils.BooleanUtils.mapNotStringToBoolean;
+import static org.nextprot.scenario.step_definition.utils.BooleanUtils.mapStringToBoolean;
 
 public class WebPageSteps {
 
-    public static final String API_URL = StepUtils.getProperty("api");
-    public static final String SEARCH_URL = StepUtils.getProperty("search");
-    public static final String SNORQL_URL = StepUtils.getProperty("snorql");
-    public static final String ANY_URL = StepUtils.getProperty("any");
+    public static final String API_URL = PropertyRegister.getProperty("api");
+    public static final String SEARCH_URL = PropertyRegister.getProperty("search");
+    public static final String SNORQL_URL = PropertyRegister.getProperty("snorql");
+    public static final String ANY_URL = PropertyRegister.getProperty("any");
 
     public static String getNextprotPageUrl(String page) {
 
@@ -35,7 +37,7 @@ public class WebPageSteps {
             case "any":
                 return ANY_URL;
             default:
-                throw new IllegalArgumentException("cannot find url for page "+page);
+                throw new IllegalArgumentException("cannot find url for page " + page);
         }
     }
 
@@ -59,7 +61,7 @@ public class WebPageSteps {
 
         String previousURL = WebDriverManager.getDriver().getCurrentUrl();
 
-        WebDriverManager.getDriver().navigate().to(previousURL+path);
+        WebDriverManager.getDriver().navigate().to(previousURL + path);
     }
 
     @Then("^the page title should be \"([^\"]*)\"$")
@@ -95,7 +97,7 @@ public class WebPageSteps {
     @And("^I click on button \"([^\"]*)\"$")
     public void iClickOnButton(String name) throws Throwable {
 
-        WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
+        WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'" + name + "')]")).click();
     }
 
     @When("^I click on logged user drop-down$")
@@ -115,25 +117,24 @@ public class WebPageSteps {
     @Given("^I click on drop-down \"([^\"]*)\"$")
     public void iClickOnDropdown(String name) throws Throwable {
 
-        WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'"+name+"')]")).click();
+        WebDriverManager.waitUntilFindElement(20, By.xpath("//button[contains(text(),'" + name + "')]")).click();
     }
 
     @Then("^the page source should( not)? contain( ignored case)? text \"([^\"]*)\"$")
-    public void thePageSourceShouldContainText(String shouldNotContainText, String ignoreCase, String text) throws Throwable {
+    public void thePageSourceShouldContainText(String shouldNotContainText, String ignoredCase, String text) throws Throwable {
 
-        thePageSourceShouldContainTexts(shouldNotContainText, ignoreCase, Collections.singletonList(text));
+        thePageSourceShouldContainTexts(shouldNotContainText, ignoredCase, Collections.singletonList(text));
     }
 
     @Then("^the page source should( not)? contain( ignored case)? texts$")
-    public void thePageSourceShouldContainTexts(String notStatus, String ignoreCase, List<String> textList) throws Throwable {
+    public void thePageSourceShouldContainTexts(String notStatement, String ignoredCase, List<String> textList) throws Throwable {
 
-        boolean reverseSearch = valueOfBooleanFromNotStatus(notStatus);
-        boolean caseSensitive = !" ignore case".equalsIgnoreCase(ignoreCase);
+        boolean reverseSearch = !mapNotStringToBoolean(notStatement);
+        boolean caseSensitive = mapStringToBoolean(ignoredCase, "ignored case");
 
-        fluentWaitUntilExpectedCondition(30, d ->
-                new TextFinder(d.getPageSource(), caseSensitive).findText(textList, reverseSearch) ||
-                new TextFinder(d.switchTo().frame("iframeViewer").getPageSource(), caseSensitive).findText(textList, reverseSearch)
-        );
+        TextFinder finder = new TextFinder(getPageSources(), caseSensitive);
+
+        fluentWaitUntilExpectedCondition(60, d -> finder.search(textList, reverseSearch));
     }
 
     @Then("^the page source should( not)? match pattern \"([^\"]*)\"$")
@@ -143,10 +144,12 @@ public class WebPageSteps {
     }
 
     @Then("^the page source should( not)? match patterns$")
-    public void thePageSourceShouldMatchTexts(String notStatus, List<String> patternList) throws Throwable {
+    public void thePageSourceShouldMatchTexts(String notStatement, List<String> patternList) throws Throwable {
 
-        boolean reverseSearch = valueOfBooleanFromNotStatus(notStatus);
+        boolean reverseSearch = !mapNotStringToBoolean(notStatement);
 
-        fluentWaitUntilExpectedCondition(30, d -> TextFinder.CaseSensitive(d.getPageSource()).matchPattern(patternList, reverseSearch));
+        TextFinder finder = TextFinder.CaseSensitive(getPageSources());
+
+        fluentWaitUntilExpectedCondition(60, d -> finder.matchPattern(patternList, reverseSearch));
     }
 }
