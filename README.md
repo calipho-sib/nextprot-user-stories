@@ -1,10 +1,9 @@
-# neXtProt User Stories
+# neXtProt Features
 
-Defines and tests user stories, features or specifications for [neXtProt](https://www.nextprot.org/).
+Defines acceptance tests for [neXtProt](https://www.nextprot.org/) specifications.
 
-All our test acceptance are based on the following technologies:
+![http://docs.seleniumhq.org/](doc/img/cucumber-triad.png)
+![http://docs.seleniumhq.org/](doc/img/selenium-logo.png)
 
-- [selenium](http://docs.seleniumhq.org/)
-- [cucumber](https://cucumber.io/)
+Check [user stories documentation](doc/user-stories-with-gherkin.md) for more informations.
 
-See [documentation](doc/user-stories.md)
