@@ -1,4 +1,4 @@
-Feature: neXtProt web application is accessible
+Feature: Test neXtProt web application accessibility
 
   As a user I should be able to access neXtProt web site
 
