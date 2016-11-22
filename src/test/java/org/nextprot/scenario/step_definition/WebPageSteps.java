@@ -44,10 +44,7 @@ public class WebPageSteps {
     @When("^I navigate to nextprot url \"\\{(api|search|snorql|any)\\}(/.*)?\"$")
     public void shouldNavigateToNextprotPage(String host, String path) throws Throwable {
 
-        if (path != null)
-            WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(host) + path);
-        else
-            WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(host));
+         WebDriverManager.getDriver().navigate().to(getNextprotPageUrl(host)+(path != null ? path : ""));
     }
 
     @When("^I navigate to url \"([^\"]+)\"$")
@@ -67,7 +64,7 @@ public class WebPageSteps {
     @Then("^the page title should be \"([^\"]*)\"$")
     public void pageTitleShouldBe(String expectedTitle) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getTitle().equals(expectedTitle));
+        fluentWaitUntilExpectedCondition(30, d -> d.getTitle().equals(expectedTitle));
     }
 
     @When("^I click on link text \"([^\"]*)\"$")
@@ -91,7 +88,7 @@ public class WebPageSteps {
     @Then("^I should find in the page \"([^\"]*)\"$")
     public void iShouldFindInThePage(String expectedName) throws Throwable {
 
-        fluentWaitUntilExpectedCondition(30, d -> WebDriverManager.getDriver().getPageSource().contains(expectedName));
+        fluentWaitUntilExpectedCondition(30, d -> d.getPageSource().contains(expectedName));
     }
 
     @And("^I click on button \"([^\"]*)\"$")
