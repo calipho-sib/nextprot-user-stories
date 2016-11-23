@@ -22,28 +22,20 @@ import static org.openqa.selenium.remote.DesiredCapabilities.firefox;
 
 public class WebDriverManager {
 
-    enum DriverName {
+    private enum DriverName {
         FIREFOX, CHROME, EDGE, SAFARI, IE, OPERA
     }
 
     private static WebDriver driver;
 
-    static void initDriver(DriverName driverName) {
+    public static void initDriver() {
 
-        initDriver(driverName, false);
-    }
-
-    static void initRemoteDriver(DriverName driverName) {
-
-        initDriver(driverName, true);
-    }
-
-    private static void initDriver(DriverName driverName, boolean remote) {
+        DriverName driverName = WebDriverManager.DriverName.valueOf(PropertyRegister.getProperty("webdriver").toUpperCase());
 
         DesiredCapabilities desiredCapabilities = newDesiredCapabilities(driverName);
 
-        if (remote) {
-            driver = newRemoteWebDriver(desiredCapabilities);
+        if (Boolean.valueOf(PropertyRegister.getProperty("webdriver.remote"))) {
+            driver = newRemoteWebDriver(desiredCapabilities, PropertyRegister.getProperty("webdriver.remote.url"));
         }
         else {
             switch (driverName) {
@@ -69,7 +61,6 @@ public class WebDriverManager {
 
             desiredCapabilities.setCapability("platform", "Linux");
             desiredCapabilities.setCapability("driver.version", "2.24");
-            //System.setProperty("webdriver.chrome.driver", StepUtils.getProperty("webdriver.chrome.driver"));
         }
         else if (driverName == DriverName.FIREFOX) {
             desiredCapabilities = firefox();
@@ -78,11 +69,10 @@ public class WebDriverManager {
         return desiredCapabilities;
     }
 
-    private static WebDriver newRemoteWebDriver(DesiredCapabilities desiredCapabilities) {
+    private static WebDriver newRemoteWebDriver(DesiredCapabilities desiredCapabilities, String remoteUrl) {
 
         try {
-            //return new RemoteWebDriver(new URL("http://miniwatt:4444/wd/hub"), desiredCapabilities);
-            return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), desiredCapabilities);
+            return new RemoteWebDriver(new URL(remoteUrl), desiredCapabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
