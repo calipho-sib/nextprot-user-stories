@@ -50,6 +50,9 @@ Feature: Search neXtProt
       | Proteins     | P01737                        | No search results were found.               |
       | Proteins     | P01733                        | No search results were found.               |
       | Proteins     | P04435                        | No search results were found.               |
+      | Proteins     | ENSG00000239975               | Ig kappa chain V-I region AG                |
+      | Proteins     | ENST00000390265               | Ig kappa chain V-I region AG                |
+      | Proteins     | ENSP00000374800               | Ig kappa chain V-I region AG                |
       | Proteins     | COSM5518288                   | Endothelial PAS domain-containing protein 1 |
       | Proteins     | COSM1532223                   | No search results were found.               |
       | Publications | 21636302                      | severe neuromuscular phenotype              |
