@@ -67,3 +67,5 @@ Feature: Search neXtProt
       | Terms        | FA-05386                      | Integrator subunit 8 family                 |
       | Terms        | FA-01918                      | IspD/TarI cytidylyltransferase family       |
       | Terms        | FA-05376                      | No search results were found.               |
+      | Terms        | KW-0181                       | No search results were found.               |
+      | Terms        | KW-1185                       | No search results were found.               |
