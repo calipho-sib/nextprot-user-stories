@@ -56,6 +56,7 @@ Feature: Search neXtProt
       | Proteins     | COSM5518288                   | Endothelial PAS domain-containing protein 1 |
       | Proteins     | COSM1532223                   | No search results were found.               |
       | Proteins     | PAp02121803                   | Ig kappa chain V-I region AG                |
+      | Proteins     | PAp00134062                   | Ig kappa chain V-I region AG                |
       | Publications | 21636302                      | severe neuromuscular phenotype              |
       | Publications | 27663366                      | No search results were found.               |
       | Terms        | You-Hoover-Fong syndrome      | You-Hoover-Fong syndrome                    |
