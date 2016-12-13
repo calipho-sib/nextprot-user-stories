@@ -72,14 +72,9 @@ It is also possible to type `ctrl-space` to ask for auto-completion.
 
 > Also note that auto-completion in `Atom` actually ONLY WORKS WITHOUT INTERNAL SPACES.
 
-### File `features.properties`
+### Property file `features.properties`
 
-This file contains variables that can be referenced in step definitions.
+This file contains properties that can be referenced in step definitions as aliases.
 
-For example the variable `search` is referenced in the following step:
-```
-I navigate to url of nextprot "search"
-```
-
-Here variable "search" is an alias for url "http://dev-search.nextprot.org/".
+For example the variable `page`, referenced in the step `I navigate to nextprot "page"` is an alias for url "http://dev-search.nextprot.org/".
 
