@@ -1,4 +1,4 @@
-# General step definitions
+# neXtProt step definitions conventions
 
 Here are a few already defined step definitions that should be reuse anywhere it is indicated:
 

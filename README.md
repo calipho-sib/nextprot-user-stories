@@ -5,5 +5,5 @@ Defines acceptance tests for [neXtProt](https://www.nextprot.org/) specification
 ![http://docs.seleniumhq.org/](./doc/img/cucumber-triad.png)
 ![http://docs.seleniumhq.org/](./doc/img/selenium-logo.png)
 
-Check [user stories documentation](doc/user-stories-with-gherkin.md) for more informations.
+Check [user stories documentation](doc/create-user-stories-for-non-dev.md) for more informations.
 
