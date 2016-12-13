@@ -72,3 +72,10 @@ Each steps should probably be grouped in different categories:
 - ...
 
 The graal could be completion feat helping writting those steps like intellij
+
+## Development cycle and coordination between feature writers and java coders (TODO, TOTHINK)
+
+There is a list of step definitions already mapping java code in this repository.
+They are accessible through auto-completion when writing future `scenario`.
+
+When new steps are created, it is not executable by `cucumber` and the java logic will have to be written by a developer.

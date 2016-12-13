@@ -1,6 +1,8 @@
+# Writing `user stories` for non-developers
+
 Feature writers need the help of a text editor to create and edit `user-stories`. And depending on their profile, there are some alternative solutions.
 
-Developers already uses IDE to write code (Eclipse, Intellij, ...) and most of them provides plugins for `cucumber/gherkin`.
+Developers already uses [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) to write code (Eclipse, Intellij, ...) and most of them provides plugins for `cucumber/gherkin`.
 Non-developers do not usually need those heavyweight tools.
 
 They need a simpler editor that supports `gherkin` syntax only. In my opinion, this editor should be able to provide:
@@ -8,7 +10,7 @@ They need a simpler editor that supports `gherkin` syntax only. In my opinion, t
 1. syntax highlighting for `gherkin`
 2. auto-completion on existed feature steps
 
-## Competitors
+## Editors
 
 Here are the most popular modern editors tested for our needs (that I know at this time :)):
 
@@ -20,7 +22,7 @@ Here are the most popular modern editors tested for our needs (that I know at th
 
 `Atom` comes with both needed requirements.
 
-## Installation of `Atom` (+ plugins)
+### Installation of `Atom` (+ plugins)
 
 1. First go to web site [https://atom.io/](https://atom.io/) and download the latest release.
 2. Launch Atom
@@ -29,19 +31,24 @@ Here are the most popular modern editors tested for our needs (that I know at th
 5. Install packages `cucumber` and `cucumber-autocomplete`
 6. Select tab `Package` and click on `cucumber-autocomplete` settings, fill `Path` to `/.`
 
-## An example of feature in `Atom`:
+### An example of feature in `Atom`:
 
 ![feature](img/example-feature-in-atom.png)
 
-# neXtProt user-stories
+## Features in `neXtProt-user-stories`
 
-Some `feature`s have already been written for neXtProt. They are available in our GitHub repo named [`nextprot-user-stories`](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features).
+Some `feature`s have already been written for neXtProt. 
+They are available in our GitHub repo named [`nextprot-user-stories`](https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features).
 
-For discoverability of those feature steps, I Highly recommend to have a local access to this folder to profit from full auto-completion in `Atom`.
+    A good writer will always try to use best practices whenever it is possible. 
+    He will not repeat himself and will reuse existing feature `steps` whenever it is possible.
+    
+Writer will need to discover already existing steps while writing scenarios via auto-completion.
+He will need to have a local access to `features/` folder to profit from full auto-completion in `Atom`.
 
 There are 2 alternatives to get those resources:
 
-### Basic solution - Download the single folder `features/` from GitHub repository:
+### A simple one - Downloading the single folder `features/` from GitHub repository
 
 As Git doesn't support download of a single folder, we will use `DownGit` for that.
 
@@ -49,35 +56,12 @@ As Git doesn't support download of a single folder, we will use `DownGit` for th
 2. Paste the link `https://github.com/calipho-sib/nextprot-user-stories/tree/develop/src/test/resources/features`
 3. Click on `Download` and choose a destination in your system. 
 4. Unzip `features.zip`
-5. Open folder (``) `features/` with `Atom`
+5. Open folder `features/` with `Atom`
 
-### Advanced solution (the most powerful alternative) - Cloning github repository locally:
+### An advanced one (the most powerful alternative) - Cloning github repository locally
 
 1. `$ git clone https://github.com/calipho-sib/nextprot-user-stories.git`
 2. `$ cd nextprot-user-stories/src/test/resources/features/`
-
-## `Feature/` structure (2016-12-12)
-
-```
-.
-├── access-nextprot.feature
-├── api
-│   ├── about-nextprot.feature
-│   ├── entry-accessions.feature
-│   ├── entry.feature
-│   ├── feature-isoform-mapping.feature
-│   ├── gene-names.feature
-│   └── page-display.feature
-├── features.properties
-├── registration.feature
-├── search
-│   ├── entry_view
-│   │   └── function.feature
-│   ├── save-search-result.feature
-│   └── search.feature
-└── snorql
-    └── sparql-queries.feature
-```
 
 Here is a snapshot of auto-complete in action with `Atom`:
 
@@ -88,7 +72,7 @@ It is also possible to type `ctrl-space` to ask for auto-completion.
 
 > Also note that auto-completion in `Atom` actually ONLY WORKS WITHOUT INTERNAL SPACES.
 
-## File `features.properties`
+### File `features.properties`
 
 This file contains variables that can be referenced in step definitions.
 
@@ -99,9 +83,3 @@ I navigate to url of nextprot "search"
 
 Here variable "search" is an alias for url "http://dev-search.nextprot.org/".
 
-## Development cycle and coordination between feature writers and java coders (TODO, TOTHINK)
-
-There is a list of step definitions already mapping java code in this repository.
-They are accessible through auto-completion when writing future `scenario`.
-
-When new steps are created, it is not executable by `cucumber` and the java logic will have to be written by a developer.

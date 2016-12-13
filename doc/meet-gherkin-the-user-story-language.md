@@ -1,10 +1,12 @@
+# Gherkin, the `user story` language
+
 Cucumber is an awesome tool that can help us create living documentation. It is a great way to gain a better understanding of how it should function.
 
 It utilizes Gherkin – a language that is at the core of Cucumber’s ability to both document and automate tests. It allows for writing tests around how a feature should behave – a process known as Behaviour Driven Development.
 
 We will gain a better understanding of what is being tested and how a feature should function – something that is along the same lines as writing user stories.
 
-# Gherkin, the `user story` language
+# Gherkin language in a nutshell
 
 Gherkin is a declarative language - you write your code in such a way that it describes what you want to do.
 
