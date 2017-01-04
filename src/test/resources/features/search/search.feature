@@ -34,6 +34,25 @@ Feature: Search neXtProt
     Given I make a simple search with query "krypton"
     When I select all search results
     Then the clipboard should contain "12" elements
+    
+  # For now, terms checked are from CVs which are in FTP site
+  # TO DO: Extend to all CVs and also check that everything that should be indexed is indexed (document specs first)
+  Scenario Outline: Check ACs of CV terms which exist are indexed
+    Given I click on drop-down id "#search-entity"
+    And I select option "Terms"
+    When I make a simple search with query "<query>"
+    Then the page source should contain text "<result>"
+
+    Examples:
+      | query                         | result                                      |   
+      | TS-0564                       | Liver                                       |
+      | CVCA_0004                     | N-linked (GlcNAc...) (complex)              |
+      | DO-00615                      | SH3 domain                                  |
+      | FA-03015                      | Prion family                                |
+      | CVME_0001                     | Calcium                                     |
+      | ME:0000002                    | impact                                      |
+      | PP:0001                       | protein abundance                           |
+      | CVTO_0002                     | Extracellular                               |
 
   Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
     Given I click on drop-down id "#search-entity"
