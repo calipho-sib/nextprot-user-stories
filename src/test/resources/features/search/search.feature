@@ -53,6 +53,26 @@ Feature: Search neXtProt
       | ME:0000002                    | impact                                      |
       | PP:0001                       | protein abundance                           |
       | CVTO_0002                     | Extracellular                               |
+      
+  # UPDATE at each new release
+  # For now, terms checked are from CVs which are in FTP site
+  # TO DO: Extend to all CVs 
+  Scenario Outline: Check that the next free AC for CVs return no results
+    Given I click on drop-down id "#search-entity"
+    And I select option "Terms"
+    When I make a simple search with query "<query>"
+    Then the page source should contain text "No search results were found."
+
+    Examples:
+      | query                         |
+      | TS-2449                       |
+      | CVCA_0035                     |
+      | DO-00913                      |
+      | FA-05395                      |
+      | CVME_0038                     |
+      | ME:0000007                    |
+      | PP:000006                     |
+      | CVTO_0025                     |
 
   Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
     Given I click on drop-down id "#search-entity"
