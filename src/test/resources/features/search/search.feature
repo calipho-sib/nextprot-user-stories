@@ -34,7 +34,24 @@ Feature: Search neXtProt
     Given I make a simple search with query "krypton"
     When I select all search results
     Then the clipboard should contain "12" elements
-    
+
+  Scenario Outline: Check that searching for entries in exclusion list returns no results
+    Given I click on drop-down id "#search-entity"
+    And I select option "Proteins"
+    When I make a simple search with query "<query>"
+    Then the page source should contain text "No search results were found."
+
+    Examples:
+      | query                                   |
+      | P04220                                  |
+      | "Ig mu heavy chain disease protein"     |
+      | P04436                                  |
+      | P04437                                  |
+      | P01737                                  |
+      | P01733                                  |
+      | P04435                                  |
+      | "T-cell receptor alpha chain V region"  |
+
   # For now, terms checked are from CVs which are in FTP site
   # TO DO: Extend to all CVs and also check that everything that should be indexed is indexed (document specs first)
   Scenario Outline: Check ACs of CV terms which exist are indexed
@@ -57,7 +74,7 @@ Feature: Search neXtProt
   # UPDATE at each new release
   # For now, terms checked are from CVs which are in FTP site
   # TO DO: Extend to all CVs 
-  Scenario Outline: Check that the next free AC for CVs return no results
+  Scenario Outline: Check that searching for the next free AC for CVs returns no results
     Given I click on drop-down id "#search-entity"
     And I select option "Terms"
     When I make a simple search with query "<query>"
@@ -75,7 +92,7 @@ Feature: Search neXtProt
       | CVTO_0025                     |
 
   # UPDATE at each new release
-  Scenario Outline: Check new CV term or data indexation in upcoming release
+  Scenario Outline: Check new CV terms or data in upcoming release are indexed
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
     When I make a simple search with query "<query>"
@@ -84,13 +101,13 @@ Feature: Search neXtProt
     Examples:
       | option       | query                         | result                                                       |
       | Proteins     |               |               |
-      | Publications |               |               |
+      | Publications | 27612661                      | Directed evolution of glutathione transferases               |
       | Terms        | CVCA_0034                     | N-linked (GlcNAc...) (hybrid)                                |
       | Terms        | DO-00909                      | K167R                                                        |
       | Terms        | FA-05394                      | Class-II aminoacyl-tRNA synthetase family. Type 2 subfamily  |
 
   # UPDATE at each new release
-  Scenario Outline: Check modified CV term or data indexation in upcoming release
+  Scenario Outline: Check modified CV terms or data in upcoming release are indexed
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
     When I make a simple search with query "<query>"
@@ -103,7 +120,7 @@ Feature: Search neXtProt
       
       
   # UPDATE at each new release
-  Scenario Outline: Check obsoleted (deleted) CV term or data indexation in upcoming release
+  Scenario Outline: Check search for obsoleted (deleted) CV term or data in upcoming release returns no results
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
     When I make a simple search with query "<query>"
