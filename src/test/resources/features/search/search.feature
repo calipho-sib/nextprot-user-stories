@@ -74,7 +74,23 @@ Feature: Search neXtProt
       | PP:000006                     |
       | CVTO_0025                     |
 
-  Scenario Outline: Check new, modified, excluded or obsolete data indexation in new release 2016_10
+  # UPDATE at each new release
+  Scenario Outline: Check new CV term or data indexation in upcoming release
+    Given I click on drop-down id "#search-entity"
+    And I select option "<option>"
+    When I make a simple search with query "<query>"
+    Then the page source should contain text "<result>"
+
+    Examples:
+      | option       | query                         | result                                                       |
+      | Proteins     |               |               |
+      | Publications |               |               |
+      | Terms        | CVCA_0034                     | N-linked (GlcNAc...) (hybrid)                                |
+      | Terms        | DO-00909                      | K167R                                                        |
+      | Terms        | FA-05394                      | Class-II aminoacyl-tRNA synthetase family. Type 2 subfamily  |
+
+  # UPDATE at each new release
+  Scenario Outline: Check modified CV term or data indexation in upcoming release
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
     When I make a simple search with query "<query>"
@@ -82,31 +98,19 @@ Feature: Search neXtProt
 
     Examples:
       | option       | query                         | result                                      |
-      | Proteins     | P01593                        | Ig kappa chain V-I region AG                |
-      | Proteins     | P04220                        | No search results were found.               |
-      | Proteins     | P04436                        | No search results were found.               |
-      | Proteins     | P04437                        | No search results were found.               |
-      | Proteins     | P01737                        | No search results were found.               |
-      | Proteins     | P01733                        | No search results were found.               |
-      | Proteins     | P04435                        | No search results were found.               |
-      | Proteins     | ENSG00000239975               | Ig kappa chain V-I region AG                |
-      | Proteins     | ENST00000390265               | Ig kappa chain V-I region AG                |
-      | Proteins     | ENSP00000374800               | Ig kappa chain V-I region AG                |
-      | Proteins     | COSM5518288                   | Endothelial PAS domain-containing protein 1 |
-      | Proteins     | COSM1532223                   | No search results were found.               |
-      | Proteins     | PAp02121803                   | Ig kappa chain V-I region AG                |
-      | Proteins     | PAp00134062                   | Ig kappa chain V-I region AG                |
-      | Publications | 21636302                      | severe neuromuscular phenotype              |
-      | Publications | 27663366                      | No search results were found.               |
-      | Terms        | You-Hoover-Fong syndrome      | You-Hoover-Fong syndrome                    |
-      | Terms        | DI-01661                      | Gillespie syndrome                          |
-      | Terms        | DI-01848                      | No search results were found.               |
-      | Terms        | DO-00904                      | PP1-binding                                 |
-      | Terms        | DO-00864                      | C2HC MYST-type                              |
-      | Terms        | DO-00106                      | No search results were found.               |
-      | Terms        | DO-00905                      | No search results were found.               |
-      | Terms        | FA-05386                      | Integrator subunit 8 family                 |
-      | Terms        | FA-01918                      | IspD/TarI cytidylyltransferase family       |
-      | Terms        | FA-05376                      | No search results were found.               |
-      | Terms        | KW-0181                       | No search results were found.               |
-      | Terms        | KW-1185                       | No search results were found.               |
+      | Terms        | DO-00528                      | Prospero-type homeo                         |
+      | Terms        | FA-04941                      | INKA family                                 |
+      
+      
+  # UPDATE at each new release
+  Scenario Outline: Check obsoleted (deleted) CV term or data indexation in upcoming release
+    Given I click on drop-down id "#search-entity"
+    And I select option "<option>"
+    When I make a simple search with query "<query>"
+    Then the page source should contain text "No search results were found."
+
+    Examples:
+      | option       | query                         |
+      | Terms        | TS-2176                       |
+      | Terms        | DO-00095                      |
+      | Terms        | CVTO_0008                     |
