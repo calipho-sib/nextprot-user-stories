@@ -105,6 +105,8 @@ Feature: Search neXtProt
       | Terms        | CVCA_0034                     | N-linked (GlcNAc...) (hybrid)                                |
       | Terms        | DO-00909                      | K167R                                                        |
       | Terms        | FA-05394                      | Class-II aminoacyl-tRNA synthetase family. Type 2 subfamily  |
+      | Terms        | DI-04829                      | Band heterotopia                                             |
+      | Terms        | DI-04857                      | Sifrim-Hitz-Weiss syndrome                                   |
 
   # UPDATE at each new release
   Scenario Outline: Check modified CV terms or data in upcoming release are indexed
@@ -131,3 +133,4 @@ Feature: Search neXtProt
       | Terms        | TS-2176                       |
       | Terms        | DO-00095                      |
       | Terms        | CVTO_0008                     |
+      | Terms        | KW-0197                       |
