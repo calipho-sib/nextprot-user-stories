@@ -20,10 +20,10 @@ Feature: Search neXtProt
     Then the page source should contain text "<result>"
 
     Examples:
-      | option       | result                                                            |
-      | Proteins     | Transmembrane protease serine 11B                                 |
-      | Publications | Exploring hydrophobic sites in proteins with xenon or krypton     |
-      | Terms        | Inert Gas Narcosis [D007222]                                      |
+      | option       | result                                                        |
+      | Proteins     | Transmembrane protease serine 11B                             |
+      | Publications | Exploring hydrophobic sites in proteins with xenon or krypton |
+      | Terms        | Inert Gas Narcosis [D007222]                                  |
 
   Scenario: Select a result after a protein search should add it to clipboard
     Given I make a simple search with query "kinase"
@@ -38,19 +38,19 @@ Feature: Search neXtProt
   Scenario Outline: Check that searching for entries in exclusion list returns no results
     Given I click on drop-down id "#search-entity"
     And I select option "Proteins"
-    When I make a simple search with query "<query>"
+    When I make a simple search with query '<query>'
     Then the page source should contain text "No search results were found."
 
     Examples:
-      | query                                   |
-      | P04220                                  |
-      | "Ig mu heavy chain disease protein"     |
-      | P04436                                  |
-      | P04437                                  |
-      | P01737                                  |
-      | P01733                                  |
-      | P04435                                  |
-      | "T-cell receptor alpha chain V region"  |
+      | query                                  |
+      | P04220                                 |
+      | "Ig mu heavy chain disease protein"    |
+      | P04436                                 |
+      | P04437                                 |
+      | P01737                                 |
+      | P01733                                 |
+      | P04435                                 |
+      | "T-cell receptor alpha chain V region" |
 
   # For now, terms checked are from CVs which are in FTP site
   # TO DO: Extend to all CVs and also check that everything that should be indexed is indexed (document specs first)
@@ -61,19 +61,20 @@ Feature: Search neXtProt
     Then the page source should contain text "<result>"
 
     Examples:
-      | query                         | result                                      |   
-      | TS-0564                       | Liver                                       |
-      | CVCA_0004                     | N-linked (GlcNAc...) (complex)              |
-      | DO-00615                      | SH3 domain                                  |
-      | FA-03015                      | Prion family                                |
-      | CVME_0001                     | Calcium                                     |
-      | ME:0000002                    | impact                                      |
-      | PP:0001                       | protein abundance                           |
-      | CVTO_0002                     | Extracellular                               |
-      
+      | query      | result                         |
+      | TS-0564    | Liver                          |
+      | CVCA_0004  | N-linked (GlcNAc...) (complex) |
+      | DO-00615   | SH3 domain                     |
+      | FA-03015   | Prion family                   |
+      | CVME_0001  | Calcium                        |
+      | ME:0000002 | impact                         |
+      | PP:0001    | protein abundance              |
+      | CVTO_0002  | Extracellular                  |
+
   # UPDATE at each new release
   # For now, terms checked are from CVs which are in FTP site
-  # TO DO: Extend to all CVs 
+  # TO DO: Extend to all CVs
+  @dbrelease
   Scenario Outline: Check that searching for the next free AC for CVs returns no results
     Given I click on drop-down id "#search-entity"
     And I select option "Terms"
@@ -81,17 +82,17 @@ Feature: Search neXtProt
     Then the page source should contain text "No search results were found."
 
     Examples:
-      | query                         |
-      | TS-2449                       |
-      | CVCA_0035                     |
-      | DO-00913                      |
-      | FA-05395                      |
-      | CVME_0038                     |
-      | ME:0000007                    |
-      | PP:000006                     |
-      | CVTO_0025                     |
+      | query      |
+      | TS-2449    |
+      | CVCA_0035  |
+      | DO-00913   |
+      | FA-05395   |
+      | CVME_0038  |
+      | ME:0000007 |
+      | PP:000006  |
+      | CVTO_0025  |
 
-  # UPDATE at each new release
+  @dbrelease
   Scenario Outline: Check new CV terms or data in upcoming release are indexed
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
@@ -99,16 +100,16 @@ Feature: Search neXtProt
     Then the page source should contain text "<result>"
 
     Examples:
-      | option       | query                         | result                                                       |
-      | Proteins     |               |               |
-      | Publications | 27612661                      | Directed evolution of glutathione transferases               |
-      | Terms        | CVCA_0034                     | N-linked (GlcNAc...) (hybrid)                                |
-      | Terms        | DO-00909                      | K167R                                                        |
-      | Terms        | FA-05394                      | Class-II aminoacyl-tRNA synthetase family. Type 2 subfamily  |
-      | Terms        | DI-04829                      | Band heterotopia                                             |
-      | Terms        | DI-04857                      | Sifrim-Hitz-Weiss syndrome                                   |
+      | option       | query     | result                                                      |
+      | Proteins     |           |                                                             |
+      | Publications | 27612661  | Directed evolution of glutathione transferases              |
+      | Terms        | CVCA_0034 | N-linked (GlcNAc...) (hybrid)                               |
+      | Terms        | DO-00909  | K167R                                                       |
+      | Terms        | FA-05394  | Class-II aminoacyl-tRNA synthetase family. Type 2 subfamily |
+      | Terms        | DI-04829  | Band heterotopia                                            |
+      | Terms        | DI-04857  | Sifrim-Hitz-Weiss syndrome                                  |
 
-  # UPDATE at each new release
+  @dbrelease
   Scenario Outline: Check modified CV terms or data in upcoming release are indexed
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
@@ -116,12 +117,12 @@ Feature: Search neXtProt
     Then the page source should contain text "<result>"
 
     Examples:
-      | option       | query                         | result                                      |
-      | Terms        | DO-00528                      | Prospero-type homeo                         |
-      | Terms        | FA-04941                      | INKA family                                 |
-      
-      
-  # UPDATE at each new release
+      | option | query    | result              |
+      | Terms  | DO-00528 | Prospero-type homeo |
+      | Terms  | FA-04941 | INKA family         |
+
+
+  @dbrelease
   Scenario Outline: Check search for obsoleted (deleted) CV term or data in upcoming release returns no results
     Given I click on drop-down id "#search-entity"
     And I select option "<option>"
@@ -129,8 +130,8 @@ Feature: Search neXtProt
     Then the page source should contain text "No search results were found."
 
     Examples:
-      | option       | query                         |
-      | Terms        | TS-2176                       |
-      | Terms        | DO-00095                      |
-      | Terms        | CVTO_0008                     |
-      | Terms        | KW-0197                       |
+      | option | query     |
+      | Terms  | TS-2176   |
+      | Terms  | DO-00095  |
+      | Terms  | CVTO_0008 |
+      | Terms  | KW-0197   |
