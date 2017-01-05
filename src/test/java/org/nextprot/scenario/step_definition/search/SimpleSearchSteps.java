@@ -14,7 +14,18 @@ public class SimpleSearchSteps {
     }
 
     @When("^I make a simple search with query \"([^\"]*)\"$")
-    public void iMakeASimpleSearchWithQuery(String query) throws Throwable {
+    public void iMakeASimpleSearchWithDoubleQuoteQuery(String query) throws Throwable {
+
+        makeASimpleSearchWithQuery(query);
+    }
+
+    @When("^I make a simple search with query '([^']*)'$")
+    public void iMakeASimpleSearchWithSingleQuoteQuery(String query) throws Throwable {
+
+        makeASimpleSearchWithQuery(query);
+    }
+
+    private void makeASimpleSearchWithQuery(String query) throws Throwable {
 
         WebElement searchField = WebDriverManager.waitUntilFindElement(20, By.id("search-query"));
 
