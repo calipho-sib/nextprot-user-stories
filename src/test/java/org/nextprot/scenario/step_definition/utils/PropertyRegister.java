@@ -21,6 +21,7 @@ public class PropertyRegister {
                     PropertyRegister.class.getClassLoader().getResource("hidden.properties").getFile(),
                     PropertyRegister.class.getClassLoader().getResource("features/features.properties").getFile()
             );
+
         } catch (IOException e) {
             throw new IllegalStateException("cannot load properties", e);
         }
@@ -39,6 +40,12 @@ public class PropertyRegister {
             try (InputStream input = new FileInputStream(fileName)) {
                 props.load(input);
             }
+        }
+
+        String propertyThatCanBeOverriden = "webdriver.remote.url";
+        if(System.getProperty(propertyThatCanBeOverriden) != null) {
+            System.err.println("Overriding webdriver.remote.url with: " + System.getProperty(propertyThatCanBeOverriden));
+            props.put(propertyThatCanBeOverriden, System.getProperty(propertyThatCanBeOverriden));
         }
 
         return props;
